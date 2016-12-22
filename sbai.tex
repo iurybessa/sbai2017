@@ -53,29 +53,48 @@
 \makeatother
 \usepackage{amsmath}
 % --------------------------------------------------
+\usepackage{graphicx}
+\usepackage{float}
 
+\usepackage[portugues,ruled,lined]{algorithm2e}
+\usepackage{algorithmic}
+
+\usepackage[table]{xcolor}
+\usepackage{booktabs}
+
+\usepackage{caption}
+\usepackage{subcaption}
+
+
+%-----------------------
+\usepackage{mathtools, nccmath}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+
+\usepackage{xparse}
+%
+\DeclarePairedDelimiterX{\set}[1]{\{}{\}}{\setargs{#1}}
+\NewDocumentCommand{\setargs}{>{\SplitArgument{1}{;}}m}
+{\setargsaux#1}
+\NewDocumentCommand{\setargsaux}{mm}
+{\IfNoValueTF{#2}{#1} {#1\,\delimsize|\,\mathopen{}#2}}%{#1\:;\:#2}
+
+\parindent = 0pt
+
+\usepackage{amsfonts}
 
 \begin{document}
 
 % CABEÇALHO
 
-\title{TÍTULO TODO EM LETRAS MAIÚSCULAS}
+\title{EVALUATING UAV MISSION PLANNERS IN RESPECT OF AN OPTIMAL SOLUTION MODEL}
 
-\author{João da Silva}{jsilva@silva.com}
-\address{Endereço do João e da Maria\\ Em algum lugar\\ Cidade, Estado, País}
+\author[1]{Thiago Cavalcante}{thiagorodrigoengcomp@gmail.com}
+\address{Federal University of Amazonas, Manaus, Brazil}
 
-\author{Joaquim Pereira}{jpereira@pereira.org}
-\address{Endereço do Joaquim\\ Em algum lugar\\ Cidade, Estado, País}
-
-\author[1]{Maria da Silva}{maria@pereira.org}
-
-\author{Pedro Manoel}{pedro@pedro.com}
-\address{Endereço do Pedro e do Rafael\\ Em algum lugar\\ Cidade, Estado, País}
-
-\author{José Rodrigues}{jose@rodrigues}
-\address{Endereço do José\\ Em algum lugar\\ Cidade, Estado, País}
-
-\author[3]{Rafael Pires}{rafael@pires}
+\author[1]{Iury Bessa}{iury.bessa@gmail.com}
+%\address{Federal University of Amazonas, Manaus, Brazil}
 
 % Com a opção 'journal' pode-se definir
 %\volume{X}
@@ -92,253 +111,536 @@
 
 \selectlanguage{english}
 \begin{abstract}
-  This is where the abstract should be placed. It is a single paragraph providing a concise summary of the material in the paper below. It usually has less than 200 words. It should not be confused with the introduction, must not contain abbreviations, footnotes, references to literature, figures, etc.   \end{abstract}
+  This paper presents the development of mission planners in intralogistics for a commercial unmanned aerial vehicle equipped with a robotic gripper in an industrial environment where there are a warehouse of inputs, production lines and a product warehouse. In this work, the planner generates the necessary commands to carry out a mission that includes everything from the delivery of inputs brought from the warehouse of inputs to the production line until the final product is delivered to the customer (product warehouse). Two different approaches were developed for mission planning: in the first approach, a simple heuristic was used to solve the problem; in the second approach, a technique with task scheduling (production process) was used. These approaches follow some production rules that will be presented throughout this work. An evaluation of the mission planners developed was performed, verifying the cost of both, performing some measures of execution time, as well as comparing these results with the optimum cost obtained with the IBM ILOG CPLEX optimizer. \end{abstract}
 
-\keywords{Template, Example.}
+\keywords{Mission Planning, Manufacturing Systems.}
 
 \selectlanguage{brazil}
 \begin{abstract}
-  Os artigos a serem submetidos deverão ser redigidos em língua portuguesa, espanhola ou inglesa, com número máximo de 6 (seis) páginas, tamanho A4, coluna dupla, em formato PDF.
+  Este artigo apresenta o desenvolvimento de planejadores de missão na intralogística para um veículo aéreo não tripulado comercial, equipado com uma garra robótica, em um ambiente industrial onde há almoxarifado de insumos, linhas de produção e deposito de produtos. Neste trabalho, o planejador gera comandos necessários para realizar uma missão a qual compreende desde a entrega de insumos trazidos do almoxarifado à linha de produção, até a entrega do produto final ao cliente. Foram desenvolvidas duas abordagens diferentes para planejamento de missão: na primeira abordagem, utilizou-se uma simples heurística que resolve o problema; já na segunda abordagem, utilizou-se uma técnica com escalonamento de tarefas (processo de produção). Estas abordagens seguem algumas regras de produção que serão apresentadas ao longo deste trabalho. Foi realizado uma avaliação dos planejadores de missão desenvolvidos, verificando o custo de ambos, realizando algumas medidas de tempo de execução, bem como comparando estes resultados com o custo ótimo obtido  com a ferramenta de otimização CPLEX.
 \end{abstract}
 
-\keywords{Lista de palavras-chave, separadas por vírgulas. Máximo de quatro palavras-chave, sendo que pelo menos uma delas deve corresponder a um dos tópicos de interesse dos eventos. Conferir tópicos em: http://www.sbai2013.ufc.br/ ou http://posmec.ufabc.edu.br/dincon2013/).}
+\keywords{Planejamento de Missão, Sistemas de Manufatura.}
 ]
 
 % CONTRIBUIÇÃO
 
-\selectlanguage{brazil}
+\selectlanguage{english}
 
-\section{Como utilizar o estilo \SBATeX}
-Este texto serve de guia de utilização do estilo \SBATeX para
-\LaTeXe. Com este estilo é possível gerar artigos em dois formatos
-diferentes, controlado por meio das opções:
+\section{Introduction}
+
+Use of a commercial UAV - 3DR IRIS + - in the intralogistics \footnote{Internal Logistics of movement and storage.}, aiming to give another option of agility in the manufacturing process. Additionally, it will be approached a study of evaluation of the cost of the missions that the UAV executes in this process.
+
+Logistics has become a competitive and fundamental factor for organizations, involving the management, conservation and supervision of freight transport. In addition, excellent logistics means customer satisfaction, so speed is still an important factor in a successful logistics process \protect\cite{drone4logistic}. Currently, one of the solutions to this type of problem is the use of UAVs, which are any and every type of aircraft that does not require on board pilots to be guided. Nowadays, UAVs are mostly remotely piloted vehicles (RPV), since their operations are carried out by ground operators. If the tasks performed by a UAV were performed autonomously, it would relieve the work of these operators, since they perform tedious and repetitive tasks \protect\cite{pascarella2013autonomic}.
+
+A probable improvement of these logistics systems is the increase of the automation of the UAVs, because by increasing the intelligence of these systems, the costs can be minimized. However, one of the main problems with the use of autonomous UAVs is the reliability and intelligence of the system. Because of these factors, investments and studies related to stand-alone UAVs are still considered small \protect\cite{hern2014dhl}. Thus, increased employment of autonomous UAVs requires the development of devices that are capable of performing tasks and interacting with the environment intelligently and reliably.
+
+Autonomous UAVs need to know what will happen in a future instant and what is the best decision to make at the present time, and therefore require strategies not only to decompose their missions into meaningful sub-tasks but also to track progress toward mission goals and the evolution of these tasks relative to the capabilities of autonomous UAVs \protect\cite{finn2012developments}. As a consequence, in order to perform a mission successfully, it is recommended to make a plan to the task \protect\cite{successplan}. Mission planning problems consist of planning events to meet certain requirements associated with the plan and improving mission objectives \protect\cite{krozel1988search}. Therefore, this is one of the main challenges faced in solving this type of problem.
+
+This paper presents a methodology that evaluate the cost of mission planners for a commercial UAV. The evaluation is made by comparing the mission execution time with the cost of an optimal solution solved by CPLEX solver.
+
+\section{Background}
+
+\subsection{Mission Planning}
+Mission planning for UAVs can be defined as the process of location planning (waypoints) to be visited and the actions of the vehicle (loading/unloading, filming/photos, capturing information), usually within a certain range of time. Functionally, mission planning lies above the trajectory planning process, where the mission planner generates a desired mission plan, and then the trajectory planner generates the flight plan (trajectories) between the waypoints.
+
+In the literature, there are some attempts to implement UAV guidance systems that perform mission planning. Doherty et al. \protect\citeasnoun{doherty2009temporal} presented an architecture of a framework for mission planning and execution tracking, applied to an unmanned helicopter. During the execution of the mission, knowledge was acquired through sensors which was used to create state structures. These structures will allow the construction of a logical model, representing the real development of the system and its environment over time. Then, the planning and monitoring modules use temporal action logic (TAL) to reason about actions and changes.
+
+The NASA/U.S. Army autonomous helicopter project has developed a guidance system for the autonomous surveillance planning problem for multiple and different targets \cite{whalley2005design}, which generates mission plans using a theoretical approach to decision making. A high-level standalone control is provided by the framework Apex \protect\cite{baer1998nasa}, a reactive procedure-based scheduler/planner used to perform mission-level tasks. Apex synthesizes a course of action primarily by linking elemental procedures expressed in procedural definition language (PDL), a notation developed specifically for the Apex reactive planner. This guidance system was integrated into a robotic helicopter and tested in more than 240 scenarios.
+
+A similar project, called Ressac (Research and Rescue by Cooperative Autonomous System), was conducted by the French Aerospace Laboratory (ONERA) for a search and rescue scenario \protect\cite{fabiani2007autonomous}. This architecture for an exploration mission was developed based on the idea of ??decomposing the mission into a sequence of tasks or macro-actions associated with rewards. The problem was modelled using a Markov decision process framework (MDP) and dynamic programming algorithms for mission planning. Konigsbuch \protect\cite{teichteil2007multi} extends the guidance system and integrates with a robotic helicopter.
+
+Finally, the German Aerospace Center (DLR) has also developed a mission management system based on the behavior paradigm \cite{adolf2010onboard}, which has been integrated with the ARTIS helicopter and validated in different scenarios, including follower of waypoints and search and tracking mission.
+
+%\subsection{UAV Navigation}
+
+
+
+\subsection{Optimization Problems}
+
+An optimization problem is about finding the best solution (relative to a certain criterion) among a set of available alternatives. For example, the popular bin packaging problem that aims to find the number of boxes of a certain size to store a set of objects of indicated sizes; optimization involves, for example, finding the least amount of boxes.
+
+Two distinctions need to be made to better understand the universe of optimization problems. The first is to distinguish a problem which refers to a more general class, for example, the problem of packaging, and an example representing a special type of problem, for example the problem of packaging, wherein there are 5 packages for packaging 25 objects of different sizes. The second distinction concerns the existence of two categories of problem classes: the abstract problem classes and the concrete problem classes. As the name itself suggests, the second category refers to problems that have "concrete existence," that is, problems for which instances can be created. The BPP corresponds to this category. Together they are also part of a more abstract class: grouping problems. Only with the problem of abstract classes, it is impossible to define instances. In fact, as shown in Figure ~\ref{fig: Optimization problems}, the classes of concrete and abstract problems form a hierarchy of optimization problems.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.47\textwidth]{figuras/problemasDeOtimizacao.eps}
+	\caption{Some Optimization Problems.\label{fig:problemasDeOtimizacao}}
+	\end{figure}
+	
+	An optimization problem can be defined as a finite set of variables, where the correct values for the variables specify the optimal solution. If the variables are of the set of real, the problem is called continuous, and if they can only have a finite set of distinct values, the problem is called combinatorial \protect\cite{francq2011optimization}.
+	
+	In order for the optimization problems to be solved, it is necessary to develop a method that solves them, which are the algorithms. An important category of problems are the NP-hard problems, where they can only be solved by certain algorithms that try to arrive at the optimal solution of that determined problem.
+	
+	When the optimal solution of an NP-hard problem is not guaranteed, this type of method is called a heuristic. A heuristic is an intuitive way of solving a particular problem, where the best possible solution is not guaranteed.
+	
+	Every optimization problem is basically characterized by having an objective function, which can be called cost function when it is desired to minimize it or utility function when it is desired to maximize it, and a set of constraints that delimit the space of viable solutions, or Be the region where the solutions are that can be accepted. The objective function contains a set of variables to which values must be assigned in a systematic way so as to walk through the search space and find the one that optimizes the result to be searched, in case a maximization problem finds the highest possible value while in a Minimize the value. In both cases the solution must satisfy the set of constraints imposed to be accepted. The formatting of an optimization problem mathematically occurs as follows:
+	
+	\begin{align*}
+	\text{Given: } f:A\rightarrow\R \\
+	\text{Minimize~~~}  & x\textsubscript{0} \rightarrow A \\
+    \text{Subject to~~~}  & f(x\textsubscript{0})\leq f(x)~  \forall~ x ~\in~ A \\
+    \text{or} \\
+    \text{Maximize~~~}  & x\textsubscript{0} \rightarrow A \\
+    \text{Subject to~~~}  & f(x\textsubscript{0})\geq f(x)~  \forall~ x ~\in~ A
+	\end{align*}
+	
+	Where \(A\) is the set of workable solutions that the function \(f\) can generate.
+	
+	One can interpret the space of solutions as being a subset of Euclidean space \(\R^n\). Each variable is a dimension of space. For a function with two variables it is possible to form in a two-dimensional space and with the addition of a third dimension to the result of the function with \(x\) and \(y\) as input it is possible to observe the behaviour of the function as The \(x\) and the \(y\) of the function undergo variation. In Figure ~\ref{fig: sol} a two-dimensional graph is shown in which the variation of the function value causes changes in the gray scale. For larger values ??a darker gray is obtained and for smaller values ??a lighter gray is obtained. With this, one can observe the space of solutions in a panoramic way in the two-dimensional space and it is verified that as it approaches the center the function generates smaller values. In it it is also possible to notice that the x-shaped marks, which represent the solutions found, vary towards the local minimum that is in the middle of the search space. The heuristic used to search for the optimal solution in this case was to look for neighbouring solutions that minimized the cost of the function in the same way that a sphere that rolls over an inclined plane stabilizes when it reaches a valley that would be the local minimum Function. However, this heuristic is not always the most adequate, as will be seen later.
+
+\section{Methodology}
+
+\subsection{UAV Movement System}
+
+
+
+\subsection{Mission Planning}
+
+\subsection{Optimization Problem Modelling and Planner Evaluation Technique}
+\label{modelo}
+
+The purpose of this subsection is to elaborate a modelling of the mission planning problem in an optimization problem. In order to find later, the shortest execution time of all the tasks (minimization), based on the data below:
+
+It is assumed that the processing time $ p_i $ is the total time of production, that is, considering the sum of the time that the UAV stays in the stock collecting inputs, the time in which it stays in the production line leaving inputs and collecting products, And the time it takes for the UAV to move from the production line to the stock or to the customer. We also assume that the production time (setup) $s_i$ is the time the product takes to be produced, after having in line all the inputs needed to produce it. Therefore, the total time for the production of a given product is the sum of the processing time $p_i$ and of setup $s_i$.
+
+In this modelling, the fictive task or dummy of the scheduling, $j_0$, with processing time proportional to the time that the UAV collect the input and leads to the production line. In the literature, production lines are called unrelated parallel machines, for optimization problems of scalable tasks (when there are $m$ machines in parallel with performances depending on the task to be executed, notation used is $R$) \cite{Du2008scheduling}.
+
+
 \begin{itemize}
-  \item \verb+journal+: formato utilizado pela \emph{Revista da
-  Sociedade Brasileira de Automática}. Esta opção, isoladamente,
-  produz uma versão acabada do artigo.
-
-  \item \verb+conference+: formato utilizado pelo \emph{Congresso
-  Brasileiro de Automática} e \emph{Simpósio Brasileiro de Automação Inteligente} na produção das versões acabadas dos artigos
-  nos anais.
+\item $J = \set{j_1,~j_2,~...,~j_n}$ is the set of tasks;
+\item $M = \set{m_1,~m_2,~...,~m_n}$ is the set of machines (production lines);
+\item $P = \set{p_1,~p_2,~...,~p_n}$ is the processing time of each task;
+\item $S = \set{s_1,~s_2,~...,~s_n}$ is the setup time (production time of each production line);
+\item $R||C_{max}$ (Three-field notation\footnote{Notation $\alpha | \beta | \gamma$, where $\alpha$: processing environment, $\beta$: problem constraints and $\gamma$: optimization criterion.} used in the literature to represent a given task scheduling problem, in this case, minimizing the makespan \footnote{Makespan is the termination time of the most loaded processor.} in an unrelated parallel machine environment \protect\cite{graham1979optimization}.
 \end{itemize}
-O nome entre parênteses governa o tipo de documento a ser gerado. Este
-parâmetro deve ser passado (entre colchetes) como argumento do comando
-\verb+\documentclass+, que deve ser o primeiro comando a aparecer no
-artigo. Por exemplo, o comando
-\begin{verbatim}
-  \documentclass[conference]{sbatex}
-\end{verbatim}
-é utilizado no início deste arquivo para geração do formato final
-para o \emph{Congresso Brasileiro de Automática} e o
-\emph{Simpósio Brasileiro de Automação Inteligente}.
 
-Pode-se adicionar ao comando \verb+\documentclass+ as seguintes
-opções:
+Model:
+
+\begin{enumerate}
+\item \textbf{Choosing the constraints:}
+
+The variable $x_ {ij}$ is a binary constraint which takes the value $1$ if the task $j$ is running on the machine $i$, and $0$ otherwise. The variable $C_ {max}$ is the variable that will be optimized.
+
+\begin{equation}
+\begin{split}
+x_{ij}=\begin{cases}
+    1,       & \quad \text{if the task } j \text{ is running in} \\
+ &\text{ the machine (production line) }i\\
+    0,  & \quad \text{otherwise}\\
+  \end{cases}
+\end{split}
+\end{equation}
+
+\begin{equation}
+C_{max}=makespan \text{ (duration of a mission)}
+\end{equation}
+\item \textbf{Elaboration of the objective function:}
+The objective function is the variable $C_ {max}$ (total process execution time) that needs to be minimized.
+\begin{equation}
+\text{Minimize } C_{max}
+\end{equation}
+$C_{max}$ is the variable that need to be minimized (optimized).
+\item \textbf{Restrictions:}
+
 \begin{itemize}
-  \item \verb+submission+: quando em combinação com a opção
-  \verb+journal+ produz uma versão adequada para proposição à
-  \emph{Revista da Sociedade Brasileira de Automática}. É ignorada se em
-  conjunto opção \verb+conference+.
+\item \textbf{Each task must be executed/processed in an unique machine (production line)}
 
-  \item \verb+harvard+: inclui o pacote \verb+harvard+, utilizado para
-  produção das referências bibliográficas. Pode ser usado em conjunto
-  com qualquer das outras opções. Veja seção~\ref{sec:bibliografia}.
+\begin{equation}
+\sum_{\substack{
+   i \in M\\
+   \forall j \in J
+  }} 
+ x_{ij}=1
+\end{equation}
+
+For a better understanding what the summation means, let's suppose that there are two production lines and tree products to be produced (tasks), therefore, $x_{00}+x_{10}+x_{20}=1$, $x_{01}+x_{11}+x_{21}=1$ and $x_{02}+x_{12}+x_{22}=1$, so, it can be verified that those restrictions are set, there will be only one task running in a machine.
+
+\item \textbf{Time execution of the tasks in each machine}
+
+\begin{equation}
+\sum_{\substack{
+   j \in J\\
+   \forall i \in M
+  }} 
+ (p_j+s_j)x_{ij}\leq C_{max}
+\end{equation}
+
+For a better understanding what the summation means, let's suppose that there are two machines and two tasks, and the time of processing and setup of each task are $p_0=100,~ p_1=100$ and $s_0=12,~ s_1=18$ respectively. Therefore, the production time of the product $0$ in the production line $0$ is $p_0 + s_0$ and so on. 
 \end{itemize}
-Por exemplo, para propor um artigo ao congresso e utilizar o pacote de
-referências bibliográficas \verb+harvard+ usa-se o comando
-\begin{verbatim}
-  \documentclass[conference,harvard]{sbatex}
-\end{verbatim}
-A ordem dos parâmetros não é relevante.
+\item \textbf{Completeness and non-negativity:}
 
-Os seguintes \emph{pacotes} \LaTeX\ estão disponíveis
-automaticamente\footnote{Isto também significa que \emph{é necessário
-ter estes pacotes instalados} para que se possa utilizar o estilo
-\SBATeX.} com o estilo \SBATeX:
+\begin{equation}
+\begin{split}
+ x_{ij} \in \{0,1\}~\forall i=1,2,...,M\text{ and }\\
+ \forall j=0(dummy), 1,2,3,...,N
+\end{split}
+\end{equation}
+
+\item \textbf{Full model:}
+\begin{align*}
+\begin{split}
+\text{Minimize~~~}  & C_{max} \\
+    \text{Subject to~~~}  &\sum_{\substack{
+   i \in M\\
+   \forall j \in J
+  }} 
+  x_{ij}=1 \\
+    & \sum_{\substack{
+   j \in J\\
+   \forall i \in M
+  }} 
+ (p_j+s_j)x_{ij}\leq C_{max} \\
+ 	& x_{ij} \in \{0,1\}~\forall i=1,2,...,M ~e~
+ 	\forall \\
+ &j=0(dummy), 1,2,3,...,N
+\end{split}
+\end{align*}
+
+\end{enumerate}
+
+In order to evaluate the cost of the two solutions implemented in this work, a generalized evaluation metric was developed, as shown below.
+
+The cost function evaluated in this work is the time spent for the execution of the mission. The evaluation metric compares the cost of the strategies developed with the cost of a solution generated by a solver.
+
+Firstly, the optimal cost of the problem is obtained through the CPLEX solver, which returns the optimum value (minimum mission execution time). The implementation of the modelling optimization problem is done in C ++ with the help of the CPLEX solver.
+
+Considering,
+
 \begin{itemize}
-\item \verb+ifthen+: pacote com comandos de controle de fluxo do tipo
-`if', `then' e `else'; utilizado internamente para controle das opções de
-formatação.
-\item \verb+fancyhdr+: pacote para formatação dos cabeçalhos e rodapés.
-\item \verb+babel+: pacote para escrita em múltiplos idiomas; os
-idiomas/dialetos \verb+english+, \verb+brazil+ e \verb+spanish+ já
-estão habilitados.
-\item \verb+theorem+: pacote para controle dos ambientes \verb+theorem+,
-\verb+lemma+, \verb+corollary+ e \verb+proof+.
-\item \verb+geometry+: pacote para controle da dimensões do texto na página.
-\item \verb+latexsym+: pacote com símbolos extras do \LaTeXe.
-\end{itemize}
-A opção \verb+journal+ provê o pacote:
+	\item \textbf{$c_o$} - it is the optimal cost obtained by the CPLEX solver;
+	\item \textbf{$c_X$} - it is the cost of the solution generated by planner X;
+	\item \textbf{$Crel_X$} - it is the relative cost of the solution generated by planner X.
+	\end{itemize}
+	
+	The evaluation of each mission planner will be made relative to the optimal cost, therefore:
+	
+	\begin{equation}
+Crel_X=\frac{c_o}{c_X}
+\end{equation}
+
+Where $0 \leq Crel_X \leq 1$, it can be verified that as close of $1$ the $Crel_X$ is, the solution cost is smaller.
+
+\subsection{Mission Planners Cost Evaluation Metrics}
+\label{sec:ac}
+
+To evaluate the cost of mission planner solutions implemented, a generalized evaluation metric was developed, as shown below.
+
+The evaluation function in this work is the execution time of the mission. The evaluation metric compares the cost of the strategies developed with the cost of a solution generated by a solver.
+
+Firstly, the optimal cost of the problem is obtained through the CPLEX solver, which returns the optimal value (minimum mission execution time) under the same circumstances. The implementation of the optimization problem modelled in the subsection~\ref{model} is implemented in C++ using the CPLEX solver.
+
+Knowing that:
+
 \begin{itemize}
-\item \verb+times+: pacote para utilização das fontes \verb+times+.
-\end{itemize}
-A opção \verb+submission+ provê o pacote:
+	\item \textbf{$c_o$} - it's the optimal cost obtained by the CPLEX solver;
+	\item \textbf{$c_X$} - it's the cost of the solution generated by planner X;
+	\item \textbf{$Crel_X$} - it's the relative cost of the solution generated by planner X.
+	\end{itemize}
+	
+The evaluation of each planner will be made relative to the optimal cost, therefore:
+
+\begin{equation}
+Crel_X=\frac{c_o}{c_X}
+\end{equation}
+
+As we know $0 \leq Crel_X \leq 1$, we can verify that the closer to $1$ the $Crel_X$ is, the less the cost of the solution.
+
+
+
+\section{Experimental Evaluation}
+
+\subsection{Case Study}
+\label{sec:ec}
+
+To perform the analysis of the techniques used and to evaluate the cost of the solutions addressed, the following case study was used:
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.45\textwidth]{figuras/useCase.eps}
+	\caption{Representação do Estudo de Caso.\label{fig:useCase}}
+	\end{figure}
+	
+In the Figure~\ref{fig:useCase}, we can see that there are inputs in the warehouse of type A, B and C and two production lines that produce products of type X and Y.
+
+Each production line produces only one type of product and has a characteristic production time, as shown in Figure~\ref{fig:useCase}. In this case, to produce a product of type X, two inputs of type A and one input of type C are required. In order to produce a product of type Y, two inputs of type B and one input of type C are required. The production time of a X product is $4p.u.$ and the time of production of product Y is $6p.u.$. A production unit ($1u.p.$) was considered to be a \texttt{GoTo} command performed by the UAV.
+
+The task to be performed is the production of the customer order, where the UAV will collect supplies from the warehouse, take to the production line and once the production of a certain product is finished, it will lead to the customer.
+
+\subsection{Mission Planners}
+
+In the context of this work, mission planner is a software developed with the purpose of generating a production mission given the warehouse and customer request. This program generates a \texttt{.mission} extension file containing a set of mission commands, as shown in the~\ref{mission} subsection.
+
+\subsubsection{Planner A}
+
+In this strategy, the UAV starts moving toward the warehouse, takes two inputs of type A to produce a product X, then takes the type C input, waits on the production line for the product X to be produced. After being produced, it leads to the customer. If there is more products of type X to be produced, it goes to the warehouse and carries out the whole process again.
+
+After all the X products are produced and taken to the customer, the UAV will go to the warehouse and take the two type B inputs and then the type C input, wait for the first product Y to be produced and then take it to the customer. If you need to produce more Y products, the process is the same.
+
+The pseudo code of this algorithm is shown in the Algorithm~\ref{alg:planA}:
+
+\begin{center}
+    \scalebox{0.75}{
+    \begin{minipage}{1.3\linewidth}
+      \begin{algorithm}[H]
+\Entrada{almoxarifado}
+\Entrada{pedido}
+\Saida{arquivo de missão \textit{.mission}}
+\Inicio{
+verificar o pedido\;
+\Repita{produção de todos os X completa}{
+vai ao almoxarifado\;
+\Repita{até levar dois A}{
+	pega insumo A\;
+	leva a linha de produção X\;
+}
+vai ao almoxarifado\;
+pega insumo C\;
+leva a linha de produção X\;
+espera até X ser produzido\;
+leva X ao cliente\;
+}
+\Repita{produção de todos os Y completa}{
+vai ao almoxarifado\;
+\Repita{até levar dois B}{
+	pega insumo B\;
+	leva a linha de produção Y\;
+}
+vai ao almoxarifado\;
+pega insumo C\;
+leva a linha de produção Y\;
+espera até Y ser produzido\;
+leva Y ao cliente\;
+}
+}
+\caption{Planner A}\label{alg:planA}
+\end{algorithm}
+    \end{minipage}%
+    }
+\end{center}
+
+\subsubsection{Planner B}
+In planner B, unlike planner A where the UAV is idle waiting for each product to be produced and only then takes the customer, the UAV continues the production process while the output of the products does not end. Once the production of each product is finished, the VANT for the task that was running and goes to the production line of that particular product, performs the collection and takes it to the customer. It then returns the task it was previously running, performing a scheduling of tasks.
+
+The pseudo code of this algorithm is shown in the Algorithm~\ref{alg:planB}:
+
+\begin{center}
+    \scalebox{0.75}{
+    \begin{minipage}{1.3\linewidth}
+      \begin{algorithm}[H]
+\Entrada{almoxarifado}
+\Entrada{pedido}
+\Saida{mission file \textit{.mission}}
+\Inicio{
+inicializa $t_x$\;
+inicializa $t_y$\;
+verificar o pedido\;
+\Repita{produção de todos os X completa}{
+\uIf{contador deste X não é $t_x$}{
+vai ao almoxarifado\;
+\Repita{até levar dois A}{
+	pega insumo A\;
+	leva a linha de produção X\;
+}
+vai ao almoxarifado\;
+pega insumo C\;
+leva a linha de produção X\;
+contador deste X inicia (tempo de produção)\;
+continua a produção\;
+}
+\Else{volte a linha de produção X\;
+		leve X ao cliente\;
+		volte para a produção\;}
+}
+\Repita{produção de todos os Y completa}{
+\uIf{contador deste X não é $t_y$}{
+vai ao almoxarifado\;
+\Repita{até levar dois B}{
+	pega insumo B\;
+	leva a linha de produção Y\;
+}
+vai ao almoxarifado\;
+pega insumo C\;
+leva a linha de produção Y\;
+contador deste Y inicia (tempo de produção)\;
+continua a produção\;
+}
+\Else{volte a linha de produção Y\;
+		leve X ao cliente\;
+		volte para a produção\;}
+}
+}
+\caption{Planner B}\label{alg:planB}
+\end{algorithm}
+    \end{minipage}%
+    }
+\end{center}
+
+\subsection{Evaluation Cost}
+\label{sec:acusto}
+
+After the implementation of the algorithm of planners A and B, the metric shown in this work was used to evaluate the cost of the algorithms. The results of the proposed mission planning methods in this work were compared to the optimal solution obtained with the branch-and-cut algorithm of the IBM/ILOG CPLEX 12.4 tool developed in C++.
+
+In order to obtain better results in the comparison, it was considered only the time in which the UAV takes to finish the production of a product, excluding the time in which it leaves its initial position and moves to the warehouse, the time in which it Moves from the customer to the warehouse and the time it takes to go to the end point and land. This was done due to the greater practicality of implementing the problem in the CPLEX solver. The problem was modelled considering the total processing time, that is, only the processing time of the task (production) and the time of set-up (time of production of the line). Thus, the execution time of each mission was measured and compared to the value obtained by the CPLEX solver (optimal time), as shown in Table~\ref{fig:comp}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}
+>{\columncolor[HTML]{FFFFFF}}c 
+>{\columncolor[HTML]{FFFFFF}}c @{}}
+\cmidrule(l){2-2}
+                      & \textbf{Time (s)}    \\ \midrule
+\textbf{Planner A} & 420					  \\
+\textbf{Planner B} & 404                   \\
+\textbf{CPLEX}        & 134                   \\ \bottomrule
+\end{tabular}
+\caption{Time execution for comparison with the optimal solution time}
+\label{fig:comp}
+\end{table}
+
+The Table~\ref{fig:comp} shows the mission execution times obtained using the scheduler algorithm A, the scheduler algorithm B, and the minimum value given by the solver.
+
+Using the metric shown in the section~\ref{sec:ac}, then:
+
+\begin{equation}
+Creal_A=\frac{134}{420}=0,319
+\label{eq1}
+\end{equation}
+
+\begin{equation}
+Creal_B=\frac{134}{408}=0,328
+\label{eq2}
+\end{equation}
+
+It can be seen in the Equation~\ref{eq2} that planner B performs the mission more quickly and has a lower cost than planner A, according to the metric used.
+
+\subsection{Practical Results}
+
+To verify the practical results, as well as a cost comparison between the different approaches of mission planners developed in this work, the flight time measurement was performed using the two mission planning algorithms developed, using the case study shown in \ref{sec:ec}.
+
+Below, we can verify the two mission files generated by the two strategies developed in this work:
+
+%\begin{figure}[H]
+%\centering
+%\begin{subfigure}{.5\textwidth}
+%  \centering
+%  \includegraphics[width=.6\linewidth]{figuras/planAArq.PNG}
+%  \caption{Planejador A.}
+%  \label{fig:planAArq}
+%\end{subfigure}%
+%\begin{subfigure}{.5\textwidth}
+%  \centering
+%  \includegraphics[width=.6\linewidth]{figuras/planBArq.PNG}
+%  \caption{Planejador B.}
+%  \label{fig:planBArq}
+%\end{subfigure}
+%\caption{Arquivos de Missão.}
+%\label{fig:planArq}
+%\end{figure}
+
+The two mission files shown above, have exactly the same instances, that is, they have the same resources and have to perform the same mission that is to produce two products of type X and one of type Y. However, they execute the mission of Different way and have different performances. As discussed in Section~\ref{sec:acusto}, planner B has more \texttt{GoTo} commands than planner A (see Figure~\ref{fig:planArq}).
+
+The following is data about the mission being executed in the simulator SITL \footnote{Simulator that allows executing a Plane, Copter or Rover without the need of a hardware)}. The table below shows the performances of both schedulers relative to flight time.
+
+\begin{table}[H]
+\centering
+%\begin{adjustbox}{max width=\textwidth}
+\resizebox{7cm}{!}{%
+\begin{tabular}{@{}ccc@{}}
+\cmidrule(l){2-3}
+                                        & \cellcolor[HTML]{FF7774}\textbf{Planner A} & \cellcolor[HTML]{5FCE89}\textbf{Planner B} \\ \cmidrule(l){2-3} 
+\cellcolor[HTML]{C0C0C0}\textbf{Testes} & \textit{\textbf{Flight Time (s)}}            & \textit{\textbf{Flight Time (s)}}            \\
+\cellcolor[HTML]{C0C0C0}1               & 460,405                                       & 430,830                                       \\
+\cellcolor[HTML]{C0C0C0}2               & 460,693                                       & 436,885                                       \\
+\cellcolor[HTML]{C0C0C0}3               & 462,080                                       & 441,681                                       \\
+\cellcolor[HTML]{C0C0C0}4               & 457,719                                       & 441,277                                       \\
+\cellcolor[HTML]{C0C0C0}5               & 461,227                                       & 451,865                                       \\ \bottomrule
+\end{tabular}%
+}
+%\end{adjustbox}
+\caption{Mission Planners Flight Time - Simulator.\label{table:plannersSimulado}}
+\end{table}
+
+In the Table~\ref{table:plannersSimulado}, it can be verified that the mission time executed by planner B presented less time compared to planner A in all five tests.
+
+In Figure~\ref{fig:SimulatedGraPlanners} is shown a graph of the flight times of both planners in the five tests done in the simulation environment.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{figuras/GraPlannersSimulado.eps}
+	\caption{Flight Time Graph of Mission Planners Relative to 5 Tests in Simulator.\label{fig:GraPlannersSimulado}}
+	\end{figure}
+	
+	Next, you can see the results for the tests performed in real environment used by both planners.
+	
+	In Figure~\ref{fig:maps} the map where the tests were performed is shown on the map at the Faculty of Physical Education and Physiotherapy of Federal University of Amazonas.
+	
+		\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.47\textwidth]{figuras/mapsUseCase.PNG}
+	\caption{Warehouse, Production Line X, Production Line Y and Costumer in the Map.\label{fig:maps}}
+	\end{figure}
+	
+	In Table~\ref{table:plannersReal}, it can be seen that the mission time executed by planner B in real environment also showed a shorter time compared to planner A in the five tests:
+	
+	\begin{table}[H]
+\centering
+\resizebox{7cm}{!}{%
+\begin{tabular}{@{}ccc@{}}
+\cmidrule(l){2-3}
+                                        & \cellcolor[HTML]{FF7774}\textbf{Planner A} & \cellcolor[HTML]{5FCE89}\textbf{Planner B} \\ \cmidrule(l){2-3} 
+\cellcolor[HTML]{C0C0C0}\textbf{Testes} & \textit{\textbf{Flight Time (s)}}            & \textit{\textbf{Flight Time (s)}}            \\
+\cellcolor[HTML]{C0C0C0}1               & 455,12                                       & 441,72                                       \\
+\cellcolor[HTML]{C0C0C0}2               & 456,93                                       & 440,18                                       \\
+\cellcolor[HTML]{C0C0C0}3               & 457,19                                       & 447,51                                      \\
+\cellcolor[HTML]{C0C0C0}4               & 460,25                                       & 438,19                                       \\
+\cellcolor[HTML]{C0C0C0}5               & 459.47                                       & 445,85                                       \\ \bottomrule
+\end{tabular}%
+}
+\caption{Mission Planners Flight Time - Real.\label{table:plannersReal}}
+\end{table}
+
+In Figure~\ref{fig: GraPlannersReal} is shown a graph of the flight times of both planners in the five tests done in real environment.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{figuras/GraPlannersReal.eps}
+	\caption{Flight Time Graph of Mission Planners Relative to 5 Tests in a Real Environment.\label{fig:GraPlannersReal}}
+	\end{figure}
+	
+	As shown in the section~\ref{sec:acusto}, planner B was faster than planner A. This can also be verified in real environment, as shown in tables \ref{table:plannersSimulate} and \ref{Table:plannersReal} of mission execution time in simulated and real environment.
+	
+	
+
+\section{Conclusions}
+\label{chapter:conclusao}
+
+In this work, a common application of intralogistics performed by a VANT was developed, as well as the implementation of two mission planning strategies, as well as the cost evaluation of the same, compared to the optimal cost obtained by the CPLEX optimizer.
+
+It is understood that some contributions were made with the conclusion of this work, such as:
+
+In the manipulation and control of a commercial UAV, the ways of manipulating and controlling the 3DR IRIS + UAV of the UFAM Robotics Laboratory were investigated for future uses in undergraduate and postgraduate university projects.
+
+
+Another important contribution was the creation of a methodology for evaluating the cost of mission planners, since it allows to verify their effectiveness against optimal values obtained by an optimizer.
+
+Finally, it was possible to say that the manipulation and control of the 3DR IRIS+ UAV, as well as the creation of the cost evaluation methodology were successfully applied in simulated and real environments, thus validating the theory shown in the work.
+
+\subsection{Future Works}
+
+This section presents some potential improvements to be developed in the future by this work:
+
 \begin{itemize}
-\item \verb+setspace+: pacote para controle de espaçamento duplo entre
-linhas.
-\end{itemize}
-E a opção \verb+harvard+ provê o pacote:
-\begin{itemize}
-\item \verb+harvard+: pacote para formatação das referências
-bibliográficas.
+\item To use computational vision for the recognition of inputs, because in this work this functionality was abstracted;
+\item Use a more robust UAV for better accuracy and also to use heavier loads;
+\item Improve the modeling of the optimization problem for better results in cost evaluation;
+\item Use the CPLEX solver to directly generate an optimized mission.
 \end{itemize}
 
-Não é necessário incluir explicitamente as cláusulas
-\verb+\usepackage+ correspondentes a estes pacotes no artigo para que
-se possa utilizá-los. Caso a instalação do \LaTeX\ não contenha alguns
-destes pacotes, consulte a página
-\begin{verbatim}
-  http://www.ctan.org
-\end{verbatim}
+%\bibliography{sbai-references}
 
-Caso o artigo seja em português ou espanhol, recomenda-se a utilização
-dos pacotes \verb+inputenc+ e \verb+fontenc+ em conjunto com a opção
-\verb+journal+ na forma
-\begin{verbatim}
-  \usepackage[latin1]{inputenc}
-  \usepackage[T1]{fontenc}
-\end{verbatim}
-O pacote \verb+inputenc+ com a opção \verb+latin1+ permite que se
-escreva o texto com acentos (e.g. \verb+nação+), no formato
-ISO-8859-1, ao invés de se utilizar a acentuação no formato \TeX
-(e.g. \verb+na\c{c}\~{a}o+). O pacote \verb+fontenc+ com a opção
-\verb+T1+ faz com que o LaTeX hifenize melhor palavras em português ou
-espanhol.
+%\section{References}
 
-Com a opção \verb+conference+, e devido à escolha de um conjunto de
-fontes diferentes, recomenda-se subsituir o pacote \verb+fontenc+ pelo
-pacote \verb+ae+ (\emph{Almost European Computer Modern}), o que pode
-ser feito com o comando
-\begin{verbatim}
-  \usepackage{ae}
-\end{verbatim}
-Neste caso não é necessário adicionar explicitamente o pacote
-\verb+fontenc+, que já é carregado automaticamente pelo pacote
-\verb+ae+. Veja também a seção~\ref{sec:esqueleto}.
-
-Após o preâmbulo, inicia-se o texto propriamente dito por meio do
-comando
-\begin{verbatim}
-  \begin{document}
-\end{verbatim}
-O passo seguinte é a declaração do título do artigo, autores e
-afiliações.
-
-\subsection{Título, autores e afiliações}
-
-O título do artigo é declarado por meio do comando \verb+\title+. Por
-exemplo, o título deste artigo foi gerado com o comando:
-\begin{verbatim}
-  \title{Artigo Exemplo}
-\end{verbatim}
-O título não deve conter agradecimentos, os quais devem aparecer em
-uma seção separada, no final do artigo.
-
-Em seguida, definem-se os autores com seus endereços eletrônicos e
-afiliações por meio dos comandos \verb+\author+ e
-\verb+\address+. Por exemplo, o nome e endereço do primeiro autor
-deste artigo, João da Silva, é introduzido por meio dos comandos:
-\begin{verbatim}
-  \author{João da Silva}
-         {jsilva@silva.com}
-  \address{Endereço do João e da Maria\\
-           Em algum lugar\\
-           Cidade, Estado, País}
-\end{verbatim}
-Note-se que o comando \verb+\author+ requer dois argumentos: o nome e
-o endereço eletrônico. Quebras de linha podem ser obtidas na afiliação
-por meio do comando~\verb+\\+. Segue-se, neste exemplo, a declaração
-do nome e afiliação do segundo autor:
-\begin{verbatim}
-  \author{Joaquim Pereira}
-         {jpereira@pereira.org}
-  \address{Endereço do Joaquim\\
-           Em algum lugar\\
-           Cidade, Estado, País}
-\end{verbatim}
-
-Em geral, para cada comando \verb+\author+ deve haver um comando
-\verb+\address+ correspondente, salvo o caso de compartilhamento
-de endereços. Neste caso, omite-se o comando \verb+\address+ para
-o segundo autor e indica-se o número do endereço que se deseja
-compartilhar como um parâmetro adicional do comando
-\verb+\author+. Por exemplo, o comando:
-\begin{verbatim}
-  \author[1]{Maria da Silva}
-            {maria@pereira.org}
-\end{verbatim}
-indica que a Maria da Silva utilizará o endereço de número 1, que
-corresponde ao endereço de João da Silva.
-
-Os autores seguintes possuem endereços independentes e são
-introduzidos da maneira convencional:
-\begin{verbatim}
-  \author{Pedro Manoel}
-         {pedro@pedro.com}
-  \address{Endereço do Pedro e do Rafael\\
-           Em algum lugar\\
-           Cidade, Estado, País}
-
-  \author{José Rodrigues}
-         {jose@rodrigues}
-  \address{Endereço do José\\
-           Em algum lugar\\
-           Cidade, Estado, País}
-\end{verbatim}
-
-Finalmente, o autor Rafael é definido como
-\begin{verbatim}
-  \author[3]{Rafael Pires}
-            {rafael@pires}
-\end{verbatim}
-o que indica que Rafael compartilha o endereço de número 3 com Pedro
-Manoel. Lembre-se de que, apesar de Pedro Manoel ser o autor de número
-4, o seu endereço é o de número 3, uma vez que a Maria já compartilha
--- sem segundas intenções -- do mesmo endereço com o João.
-
-O comando
-\begin{verbatim}
-  \maketitle
-\end{verbatim}
-coloca o título e os autores no formato adequado.
-
-
-\subsection{Resumo, abstract e palavras-chave}
-
-Os artigos devem conter um resumo em português (ou espanhol) e em
-inglês. O ambiente para definição dos resumos, em qualquer idioma, é o
-\verb+abstract+. Para diferenciar os idiomas utiliza-se o comando
-\verb+\selectlanguage+, do pacote \verb+babel+. Por exemplo, a seqüência
-de comandos produz um \emph{Abstract} seguido de um \emph{Resumo}:
-\begin{verbatim}
-  \selectlanguage{english}
-  \begin{abstract}
-    Yossarian says, ...
-  \end{abstract}
-
-  \selectlanguage{brazil}
-  \begin{abstract}
-    O Largo da Sé ...
-  \end{abstract}
-\end{verbatim}
-
-As \emph{palavras-chave} devem ser definidas por meio do comando:
-\begin{verbatim}
-  \keywords{Exemplo, Ilustração}
-\end{verbatim}
-
-Deste ponto em diante selecione o idioma a ser utilizado e
-inicie o texto da sua contribuição.
-
-\textbf{IMPORTANTE:} Caso esteja se produzindo um texto com a
-opção \verb+conference+, colocam-se os comandos que vão de
-\verb+\maketitle+ a \verb+\keywords+ dentro de um ambiente
-\verb+twocolumn+. Isto é necessário para que os resumos sejam
-formatados em coluna simples\footnote{Como este arquivo está
-adaptado para utilizar o formato adequado para o \emph{Congresso
-Brasileiro de Automática} e o \emph{Simpósio Brasileiro de
-Automação Inteligente}, isto já está feito}. Veja
-seção~\ref{sec:esqueleto}.
 
 
 \subsection{Teoremas, lemas, corolários e provas}
@@ -725,5 +1027,5 @@ Deseja-se boa sorte aos autores na preparação de seus artigos, e conta-se com se
 Mencione aqui seus agradecimentos as agências de fomento e colaboradores no trabalho.
 
 % BIBLIOGRAFIA
-\bibliography{exemplo}
+\bibliography{sbai-references}
 \end{document}
