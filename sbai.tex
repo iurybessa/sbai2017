@@ -56,7 +56,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 
-\usepackage[portugues,ruled,lined]{algorithm2e}
+\usepackage[lined,ruled,boxed]{algorithm2e}
 \usepackage{algorithmic}
 
 \usepackage[table]{xcolor}
@@ -83,18 +83,19 @@
 \parindent = 0pt
 
 \usepackage{amsfonts}
+\newcommand{\commentib}[1]{{\color{blue} [IB: #1]}}
+
 
 \begin{document}
 
 % CABEÇALHO
 
-\title{EVALUATING UAV MISSION PLANNERS IN RESPECT OF AN OPTIMAL SOLUTION MODEL}
+\title{Planning and Evaluating Missions of Unmanned Aerial Vehicles for Intra-logistic Problems}
 
-\author[1]{Thiago Cavalcante}{thiagorodrigoengcomp@gmail.com}
-\address{Federal University of Amazonas, Manaus, Brazil}
-
-\author[1]{Iury Bessa}{iury.bessa@gmail.com}
-%\address{Federal University of Amazonas, Manaus, Brazil}
+\author{Thiago Cavalcante}{thiagorodrigoengcomp@gmail.com}
+\author{Iury Bessa}{iurybessa@ufam.edu.br}
+\address{Graduate Program in Electrical Engineering, Federal University of Amazonas, Manaus, AM, Brazil}
+\address{Department of Electricity, Federal University of Amazonas, Manaus, AM, Brazil}
 
 % Com a opção 'journal' pode-se definir
 %\volume{X}
@@ -123,21 +124,30 @@
 \keywords{Planejamento de Missão, Sistemas de Manufatura.}
 ]
 
+\commentib{Voc\^e sabe a origem daquele \'indice no topoda primeira p\'agina? Isso n\~ao pode ficar a\'i!}
+
 % CONTRIBUIÇÃO
 
 \selectlanguage{english}
-
+%----------------------------------------------
 \section{Introduction}
+\label{sec:introduction}
+%----------------------------------------------
 
-Use of a commercial UAV - 3DR IRIS + - in the intralogistics \footnote{Internal Logistics of movement and storage.}, aiming to give another option of agility in the manufacturing process. Additionally, it will be approached a study of evaluation of the cost of the missions that the UAV executes in this process.
+%Use of a commercial UAV - 3DR IRIS + - in the intralogistics \footnote{Internal Logistics of movement and storage.}, aiming to give another option of agility in the manufacturing process. Additionally, it will be approached a study of evaluation of the cost of the missions that the UAV executes in this process.
 
-Logistics has become a competitive and fundamental factor for organizations, involving the management, conservation and supervision of freight transport. In addition, excellent logistics means customer satisfaction, so speed is still an important factor in a successful logistics process \protect\cite{drone4logistic}. Currently, one of the solutions to this type of problem is the use of UAVs, which are any and every type of aircraft that does not require on board pilots to be guided. Nowadays, UAVs are mostly remotely piloted vehicles (RPV), since their operations are carried out by ground operators. If the tasks performed by a UAV were performed autonomously, it would relieve the work of these operators, since they perform tedious and repetitive tasks \protect\cite{pascarella2013autonomic}.
+\commentib{Eu comentei algumas das refs que estavam dando pau na hora de compilar. Revise-as, eleas devem estar usando algum s\'imbolo estranho. Al\'em disso, evite citar sites. Se n\~ao puder evitar, existe o campo de bibtex pr\'oprio para eles.}
 
-A probable improvement of these logistics systems is the increase of the automation of the UAVs, because by increasing the intelligence of these systems, the costs can be minimized. However, one of the main problems with the use of autonomous UAVs is the reliability and intelligence of the system. Because of these factors, investments and studies related to stand-alone UAVs are still considered small \protect\cite{hern2014dhl}. Thus, increased employment of autonomous UAVs requires the development of devices that are capable of performing tasks and interacting with the environment intelligently and reliably.
+Logistics has become a competitive and fundamental factor for organizations, involving the management, conservation and supervision of freight transport. In addition, excellent logistics means customer satisfaction, so speed is still an important factor in a successful logistics process \cite{drone4logistic}. Currently, one of the solutions to this type of problem is the use of UAVs, which are any and every type of aircraft that does not require on board pilots to be guided. Nowadays, UAVs are mostly remotely piloted vehicles (RPV), since their operations are carried out by ground operators. If the tasks performed by a UAV were performed autonomously, it would relieve the work of these operators, since they perform tedious and repetitive tasks \cite{pascarella2013autonomic}.
 
-Autonomous UAVs need to know what will happen in a future instant and what is the best decision to make at the present time, and therefore require strategies not only to decompose their missions into meaningful sub-tasks but also to track progress toward mission goals and the evolution of these tasks relative to the capabilities of autonomous UAVs \protect\cite{finn2012developments}. As a consequence, in order to perform a mission successfully, it is recommended to make a plan to the task \protect\cite{successplan}. Mission planning problems consist of planning events to meet certain requirements associated with the plan and improving mission objectives \protect\cite{krozel1988search}. Therefore, this is one of the main challenges faced in solving this type of problem.
+A probable improvement of these logistics systems is the increase of the automation of the UAVs, what results in minimization of the costs. However, one of the main problems with the use of autonomous UAVs is the reliability and intelligence of the system. Because of these factors, investments and studies related to stand-alone UAVs are still considered small \protect\cite{hern2014dhl}. Thus, increased employment of autonomous UAVs requires the development of devices that are capable of performing tasks and interacting with the environment intelligently and reliably.
 
-This paper presents a methodology that evaluate the cost of mission planners for a commercial UAV. The evaluation is made by comparing the mission execution time with the cost of an optimal solution solved by CPLEX solver.
+Autonomous UAVs need to know what will happen in a future instant and what is the best decision to make at the present time, and therefore require strategies not only to decompose their missions into meaningful sub-tasks but also to track progress toward mission goals and the evolution of these tasks relative to the capabilities of autonomous UAVs \cite{finn2012developments}. As a consequence, in order to perform a mission successfully, it is recommended to make a plan to the task \cite{successplan}. Mission planning problems consist of planning events to meet certain requirements associated with the plan and improving mission objectives \cite{krozel1988search}. Therefore, this is one of the main challenges faced in solving this type of problem.
+
+This paper presents a methodology that evaluate the cost of mission planners for a commercial UAV. The evaluation is made by comparing the mission execution time with the cost of an optimal solution solved by CPLEX solver. Additionally, a middleware was developed to interface the mission planning application and the embedded control software, adapting the UAV for intra-logistics. Finally, experiments were done to verify the consistency of evaluation methodology.
+
+The remaining of this work is organized as follows:\commentib{COMPLETAR. DIga o que vir\'a em cada se\c{c}\~ao. Aconselho que voc\^e crie um label para cada se\c{c}\~ao para que possa referenciar (veja como fi\ na introdu\c{c}\~ao}).
+
 
 \section{Background}
 
@@ -146,9 +156,9 @@ Mission planning for UAVs can be defined as the process of location planning (wa
 
 In the literature, there are some attempts to implement UAV guidance systems that perform mission planning. Doherty et al. \protect\citeasnoun{doherty2009temporal} presented an architecture of a framework for mission planning and execution tracking, applied to an unmanned helicopter. During the execution of the mission, knowledge was acquired through sensors which was used to create state structures. These structures will allow the construction of a logical model, representing the real development of the system and its environment over time. Then, the planning and monitoring modules use temporal action logic (TAL) to reason about actions and changes.
 
-The NASA/U.S. Army autonomous helicopter project has developed a guidance system for the autonomous surveillance planning problem for multiple and different targets \cite{whalley2005design}, which generates mission plans using a theoretical approach to decision making. A high-level standalone control is provided by the framework Apex \protect\cite{baer1998nasa}, a reactive procedure-based scheduler/planner used to perform mission-level tasks. Apex synthesizes a course of action primarily by linking elemental procedures expressed in procedural definition language (PDL), a notation developed specifically for the Apex reactive planner. This guidance system was integrated into a robotic helicopter and tested in more than 240 scenarios.
+The NASA/U.S. Army autonomous helicopter project has developed a guidance system for the autonomous surveillance planning problem for multiple and different targets \cite{whalley2005design}, which generates mission plans using a theoretical approach to decision making. A high-level standalone control is provided by the framework Apex \cite{baer1998nasa}, a reactive procedure-based scheduler/planner used to perform mission-level tasks. Apex synthesizes a course of action primarily by linking elemental procedures expressed in procedural definition language (PDL), a notation developed specifically for the Apex reactive planner. This guidance system was integrated into a robotic helicopter and tested in more than 240 scenarios.
 
-A similar project, called Ressac (Research and Rescue by Cooperative Autonomous System), was conducted by the French Aerospace Laboratory (ONERA) for a search and rescue scenario \protect\cite{fabiani2007autonomous}. This architecture for an exploration mission was developed based on the idea of ??decomposing the mission into a sequence of tasks or macro-actions associated with rewards. The problem was modelled using a Markov decision process framework (MDP) and dynamic programming algorithms for mission planning. Konigsbuch \protect\cite{teichteil2007multi} extends the guidance system and integrates with a robotic helicopter.
+A similar project, called Ressac (Research and Rescue by Cooperative Autonomous System), was conducted by the French Aerospace Laboratory (ONERA) for a search and rescue scenario \cite{fabiani2007autonomous}. This architecture for an exploration mission was developed based on the idea of decomposing the mission into a sequence of tasks or macro-actions associated with rewards. The problem was modelled using a Markov decision process framework (MDP) and dynamic programming algorithms for mission planning. Konigsbuch \cite{teichteil2007multi} extends the guidance system and integrates with a robotic helicopter.
 
 Finally, the German Aerospace Center (DLR) has also developed a mission management system based on the behavior paradigm \cite{adolf2010onboard}, which has been integrated with the ARTIS helicopter and validated in different scenarios, including follower of waypoints and search and tracking mission.
 
@@ -168,7 +178,7 @@ Two distinctions need to be made to better understand the universe of optimizati
 	\caption{Some Optimization Problems.\label{fig:problemasDeOtimizacao}}
 	\end{figure}
 	
-	An optimization problem can be defined as a finite set of variables, where the correct values for the variables specify the optimal solution. If the variables are of the set of real, the problem is called continuous, and if they can only have a finite set of distinct values, the problem is called combinatorial \protect\cite{francq2011optimization}.
+	An optimization problem can be defined as a finite set of variables, where the correct values for the variables specify the optimal solution. If the variables are of the set of real, the problem is called continuous, and if they can only have a finite set of distinct values, the problem is called combinatorial \cite{francq2011optimization}.
 	
 	In order for the optimization problems to be solved, it is necessary to develop a method that solves them, which are the algorithms. An important category of problems are the NP-hard problems, where they can only be solved by certain algorithms that try to arrive at the optimal solution of that determined problem.
 	
@@ -176,14 +186,23 @@ Two distinctions need to be made to better understand the universe of optimizati
 	
 	Every optimization problem is basically characterized by having an objective function, which can be called cost function when it is desired to minimize it or utility function when it is desired to maximize it, and a set of constraints that delimit the space of viable solutions, or Be the region where the solutions are that can be accepted. The objective function contains a set of variables to which values must be assigned in a systematic way so as to walk through the search space and find the one that optimizes the result to be searched, in case a maximization problem finds the highest possible value while in a Minimize the value. In both cases the solution must satisfy the set of constraints imposed to be accepted. The formatting of an optimization problem mathematically occurs as follows:
 	
-	\begin{align*}
-	\text{Given: } f:A\rightarrow\R \\
-	\text{Minimize~~~}  & x\textsubscript{0} \rightarrow A \\
-    \text{Subject to~~~}  & f(x\textsubscript{0})\leq f(x)~  \forall~ x ~\in~ A \\
-    \text{or} \\
-    \text{Maximize~~~}  & x\textsubscript{0} \rightarrow A \\
-    \text{Subject to~~~}  & f(x\textsubscript{0})\geq f(x)~  \forall~ x ~\in~ A
-	\end{align*}
+%	\begin{align*}
+%	\text{Given: } f:A\rightarrow\R \\
+%	\text{Minimize~~~}  & x\textsubscript{0} \rightarrow A \\
+%    \text{Subject to~~~}  & f(x\textsubscript{0})\leq f(x)~  \forall~ x ~\in~ A \\
+%    \text{or} \\
+%    \text{Maximize~~~}  & x\textsubscript{0} \rightarrow A \\
+%    \text{Subject to~~~}  & f(x\textsubscript{0})\geq f(x)~  \forall~ x ~\in~ A
+%	\end{align*}
+%	
+	\begin{equation}
+		\label{eq:optproblem}
+		\begin{array}{cc}
+		\min & f(\textbf{x}),  \\
+		\textrm{ s.t. } & \textbf{x}\in\Omega.\\
+		\end{array}
+	\end{equation}	
+	
 	
 	Where \(A\) is the set of workable solutions that the function \(f\) can generate.
 	
@@ -212,7 +231,7 @@ In this modelling, the fictive task or dummy of the scheduling, $j_0$, with proc
 \item $M = \set{m_1,~m_2,~...,~m_n}$ is the set of machines (production lines);
 \item $P = \set{p_1,~p_2,~...,~p_n}$ is the processing time of each task;
 \item $S = \set{s_1,~s_2,~...,~s_n}$ is the setup time (production time of each production line);
-\item $R||C_{max}$ (Three-field notation\footnote{Notation $\alpha | \beta | \gamma$, where $\alpha$: processing environment, $\beta$: problem constraints and $\gamma$: optimization criterion.} used in the literature to represent a given task scheduling problem, in this case, minimizing the makespan \footnote{Makespan is the termination time of the most loaded processor.} in an unrelated parallel machine environment \protect\cite{graham1979optimization}.
+\item $R||C_{max}$ (Three-field notation\footnote{Notation $\alpha | \beta | \gamma$, where $\alpha$: processing environment, $\beta$: problem constraints and $\gamma$: optimization criterion.} used in the literature to represent a given task scheduling problem, in this case, minimizing the makespan \footnote{Makespan is the termination time of the most loaded processor.} in an unrelated parallel machine environment \cite{graham1979optimization}.
 \end{itemize}
 
 Model:
@@ -379,10 +398,8 @@ After all the X products are produced and taken to the customer, the UAV will go
 
 The pseudo code of this algorithm is shown in the Algorithm~\ref{alg:planA}:
 
-\begin{center}
-    \scalebox{0.75}{
-    \begin{minipage}{1.3\linewidth}
-      \begin{algorithm}[H]
+\begin{algorithm}[H]
+\footnotesize
 \Entrada{almoxarifado}
 \Entrada{pedido}
 \Saida{arquivo de missão \textit{.mission}}
@@ -415,9 +432,6 @@ leva Y ao cliente\;
 }
 \caption{Planner A}\label{alg:planA}
 \end{algorithm}
-    \end{minipage}%
-    }
-\end{center}
 
 \subsubsection{Planner B}
 In planner B, unlike planner A where the UAV is idle waiting for each product to be produced and only then takes the customer, the UAV continues the production process while the output of the products does not end. Once the production of each product is finished, the VANT for the task that was running and goes to the production line of that particular product, performs the collection and takes it to the customer. It then returns the task it was previously running, performing a scheduling of tasks.
@@ -626,405 +640,396 @@ Another important contribution was the creation of a methodology for evaluating 
 
 Finally, it was possible to say that the manipulation and control of the 3DR IRIS+ UAV, as well as the creation of the cost evaluation methodology were successfully applied in simulated and real environments, thus validating the theory shown in the work.
 
-\subsection{Future Works}
-
-This section presents some potential improvements to be developed in the future by this work:
-
-\begin{itemize}
-\item To use computational vision for the recognition of inputs, because in this work this functionality was abstracted;
-\item Use a more robust UAV for better accuracy and also to use heavier loads;
-\item Improve the modeling of the optimization problem for better results in cost evaluation;
-\item Use the CPLEX solver to directly generate an optimized mission.
-\end{itemize}
+Further works includes the use of computational vision for the recognition of inputs, improve the modeling of the optimization problem for better results in cost evaluation, and use a solver to directly generate an optimized mission.
 
 %\bibliography{sbai-references}
 
 %\section{References}
 
 
-
-\subsection{Teoremas, lemas, corolários e provas}
-
-Quatro ambientes já se encontram pré-definidos no estilo \SBATeX. São
-eles
-\begin{itemize}
-\item \verb+theorem+: ambiente para teoremas.
-\item \verb+corollary+: ambiente para corolários.
-\item \verb+lemma+: ambiente para lemas.
-\item \verb+proof+: ambiente para provas.
-\end{itemize}
-Segue-se um exemplo de utilização destes ambientes:
-\begin{lemma}[Desigualdade Subtrativa]
-Em um espaço vetorial linear normado $\|x\| - \|y\| \leq \|x - y\|$
-para quaisquer vetores $x$, $y$.
-\end{lemma}
-\begin{proof}
-\begin{align*}
-\|x\| - \|y\| &= \|x - y + y\| - \|y\| \ \\
-              &\leq \|x - y \| + \|y\| - \|y\| \\
-              &= \|x - y\|.
-\end{align*}
-\end{proof}
-Este lema é produzido pela seguinte sequência de comandos:
-\begin{verbatim}
-  \begin{lemma}[Desigualdade Subtrativa]
-    Em um espaço vetorial linear ...
-  \end{lemma}
-  \begin{proof}
-    ...
-  \end{proof}
-\end{verbatim}
-
-Estes ambientes, com exceção do ambiente \verb+proof+, aceitam
-um parâmetro opcional que define um nome. No exemplo acima, o nome
-\emph{Desigualdade Subtrativa} foi produzido por meio deste argumento.
-
-
-\subsection{Bibliografia}
-\label{sec:bibliografia}
-
-As referências são reunidas ao fim do manuscrito, arranjadas
-alfabeticamente pelo primeiro autor e cronologicamente para cada
-autor.
-
-\textbf{IMPORTANTE:} Todas referências citadas devem aparecer em algum
-outro ponto do texto.
-
-As citações seguem um estilo autor/ano (o mesmo
-usado na revista {\em Automatica}). O pacote \verb+harvard+ (já
-incluído pelo \SBATeX) provê vários comandos para inclusão de
-citações. Dois dois mais utilizados são o tradicional \verb+\cite+ e o
-\verb+\citeasnoun+. Veja um exemplo:
-\begin{verbatim}
-  O resumo deste artigo é um trecho do
-  livro~\citeasnoun{serafim}. Já o abstract é
-  extraído de~\citeasnoun{catch22}.
-  Informações sobre o estilo bibliográfico
-  \verb+harvard+ encontram-se
-  em~\citeasnoun{harvard}. Os interessados
-  devem consultar referências adicionais
-  sobre \LaTeX~\cite{latex,%
-  latex:guide,latex:companion}.
-\end{verbatim}
-produz o trecho:
-
-\begin{em}
-  O resumo deste artigo é um trecho do
-  livro~\citeasnoun{serafim}. Já o abstract é
-  extraído de~\citeasnoun{catch22}.
-  Informações sobre o estilo bibliográfico
-  \verb+harvard+ encontram-se
-  em~\citeasnoun{harvard}. Os interessados
-  devem consultar referências adicionais
-  sobre \LaTeX~\cite{latex,latex:guide,latex:companion}.
-\end{em}
-
-Recomenda-se a utilização do programa BibTeX para gerar as suas
-referências ~\cite{latex,latex:guide,latex:companion}. Note-se que
-não é necessário definir o estilo bibliográfico com o comando
-\verb+\bibliographystyle+, pois o mesmo é definido automaticamente
-pelo estilo \SBATeX. Basta incluir o arquivo de bibliografias,
-neste exemplo o artigo \verb+exemplo.bib+ por meio do comando.
-\begin{verbatim}
-    ...
-
-    \bibliography{exemplo}
-
-  \end{document}
-\end{verbatim}
-Note-se que este comando deve ser colocado logo antes do
-encerramento do artigo, o que é feito pelo comando
-\verb+\end{document}+, de tal forma a garantir que a bibliografia
-seja o último item do artigo.
-
-
-\subsection{Esqueleto deste arquivo no formato \SBATeX}
-\label{sec:esqueleto}
-
-Este arquivo, adaptado para gerar o formato adequado para o
-\emph{Congresso Brasileiro de Automática} e o  \emph{Simpósio
-Brasileiro de Automação Inteligente}, faz uso da seguintes
-instruções:
-
-\begin{verbatim}
-\documentclass[conference,harvard,brazil,english]{sbatex}
-  \usepackage[latin1]{inputenc}
-  \usepackage{ae}
-
-    ...
-
-    \twocolumn[
-      \maketitle
-
-      \selectlanguage{english}
-      \begin{abstract}
-        Yossarian says, ...
-      \end{abstract}
-
-      \selectlanguage{brazil}
-      \begin{abstract}
-        O Largo da Sé ...
-      \end{abstract}
-
-      \keywords{Exemplo, Ilustração}
-    ]
-
-    ...
-\end{verbatim}
-
-Caso a opção \verb+journal+ seja utilizada, remova o comando
-\verb+twocolumn[+ antes do comando \verb+\maketitle+ e o \verb+]+ depois do
-comando \verb+\keywords+. Nos textos em português ou espanhol substitua o pacote \verb+ae+ pelo
-pacote \verb+fontenc+ com a opção \verb+T1+. Os trechos modificado são os
-seguintes:
-\begin{verbatim}
-  \documentclass[journal,harvard,brazil,english]{sbatex}
-  \usepackage[latin1]{inputenc}
-  \usepackage[T1]{fontenc}
-
-  \begin{document}
-
-    \title{Artigo Exemplo}
-
-    \author{João da Silva}
-           {jsilva@silva.com}
-    \address{Endereço do João e da Maria\\
-             Em algum lugar\\
-             Cidade, Estado, País}
-
-    \author{Joaquim Pereira}
-           {jpereira@pereira.org}
-    \address{Endereço do Joaquim\\
-             Em algum lugar\\
-             Cidade, Estado, País}
-
-    \author[1]{Maria da Silva}
-              {maria@pereira.org}
-
-    \author{Pedro Manoel}
-           {pedro@pedro.com}
-    \address{Endereço do Pedro e do Rafael\\
-             Em algum lugar\\
-             Cidade, Estado, País}
-
-    \author{José Rodrigues}
-           {jose@rodrigues}
-    \address{Endereço do José\\
-             Em algum lugar\\
-             Cidade, Estado, País}
-
-    \author[3]{Rafael Pires}
-              {rafael@pires}
-
-    \maketitle
-
-    \selectlanguage{english}
-    \begin{abstract}
-      Yossarian says, ...
-    \end{abstract}
-
-    \selectlanguage{brazil}
-    \begin{abstract}
-      O Largo da Sé ...
-    \end{abstract}
-
-    \keywords{Exemplo, Ilustração}
-
-    ...
-
-    \bibliography{exemplo}
-
-  \end{document}
-\end{verbatim}
-
-
-\section{Como processar este arquivo}
-
-Para processar este arquivo via linha de comandos utiliza-se a
-seqüência de comandos:
-\begin{verbatim}
-  latex sbai2013
-  bibtex sbai2013
-  latex sbai2013
-  latex sbai2013
-\end{verbatim}
-Estes comandos geram um arquivo do tipo \emph{Device Independent}
-(\verb+sbai2013.dvi+), que pode ser visualizado em programas como o
-\verb+xdvi+ ou \verb+yap+.
-
-Para gerar um arquivo no formato \emph{Postscript} (\verb+sbai2013.ps+)
-utilize o comando:
-\begin{verbatim}
-  dvips -t a4 sbai2013
-\end{verbatim}
-
-Para gerar um arquivo no formato \emph{Portable Document Format}
-(\verb+sbai2013.pdf+) utilize os comandos:
-\begin{verbatim}
-  dvips -Ppdf -t a4 sbai2013
-  ps2pdf -dMaxSubsetPct=100 -dSubsetFonts=true
-  -dEmbedAllFonts=true -dCompatibilityLevel=1.2
-  -sPAPERSIZE=a4 sbai2013.ps
-\end{verbatim}
-
-\textbf{Observação:} Dependendo da sua instalação do \verb+dvips+ o
-parâmetro \verb+-Ppdf+ pode acarretar a troca de algumas seqüências de
-letras nos arquivos .ps e .pdf. Um típico exemplo é a troca de toda
-sílaba `fi' pelo símbolo da libra esterlina. Para evitar este
-indesejável efeito você deve desabilitar (ou habilitar, dependendo da
-instalação) o remapeamento de caracteres. Faça isto adicionando à
-linha de comando do \verb+dvips+ o parâmetro \verb+-G0+ (ou \verb+-G+
-para habilitar).
-
-\section{Contribuição deste artigo}
-
-\subsection{Os vinte e sete erros mais comuns (de uma lista de cem)}
-\label{sec:27erros}
-
-Erros gramaticais e ortográficos devem, por princípio, ser
-evitados. Alguns, no entanto, como ocorrem com maior frequência,
-merecem atenção redobrada. O primeiro capítulo deste manual inclui
-explicações mais completas a respeito de cada um deles. Veja os cem
-mais comuns do idioma e use esta relação como um roteiro para fugir
-deles~\cite{manual}.
-
-\begin{enumerate}
-\item ``Mal cheiro'', ``mau-humorado''. Mal opõe-se a bem e mau, a
-bom. Assim: mau cheiro (bom cheiro), mal-humorado
-(bem-humorado). Igualmente: mau humor, mal-intencionado, mau jeito,
-mal-estar.
-
-\item ``Fazem'' cinco anos. Fazer, quando exprime tempo, é impessoal:
-Faz cinco anos.~/~Fazia dois séculos.~/~Fez 15 dias.
-
-\item ``Houveram'' muitos acidentes. Haver, como existir, também é
-invariável: Houve muitos acidentes.~/~Havia muitas pessoas.~/~Deve
-haver muitos casos iguais.
-
-\item ``Existe'' muitas esperanças. Existir, bastar, faltar, restar e
-sobrar admitem normalmente o plural: Existem muitas esperanças. /
-Bastariam dois dias.~/~Faltavam poucas peças.~/~Restaram alguns
-objetos.~/~Sobravam idéias.
-
-\item Para ``mim'' fazer. Mim não faz, porque não pode ser
-sujeito. Assim: Para eu fazer, para eu dizer, para eu trazer.
-
-\item Entre ``eu'' e você. Depois de preposição, usa-se mim ou ti: Entre
-mim e você.~/~Entre eles e ti.
-
-\item ``Há'' dez anos ``atrás''. Há e atrás indicam passado na frase. Use
-apenas há dez anos ou dez anos atrás.
-
-\item ``Entrar dentro''. O certo: entrar em. Veja outras redundâncias:
-Sair fora ou para fora, elo de ligação, monopólio exclusivo, já não há
-mais, ganhar grátis, viúva do falecido.
-
-\item ``Venda à prazo''. Não existe crase antes de palavra masculina, a
-menos que esteja subentendida a palavra moda: Salto à (moda de) Luís
-XV. Nos demais casos: A salvo, a bordo, a pé, a esmo, a cavalo, a
-caráter.
-
-\item ``Porque'' você foi? Sempre que estiver clara ou implícita a
-palavra razão, use por que separado: Por que (razão) você foi?~/~Não
-sei por que (razão) ele faltou.~/~Explique por que razão você se
-atrasou. Porque é usado nas respostas: Ele se atrasou porque o
-trânsito estava congestionado.
-
-\item Vai assistir ``o'' jogo hoje. Assistir como presenciar exige a:
-Vai assistir ao jogo, à missa, à sessão.  Outros verbos com a: A
-medida não agradou (desagradou) à população.~/~Eles obedeceram
-(desobedeceram) aos avisos.~/~Aspirava ao cargo de diretor.~/~Pagou ao
-amigo.~/~Respondeu à carta.~/~Sucedeu ao pai.~/~Visava aos estudantes.
-
-\item Preferia ir ``do que'' ficar. Prefere-se sempre uma coisa a outra:
-Preferia ir a ficar. É preferível segue a mesma norma: É preferível
-lutar a morrer sem glória.
-
-\item O resultado do jogo, não o abateu. Não se separa com vírgula o
-sujeito do predicado. Assim: O resultado do jogo não o abateu. Outro
-erro: O prefeito prometeu, novas denúncias. Não existe o sinal entre o
-predicado e o complemento: O prefeito prometeu novas denúncias.
-
-\item Não há regra sem ``excessão''. O certo é exceção. Veja outras
-grafias erradas e, entre parênteses, a forma correta: ``paralizar''
-(paralisar), ``beneficiente'' (beneficente), ``xuxu'' (chuchu),
-``previlégio'' (privilégio), ``vultuoso'' (vultoso), ``cincoenta''
-(cinqüenta), ``zuar'' (zoar), ``frustado'' (frustrado), ``calcáreo''
-(calcário), ``advinhar'' (adivinhar), ``benvindo'' (bem-vindo), ``ascenção''
-(ascensão), ``pixar'' (pichar), ``impecilho'' (empecilho), ``envólucro''
-(invólucro).
-
-\item Quebrou ``o'' óculos. Concordância no plural: os óculos, meus
-óculos. Da mesma forma: Meus parabéns, meus pêsames, seus ciúmes,
-nossas férias, felizes núpcias.
-
-\item Comprei ``ele'' para você. Eu, tu, ele, nós, vós e eles não podem
-ser objeto direto. Assim: Comprei-o para você. Também: Deixe-os sair,
-mandou-nos entrar, viu-a, mandou-me.
-
-\item Nunca ``lhe'' vi. Lhe substitui a ele, a eles, a você e a vocês e
-por isso não pode ser usado com objeto direto: Nunca o vi.~/~Não o
-convidei.~/~A mulher o deixou.~/~Ela o ama.
-
-\item ``Aluga-se'' casas. O verbo concorda com o sujeito: Alugam-se
-casas.~/~Fazem-se consertos.~/~É assim que se evitam acidentes. /
-Compram-se terrenos.~/~Procuram-se empregados.
-
-\item ``Tratam-se'' de. O verbo seguido de preposição não varia nesses
-casos: Trata-se dos melhores profissionais.~/~Precisa-se de
-empregados.~/~Apela-se para todos.~/~Conta-se com os amigos.
-
-\item Chegou ``em'' São Paulo. Verbos de movimento exigem a, e não em:
-Chegou a São Paulo.~/~Vai amanhã ao cinema.~/~Levou os filhos ao
-circo.
-
-\item Atraso implicará ``em'' punição. Implicar é direto no sentido de
-acarretar, pressupor: Atraso implicará punição.~/~Promoção implica
-responsabilidade.
-
-\item Vive ``às custas'' do pai. O certo: Vive à custa do pai. Use
-também em via de, e não ``em vias de'': Espécie em via de extinção. /
-Trabalho em via de conclusão.
-
-\item Todos somos ``cidadões''. O plural de cidadão é cidadãos. Veja
-outros: caracteres (de caráter), juniores, seniores, escrivães,
-tabeliães, gângsteres.
-
-\item O ingresso é ``gratuíto''. A pronúncia correta é gratúito, assim
-como circúito, intúito e fortúito (o acento não existe e só indica a
-letra tônica). Da mesma forma: flúido, condôr, recórde, aváro, ibéro,
-pólipo.
-
-\item A última ``seção'' de cinema. Seção significa divisão, repartição,
-e sessão equivale a tempo de uma reunião, função: Seção Eleitoral,
-Seção de Esportes, seção de brinquedos; sessão de cinema, sessão de
-pancadas, sessão do Congresso.
-
-\item Vendeu ``uma'' grama de ouro. Grama, peso, é palavra masculina: um
-grama de ouro, vitamina C de dois gramas. Femininas, por exemplo, são
-a agravante, a atenuante, a alface, a cal, etc.
-
-\item ``Porisso''. Duas palavras, por isso, como de repente e a partir
-de.
-
-\end{enumerate}
-
-\subsection{Observação importante}
-
-Os erros de português porventura presentes neste artigo
-\begin{itemize}
-\item ou foram introduzidos propositalmente para deleite dos leitores
-atentos,
-\item ou não constam da lista da seção~\ref{sec:27erros}.
-\end{itemize}
-
-\section{Conclusões}
-%Nada resta senão desejar-lhe boa sorte na preparação de seu artigo. Contamos com seu trabalho e sua presença no SBAI 2013 a ser realizado em Fortaleza - CE. Atenciosamente, Prof. Arthur, presidente do SBAI 2013.
-Siga cuidadosamente essas instruções na prepa-ração de seu artigo. Use o link ``Submissão de Tra-balho''  no site do XI SBAI (http://www.sbai2013.ufc.br/) ou do XI DINCON (http://posmec.ufabc.edu.br/dincon2013/) para realizar a submissão eletrônica dele, usando para tanto o formato .pdf. O arquivo deve ser identifi-cado pelo sobrenome do autor, a letra inicial do pri-meiro nome, um número de discriminação, caso o autor esteja submetendo mais de um trabalho, e a extensão apropriada (e.g. Newton-I-1.pdf).
-Deseja-se boa sorte aos autores na preparação de seus artigos, e conta-se com seus trabalhos e suas presenças no SBAI / DINCON 2013 a ser realizado na cidade de Fortaleza - CE. Atenciosamente, Profs. Bismark Claure Torrico, Arthur Plínio de S. Braga, André Fenili e Annibal Hetem Jr., coordenadores gerais do SBAI 2013 e do DINCON 2013, e Profs. Guilherme de Alencar Barreto e Elbert E. N. Macau, coordenadores científicos do SBAI 2013 e do DIN-CON 2013.
-
-\section*{Agradecimentos}
-Mencione aqui seus agradecimentos as agências de fomento e colaboradores no trabalho.
+%
+%\subsection{Teoremas, lemas, corolários e provas}
+%
+%Quatro ambientes já se encontram pré-definidos no estilo \SBATeX. São
+%eles
+%\begin{itemize}
+%\item \verb+theorem+: ambiente para teoremas.
+%\item \verb+corollary+: ambiente para corolários.
+%\item \verb+lemma+: ambiente para lemas.
+%\item \verb+proof+: ambiente para provas.
+%\end{itemize}
+%Segue-se um exemplo de utilização destes ambientes:
+%\begin{lemma}[Desigualdade Subtrativa]
+%Em um espaço vetorial linear normado $\|x\| - \|y\| \leq \|x - y\|$
+%para quaisquer vetores $x$, $y$.
+%\end{lemma}
+%\begin{proof}
+%\begin{align*}
+%\|x\| - \|y\| &= \|x - y + y\| - \|y\| \ \\
+%              &\leq \|x - y \| + \|y\| - \|y\| \\
+%              &= \|x - y\|.
+%\end{align*}
+%\end{proof}
+%Este lema é produzido pela seguinte sequência de comandos:
+%\begin{verbatim}
+%  \begin{lemma}[Desigualdade Subtrativa]
+%    Em um espaço vetorial linear ...
+%  \end{lemma}
+%  \begin{proof}
+%    ...
+%  \end{proof}
+%\end{verbatim}
+%
+%Estes ambientes, com exceção do ambiente \verb+proof+, aceitam
+%um parâmetro opcional que define um nome. No exemplo acima, o nome
+%\emph{Desigualdade Subtrativa} foi produzido por meio deste argumento.
+%
+%
+%\subsection{Bibliografia}
+%\label{sec:bibliografia}
+%
+%As referências são reunidas ao fim do manuscrito, arranjadas
+%alfabeticamente pelo primeiro autor e cronologicamente para cada
+%autor.
+%
+%\textbf{IMPORTANTE:} Todas referências citadas devem aparecer em algum
+%outro ponto do texto.
+%
+%As citações seguem um estilo autor/ano (o mesmo
+%usado na revista {\em Automatica}). O pacote \verb+harvard+ (já
+%incluído pelo \SBATeX) provê vários comandos para inclusão de
+%citações. Dois dois mais utilizados são o tradicional \verb+\cite+ e o
+%\verb+\citeasnoun+. Veja um exemplo:
+%\begin{verbatim}
+%  O resumo deste artigo é um trecho do
+%  livro~\citeasnoun{serafim}. Já o abstract é
+%  extraído de~\citeasnoun{catch22}.
+%  Informações sobre o estilo bibliográfico
+%  \verb+harvard+ encontram-se
+%  em~\citeasnoun{harvard}. Os interessados
+%  devem consultar referências adicionais
+%  sobre \LaTeX~\cite{latex,%
+%  latex:guide,latex:companion}.
+%\end{verbatim}
+%produz o trecho:
+%
+%\begin{em}
+%  O resumo deste artigo é um trecho do
+%  livro~\citeasnoun{serafim}. Já o abstract é
+%  extraído de~\citeasnoun{catch22}.
+%  Informações sobre o estilo bibliográfico
+%  \verb+harvard+ encontram-se
+%  em~\citeasnoun{harvard}. Os interessados
+%  devem consultar referências adicionais
+%  sobre \LaTeX~\cite{latex,latex:guide,latex:companion}.
+%\end{em}
+%
+%Recomenda-se a utilização do programa BibTeX para gerar as suas
+%referências ~\cite{latex,latex:guide,latex:companion}. Note-se que
+%não é necessário definir o estilo bibliográfico com o comando
+%\verb+\bibliographystyle+, pois o mesmo é definido automaticamente
+%pelo estilo \SBATeX. Basta incluir o arquivo de bibliografias,
+%neste exemplo o artigo \verb+exemplo.bib+ por meio do comando.
+%\begin{verbatim}
+%    ...
+%
+%    \bibliography{exemplo}
+%
+%  \end{document}
+%\end{verbatim}
+%Note-se que este comando deve ser colocado logo antes do
+%encerramento do artigo, o que é feito pelo comando
+%\verb+\end{document}+, de tal forma a garantir que a bibliografia
+%seja o último item do artigo.
+%
+%
+%\subsection{Esqueleto deste arquivo no formato \SBATeX}
+%\label{sec:esqueleto}
+%
+%Este arquivo, adaptado para gerar o formato adequado para o
+%\emph{Congresso Brasileiro de Automática} e o  \emph{Simpósio
+%Brasileiro de Automação Inteligente}, faz uso da seguintes
+%instruções:
+%
+%\begin{verbatim}
+%\documentclass[conference,harvard,brazil,english]{sbatex}
+%  \usepackage[latin1]{inputenc}
+%  \usepackage{ae}
+%
+%    ...
+%
+%    \twocolumn[
+%      \maketitle
+%
+%      \selectlanguage{english}
+%      \begin{abstract}
+%        Yossarian says, ...
+%      \end{abstract}
+%
+%      \selectlanguage{brazil}
+%      \begin{abstract}
+%        O Largo da Sé ...
+%      \end{abstract}
+%
+%      \keywords{Exemplo, Ilustração}
+%    ]
+%
+%    ...
+%\end{verbatim}
+%
+%Caso a opção \verb+journal+ seja utilizada, remova o comando
+%\verb+twocolumn[+ antes do comando \verb+\maketitle+ e o \verb+]+ depois do
+%comando \verb+\keywords+. Nos textos em português ou espanhol substitua o pacote \verb+ae+ pelo
+%pacote \verb+fontenc+ com a opção \verb+T1+. Os trechos modificado são os
+%seguintes:
+%\begin{verbatim}
+%  \documentclass[journal,harvard,brazil,english]{sbatex}
+%  \usepackage[latin1]{inputenc}
+%  \usepackage[T1]{fontenc}
+%
+%  \begin{document}
+%
+%    \title{Artigo Exemplo}
+%
+%    \author{João da Silva}
+%           {jsilva@silva.com}
+%    \address{Endereço do João e da Maria\\
+%             Em algum lugar\\
+%             Cidade, Estado, País}
+%
+%    \author{Joaquim Pereira}
+%           {jpereira@pereira.org}
+%    \address{Endereço do Joaquim\\
+%             Em algum lugar\\
+%             Cidade, Estado, País}
+%
+%    \author[1]{Maria da Silva}
+%              {maria@pereira.org}
+%
+%    \author{Pedro Manoel}
+%           {pedro@pedro.com}
+%    \address{Endereço do Pedro e do Rafael\\
+%             Em algum lugar\\
+%             Cidade, Estado, País}
+%
+%    \author{José Rodrigues}
+%           {jose@rodrigues}
+%    \address{Endereço do José\\
+%             Em algum lugar\\
+%             Cidade, Estado, País}
+%
+%    \author[3]{Rafael Pires}
+%              {rafael@pires}
+%
+%    \maketitle
+%
+%    \selectlanguage{english}
+%    \begin{abstract}
+%      Yossarian says, ...
+%    \end{abstract}
+%
+%    \selectlanguage{brazil}
+%    \begin{abstract}
+%      O Largo da Sé ...
+%    \end{abstract}
+%
+%    \keywords{Exemplo, Ilustração}
+%
+%    ...
+%
+%    \bibliography{exemplo}
+%
+%  \end{document}
+%\end{verbatim}
+%
+%
+%\section{Como processar este arquivo}
+%
+%Para processar este arquivo via linha de comandos utiliza-se a
+%seqüência de comandos:
+%\begin{verbatim}
+%  latex sbai2013
+%  bibtex sbai2013
+%  latex sbai2013
+%  latex sbai2013
+%\end{verbatim}
+%Estes comandos geram um arquivo do tipo \emph{Device Independent}
+%(\verb+sbai2013.dvi+), que pode ser visualizado em programas como o
+%\verb+xdvi+ ou \verb+yap+.
+%
+%Para gerar um arquivo no formato \emph{Postscript} (\verb+sbai2013.ps+)
+%utilize o comando:
+%\begin{verbatim}
+%  dvips -t a4 sbai2013
+%\end{verbatim}
+%
+%Para gerar um arquivo no formato \emph{Portable Document Format}
+%(\verb+sbai2013.pdf+) utilize os comandos:
+%\begin{verbatim}
+%  dvips -Ppdf -t a4 sbai2013
+%  ps2pdf -dMaxSubsetPct=100 -dSubsetFonts=true
+%  -dEmbedAllFonts=true -dCompatibilityLevel=1.2
+%  -sPAPERSIZE=a4 sbai2013.ps
+%\end{verbatim}
+%
+%\textbf{Observação:} Dependendo da sua instalação do \verb+dvips+ o
+%parâmetro \verb+-Ppdf+ pode acarretar a troca de algumas seqüências de
+%letras nos arquivos .ps e .pdf. Um típico exemplo é a troca de toda
+%sílaba `fi' pelo símbolo da libra esterlina. Para evitar este
+%indesejável efeito você deve desabilitar (ou habilitar, dependendo da
+%instalação) o remapeamento de caracteres. Faça isto adicionando à
+%linha de comando do \verb+dvips+ o parâmetro \verb+-G0+ (ou \verb+-G+
+%para habilitar).
+%
+%\section{Contribuição deste artigo}
+%
+%\subsection{Os vinte e sete erros mais comuns (de uma lista de cem)}
+%\label{sec:27erros}
+%
+%Erros gramaticais e ortográficos devem, por princípio, ser
+%evitados. Alguns, no entanto, como ocorrem com maior frequência,
+%merecem atenção redobrada. O primeiro capítulo deste manual inclui
+%explicações mais completas a respeito de cada um deles. Veja os cem
+%mais comuns do idioma e use esta relação como um roteiro para fugir
+%deles~\cite{manual}.
+%
+%\begin{enumerate}
+%\item ``Mal cheiro'', ``mau-humorado''. Mal opõe-se a bem e mau, a
+%bom. Assim: mau cheiro (bom cheiro), mal-humorado
+%(bem-humorado). Igualmente: mau humor, mal-intencionado, mau jeito,
+%mal-estar.
+%
+%\item ``Fazem'' cinco anos. Fazer, quando exprime tempo, é impessoal:
+%Faz cinco anos.~/~Fazia dois séculos.~/~Fez 15 dias.
+%
+%\item ``Houveram'' muitos acidentes. Haver, como existir, também é
+%invariável: Houve muitos acidentes.~/~Havia muitas pessoas.~/~Deve
+%haver muitos casos iguais.
+%
+%\item ``Existe'' muitas esperanças. Existir, bastar, faltar, restar e
+%sobrar admitem normalmente o plural: Existem muitas esperanças. /
+%Bastariam dois dias.~/~Faltavam poucas peças.~/~Restaram alguns
+%objetos.~/~Sobravam idéias.
+%
+%\item Para ``mim'' fazer. Mim não faz, porque não pode ser
+%sujeito. Assim: Para eu fazer, para eu dizer, para eu trazer.
+%
+%\item Entre ``eu'' e você. Depois de preposição, usa-se mim ou ti: Entre
+%mim e você.~/~Entre eles e ti.
+%
+%\item ``Há'' dez anos ``atrás''. Há e atrás indicam passado na frase. Use
+%apenas há dez anos ou dez anos atrás.
+%
+%\item ``Entrar dentro''. O certo: entrar em. Veja outras redundâncias:
+%Sair fora ou para fora, elo de ligação, monopólio exclusivo, já não há
+%mais, ganhar grátis, viúva do falecido.
+%
+%\item ``Venda à prazo''. Não existe crase antes de palavra masculina, a
+%menos que esteja subentendida a palavra moda: Salto à (moda de) Luís
+%XV. Nos demais casos: A salvo, a bordo, a pé, a esmo, a cavalo, a
+%caráter.
+%
+%\item ``Porque'' você foi? Sempre que estiver clara ou implícita a
+%palavra razão, use por que separado: Por que (razão) você foi?~/~Não
+%sei por que (razão) ele faltou.~/~Explique por que razão você se
+%atrasou. Porque é usado nas respostas: Ele se atrasou porque o
+%trânsito estava congestionado.
+%
+%\item Vai assistir ``o'' jogo hoje. Assistir como presenciar exige a:
+%Vai assistir ao jogo, à missa, à sessão.  Outros verbos com a: A
+%medida não agradou (desagradou) à população.~/~Eles obedeceram
+%(desobedeceram) aos avisos.~/~Aspirava ao cargo de diretor.~/~Pagou ao
+%amigo.~/~Respondeu à carta.~/~Sucedeu ao pai.~/~Visava aos estudantes.
+%
+%\item Preferia ir ``do que'' ficar. Prefere-se sempre uma coisa a outra:
+%Preferia ir a ficar. É preferível segue a mesma norma: É preferível
+%lutar a morrer sem glória.
+%
+%\item O resultado do jogo, não o abateu. Não se separa com vírgula o
+%sujeito do predicado. Assim: O resultado do jogo não o abateu. Outro
+%erro: O prefeito prometeu, novas denúncias. Não existe o sinal entre o
+%predicado e o complemento: O prefeito prometeu novas denúncias.
+%
+%\item Não há regra sem ``excessão''. O certo é exceção. Veja outras
+%grafias erradas e, entre parênteses, a forma correta: ``paralizar''
+%(paralisar), ``beneficiente'' (beneficente), ``xuxu'' (chuchu),
+%``previlégio'' (privilégio), ``vultuoso'' (vultoso), ``cincoenta''
+%(cinqüenta), ``zuar'' (zoar), ``frustado'' (frustrado), ``calcáreo''
+%(calcário), ``advinhar'' (adivinhar), ``benvindo'' (bem-vindo), ``ascenção''
+%(ascensão), ``pixar'' (pichar), ``impecilho'' (empecilho), ``envólucro''
+%(invólucro).
+%
+%\item Quebrou ``o'' óculos. Concordância no plural: os óculos, meus
+%óculos. Da mesma forma: Meus parabéns, meus pêsames, seus ciúmes,
+%nossas férias, felizes núpcias.
+%
+%\item Comprei ``ele'' para você. Eu, tu, ele, nós, vós e eles não podem
+%ser objeto direto. Assim: Comprei-o para você. Também: Deixe-os sair,
+%mandou-nos entrar, viu-a, mandou-me.
+%
+%\item Nunca ``lhe'' vi. Lhe substitui a ele, a eles, a você e a vocês e
+%por isso não pode ser usado com objeto direto: Nunca o vi.~/~Não o
+%convidei.~/~A mulher o deixou.~/~Ela o ama.
+%
+%\item ``Aluga-se'' casas. O verbo concorda com o sujeito: Alugam-se
+%casas.~/~Fazem-se consertos.~/~É assim que se evitam acidentes. /
+%Compram-se terrenos.~/~Procuram-se empregados.
+%
+%\item ``Tratam-se'' de. O verbo seguido de preposição não varia nesses
+%casos: Trata-se dos melhores profissionais.~/~Precisa-se de
+%empregados.~/~Apela-se para todos.~/~Conta-se com os amigos.
+%
+%\item Chegou ``em'' São Paulo. Verbos de movimento exigem a, e não em:
+%Chegou a São Paulo.~/~Vai amanhã ao cinema.~/~Levou os filhos ao
+%circo.
+%
+%\item Atraso implicará ``em'' punição. Implicar é direto no sentido de
+%acarretar, pressupor: Atraso implicará punição.~/~Promoção implica
+%responsabilidade.
+%
+%\item Vive ``às custas'' do pai. O certo: Vive à custa do pai. Use
+%também em via de, e não ``em vias de'': Espécie em via de extinção. /
+%Trabalho em via de conclusão.
+%
+%\item Todos somos ``cidadões''. O plural de cidadão é cidadãos. Veja
+%outros: caracteres (de caráter), juniores, seniores, escrivães,
+%tabeliães, gângsteres.
+%
+%\item O ingresso é ``gratuíto''. A pronúncia correta é gratúito, assim
+%como circúito, intúito e fortúito (o acento não existe e só indica a
+%letra tônica). Da mesma forma: flúido, condôr, recórde, aváro, ibéro,
+%pólipo.
+%
+%\item A última ``seção'' de cinema. Seção significa divisão, repartição,
+%e sessão equivale a tempo de uma reunião, função: Seção Eleitoral,
+%Seção de Esportes, seção de brinquedos; sessão de cinema, sessão de
+%pancadas, sessão do Congresso.
+%
+%\item Vendeu ``uma'' grama de ouro. Grama, peso, é palavra masculina: um
+%grama de ouro, vitamina C de dois gramas. Femininas, por exemplo, são
+%a agravante, a atenuante, a alface, a cal, etc.
+%
+%\item ``Porisso''. Duas palavras, por isso, como de repente e a partir
+%de.
+%
+%\end{enumerate}
+%
+%\subsection{Observação importante}
+%
+%Os erros de português porventura presentes neste artigo
+%\begin{itemize}
+%\item ou foram introduzidos propositalmente para deleite dos leitores
+%atentos,
+%\item ou não constam da lista da seção~\ref{sec:27erros}.
+%\end{itemize}
+%
+%\section{Conclusões}
+%%Nada resta senão desejar-lhe boa sorte na preparação de seu artigo. Contamos com seu trabalho e sua presença no SBAI 2013 a ser realizado em Fortaleza - CE. Atenciosamente, Prof. Arthur, presidente do SBAI 2013.
+%Siga cuidadosamente essas instruções na prepa-ração de seu artigo. Use o link ``Submissão de Tra-balho''  no site do XI SBAI (http://www.sbai2013.ufc.br/) ou do XI DINCON (http://posmec.ufabc.edu.br/dincon2013/) para realizar a submissão eletrônica dele, usando para tanto o formato .pdf. O arquivo deve ser identifi-cado pelo sobrenome do autor, a letra inicial do pri-meiro nome, um número de discriminação, caso o autor esteja submetendo mais de um trabalho, e a extensão apropriada (e.g. Newton-I-1.pdf).
+%Deseja-se boa sorte aos autores na preparação de seus artigos, e conta-se com seus trabalhos e suas presenças no SBAI / DINCON 2013 a ser realizado na cidade de Fortaleza - CE. Atenciosamente, Profs. Bismark Claure Torrico, Arthur Plínio de S. Braga, André Fenili e Annibal Hetem Jr., coordenadores gerais do SBAI 2013 e do DINCON 2013, e Profs. Guilherme de Alencar Barreto e Elbert E. N. Macau, coordenadores científicos do SBAI 2013 e do DIN-CON 2013.
+%
+%\section*{Agradecimentos}
+%Mencione aqui seus agradecimentos as agências de fomento e colaboradores no trabalho.
 
 % BIBLIOGRAFIA
 \bibliography{sbai-references}
