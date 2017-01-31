@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.6-1.40.14 (TeX Live 2014/dev) (format=pdflatex 2015.7.10)  16 JAN 2017 05:21
+This is pdfTeX, Version 3.1415926-2.6-1.40.14 (TeX Live 2014/dev) (format=pdflatex 2015.7.10)  18 JAN 2017 07:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -713,8 +713,9 @@ Underfull \hbox (badness 1286) in paragraph at lines 161--162
 
 
 LaTeX Warning: Reference `fig: Optimization problems' on page 2 undefined on in
-put line 173.
+put line 175.
 
+[2]
 Package epstopdf Info: Source file: <figuras/problemasDeOtimizacao.eps>
 (epstopdf)                    date: 2017-01-16 04:09:29
 (epstopdf)                    size: 1436237 bytes
@@ -724,44 +725,43 @@ d-to.pdf>
 (epstopdf)                    size: 8792 bytes
 (epstopdf)             Command: <repstopdf --outfile=figuras/problemasDeOtimiza
 cao-eps-converted-to.pdf figuras/problemasDeOtimizacao.eps>
-(epstopdf)             \includegraphics on input line 177.
+(epstopdf)             \includegraphics on input line 179.
 Package epstopdf Info: Output file is already uptodate.
 
-<figuras/problemasDeOtimizacao-eps-converted-to.pdf, id=14, 503.8825pt x 157.58
+<figuras/problemasDeOtimizacao-eps-converted-to.pdf, id=17, 503.8825pt x 157.58
 875pt>
 File: figuras/problemasDeOtimizacao-eps-converted-to.pdf Graphic file (type pdf
 )
  <use figuras/problemasDeOtimizacao-eps-converted-to.pdf>
 Package pdftex.def Info: figuras/problemasDeOtimizacao-eps-converted-to.pdf use
-d on input line 177.
+d on input line 179.
 (pdftex.def)             Requested size: 212.97314pt x 66.60762pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [2]
+LaTeX Warning: Reference `fig: sol' on page 3 undefined on input line 211.
 
-LaTeX Warning: Reference `fig: sol' on page 3 undefined on input line 209.
+[3 <./figuras/problemasDeOtimizacao-eps-converted-to.pdf>]
+LaTeX Font Info:    Try loading font information for OMS+aer on input line 232.
 
-LaTeX Font Info:    Try loading font information for OMS+aer on input line 230.
 
 (/usr/share/texlive/texmf-dist/tex/latex/ae/omsaer.fd
 File: omsaer.fd 1999/12/27
 )
 LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 230.
- [3 <./figuras/problemasDeOtimizacao-eps-converted-to.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 266--267
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 232.
+
+Underfull \hbox (badness 10000) in paragraph at lines 268--269
 []\T1/aer/bx/n/10 Each task must be ex-e-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 266--267
+Underfull \hbox (badness 10000) in paragraph at lines 268--269
 \T1/aer/bx/n/10 cuted/processed in an unique
  []
 
 [4]
 
-LaTeX Warning: Reference `model' on page 5 undefined on input line 350.
+LaTeX Warning: Reference `model' on page 5 undefined on input line 352.
 
 Package epstopdf Info: Source file: <figuras/useCase.eps>
 (epstopdf)                    date: 2017-01-16 04:09:29
@@ -771,29 +771,26 @@ Package epstopdf Info: Source file: <figuras/useCase.eps>
 (epstopdf)                    size: 447087 bytes
 (epstopdf)             Command: <repstopdf --outfile=figuras/useCase-eps-conver
 ted-to.pdf figuras/useCase.eps>
-(epstopdf)             \includegraphics on input line 379.
+(epstopdf)             \includegraphics on input line 381.
 Package epstopdf Info: Output file is already uptodate.
 <figuras/useCase-eps-converted-to.pdf, id=38, 586.19pt x 355.3275pt>
 File: figuras/useCase-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figuras/useCase-eps-converted-to.pdf>
 Package pdftex.def Info: figuras/useCase-eps-converted-to.pdf used on input lin
-e 379.
+e 381.
 (pdftex.def)             Requested size: 203.90855pt x 123.60199pt.
 
 
-LaTeX Warning: Reference `mission' on page 5 undefined on input line 391.
+LaTeX Warning: Reference `mission' on page 5 undefined on input line 393.
 
-
-Overfull \hbox (36.13498pt too wide) in paragraph at lines 433--433
+[5 <./figuras/useCase-eps-converted-to.pdf>]
+Overfull \hbox (36.13498pt too wide) in paragraph at lines 435--435
 [] [] 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [5 <./figuras/useCase-eps-converted-to.pdf>]
-Overfull \hbox (36.13498pt too wide) in paragraph at lines 490--490
+Overfull \hbox (36.13498pt too wide) in paragraph at lines 492--492
 [] [] 
  []
 
@@ -802,7 +799,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [6]
 
-LaTeX Warning: Reference `fig:planArq' on page 7 undefined on input line 555.
+LaTeX Warning: Reference `fig:planArq' on page 7 undefined on input line 557.
 
 
 Underfull \vbox (badness 2865) has occurred while \output is active []
@@ -810,7 +807,7 @@ Underfull \vbox (badness 2865) has occurred while \output is active []
 
 
 LaTeX Warning: Reference `fig:SimulatedGraPlanners' on page 7 undefined on inpu
-t line 580.
+t line 582.
 
 Package epstopdf Info: Source file: <figuras/GraPlannersSimulado.eps>
 (epstopdf)                    date: 2017-01-16 04:09:28
@@ -821,7 +818,7 @@ to.pdf>
 (epstopdf)                    size: 7356 bytes
 (epstopdf)             Command: <repstopdf --outfile=figuras/GraPlannersSimulad
 o-eps-converted-to.pdf figuras/GraPlannersSimulado.eps>
-(epstopdf)             \includegraphics on input line 584.
+(epstopdf)             \includegraphics on input line 586.
 Package epstopdf Info: Output file is already uptodate.
 
 <figuras/GraPlannersSimulado-eps-converted-to.pdf, id=74, 407.5225pt x 268.0012
@@ -829,10 +826,10 @@ Package epstopdf Info: Output file is already uptodate.
 File: figuras/GraPlannersSimulado-eps-converted-to.pdf Graphic file (type pdf)
  <use figuras/GraPlannersSimulado-eps-converted-to.pdf>
 Package pdftex.def Info: figuras/GraPlannersSimulado-eps-converted-to.pdf used 
-on input line 584.
+on input line 586.
 (pdftex.def)             Requested size: 226.56659pt x 149.00008pt.
 
-Overfull \hbox (10.8406pt too wide) in paragraph at lines 584--585
+Overfull \hbox (10.8406pt too wide) in paragraph at lines 586--587
  [][] 
  []
 
@@ -840,13 +837,13 @@ Overfull \hbox (10.8406pt too wide) in paragraph at lines 584--585
 File: figuras/mapsUseCase.PNG Graphic file (type png)
 
 <use figuras/mapsUseCase.PNG>
-Package pdftex.def Info: figuras/mapsUseCase.PNG used on input line 594.
+Package pdftex.def Info: figuras/mapsUseCase.PNG used on input line 596.
 (pdftex.def)             Requested size: 212.97314pt x 142.05492pt.
  [7 <./figuras/GraPlannersSimulado-eps-converted-to.pdf> <./figuras/mapsUseCase
 .PNG>]
 
 LaTeX Warning: Reference `fig: GraPlannersReal' on page 8 undefined on input li
-ne 617.
+ne 619.
 
 Package epstopdf Info: Source file: <figuras/GraPlannersReal.eps>
 (epstopdf)                    date: 2017-01-16 04:09:28
@@ -857,27 +854,27 @@ df>
 (epstopdf)                    size: 7371 bytes
 (epstopdf)             Command: <repstopdf --outfile=figuras/GraPlannersReal-ep
 s-converted-to.pdf figuras/GraPlannersReal.eps>
-(epstopdf)             \includegraphics on input line 621.
+(epstopdf)             \includegraphics on input line 623.
 Package epstopdf Info: Output file is already uptodate.
 
 <figuras/GraPlannersReal-eps-converted-to.pdf, id=89, 407.5225pt x 268.00125pt>
 File: figuras/GraPlannersReal-eps-converted-to.pdf Graphic file (type pdf)
 <use figuras/GraPlannersReal-eps-converted-to.pdf>
 Package pdftex.def Info: figuras/GraPlannersReal-eps-converted-to.pdf used on i
-nput line 621.
+nput line 623.
 (pdftex.def)             Requested size: 226.56659pt x 149.00008pt.
 
-Overfull \hbox (10.8406pt too wide) in paragraph at lines 621--622
+Overfull \hbox (10.8406pt too wide) in paragraph at lines 623--624
  [][] 
  []
 
 
 LaTeX Warning: Reference `table:plannersSimulate' on page 8 undefined on input 
-line 625.
+line 627.
 
 
 LaTeX Warning: Reference `Table:plannersReal' on page 8 undefined on input line
- 625.
+ 627.
 
 (./sbai.bbl [8 <./figuras/GraPlannersReal-eps-converted-to.pdf>]) [9
 
@@ -885,6 +882,9 @@ LaTeX Warning: Reference `Table:plannersReal' on page 8 undefined on input line
 (./sbai.aux)
 
 LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
@@ -913,7 +913,7 @@ e/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on sbai.pdf (9 pages, 1247036 bytes).
+Output written on sbai.pdf (9 pages, 1247464 bytes).
 PDF statistics:
  162 PDF objects out of 1000 (max. 8388607)
  98 compressed objects within 1 object stream

@@ -152,15 +152,17 @@ The remaining of this work is organized as follows:\commentib{COMPLETAR. DIga o 
 \section{Background}
 
 \subsection{Mission Planning}
-Mission planning for UAVs can be defined as the process of location planning (waypoints) to be visited and the actions of the vehicle (loading/unloading, filming/photos, capturing information), usually within a certain range of time. Functionally, mission planning lies above the trajectory planning process, where the mission planner generates a desired mission plan, and then the trajectory planner generates the flight plan (trajectories) between the waypoints.
+Mission planning for UAVs can be defined as the process of location planning (waypoints) to be visited and the actions of the vehicle (loading/unloading, filming/photos, capturing information), usually within a certain range of time \commentib{Essa defini\c{c}\~ao est\'a um pouco sem sentido. Procure uma defini\c{c}\~ao na literatura e insira a cita\c{c}\~ao da sua fonte.}. Functionally, mission planning lies above the trajectory planning process, where the mission planner generates a desired mission plan, and then the trajectory planner generates the flight plan (trajectories) between the waypoints. \commentib{Acho que voc\^e pode reformular esse par\'agrafo, defina primeiramente o que \'e uma miss\~ao, depois d\^e essa defini\c{c}\~ao de planejamento (como vc fez), e finalmente diga o que \'e o planejador. Deixe claro que o planejador \'e um software.}
 
-In the literature, there are some attempts to implement UAV guidance systems that perform mission planning. Doherty et al. \protect\citeasnoun{doherty2009temporal} presented an architecture of a framework for mission planning and execution tracking, applied to an unmanned helicopter. During the execution of the mission, knowledge was acquired through sensors which was used to create state structures. These structures will allow the construction of a logical model, representing the real development of the system and its environment over time. Then, the planning and monitoring modules use temporal action logic (TAL) to reason about actions and changes.
+In the literature, there are some attempts to implement UAV guidance systems that perform mission planning. \protect\citeasnoun{doherty2009temporal} presented an architecture of a framework for mission planning and execution tracking applied to an unmanned helicopter. During the execution of the mission, knowledge was acquired through sensors which was used to create state structures. These structures will allow the construction of a logical model, representing the real development of the system and its environment over time. Then, the planning and monitoring modules use temporal action logic (TAL) to reason about actions and changes.
 
 The NASA/U.S. Army autonomous helicopter project has developed a guidance system for the autonomous surveillance planning problem for multiple and different targets \cite{whalley2005design}, which generates mission plans using a theoretical approach to decision making. A high-level standalone control is provided by the framework Apex \cite{baer1998nasa}, a reactive procedure-based scheduler/planner used to perform mission-level tasks. Apex synthesizes a course of action primarily by linking elemental procedures expressed in procedural definition language (PDL), a notation developed specifically for the Apex reactive planner. This guidance system was integrated into a robotic helicopter and tested in more than 240 scenarios.
 
 A similar project, called Ressac (Research and Rescue by Cooperative Autonomous System), was conducted by the French Aerospace Laboratory (ONERA) for a search and rescue scenario \cite{fabiani2007autonomous}. This architecture for an exploration mission was developed based on the idea of decomposing the mission into a sequence of tasks or macro-actions associated with rewards. The problem was modelled using a Markov decision process framework (MDP) and dynamic programming algorithms for mission planning. Konigsbuch \cite{teichteil2007multi} extends the guidance system and integrates with a robotic helicopter.
 
 Finally, the German Aerospace Center (DLR) has also developed a mission management system based on the behavior paradigm \cite{adolf2010onboard}, which has been integrated with the ARTIS helicopter and validated in different scenarios, including follower of waypoints and search and tracking mission.
+
+\commentib{Os par\'agrafos anteriores n\~ao fazem parte de um background sobre mission planning, eles s\~ao trabalhos relacionados. Crie uma se\c{c}\~ao s\'o para isso.}
 
 %\subsection{UAV Navigation}
 
@@ -175,7 +177,7 @@ Two distinctions need to be made to better understand the universe of optimizati
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.47\textwidth]{figuras/problemasDeOtimizacao.eps}
-	\caption{Some Optimization Problems.\label{fig:problemasDeOtimizacao}}
+	\caption{Some Optimization Problems.\commentib{N\~ao \'e poss\'ivel ler essa figura.} \label{fig:problemasDeOtimizacao}}
 	\end{figure}
 	
 	An optimization problem can be defined as a finite set of variables, where the correct values for the variables specify the optimal solution. If the variables are of the set of real, the problem is called continuous, and if they can only have a finite set of distinct values, the problem is called combinatorial \cite{francq2011optimization}.
