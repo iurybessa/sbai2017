@@ -124,7 +124,7 @@
 \keywords{Planejamento de Missão, Sistemas de Manufatura.}
 ]
 
-\commentib{Voc\^e sabe a origem daquele \'indice no topoda primeira p\'agina? Isso n\~ao pode ficar a\'i!}
+\commentib{Eu sei que nao pode. Eu inclusive perguntei de ti ja como tirava...porque eu nao consegui tirar de forma definitiva.}
 
 % CONTRIBUIÇÃO
 
@@ -134,9 +134,7 @@
 \label{sec:introduction}
 %----------------------------------------------
 
-%Use of a commercial UAV - 3DR IRIS + - in the intralogistics \footnote{Internal Logistics of movement and storage.}, aiming to give another option of agility in the manufacturing process. Additionally, it will be approached a study of evaluation of the cost of the missions that the UAV executes in this process.
-
-\commentib{Eu comentei algumas das refs que estavam dando pau na hora de compilar. Revise-as, eleas devem estar usando algum s\'imbolo estranho. Al\'em disso, evite citar sites. Se n\~ao puder evitar, existe o campo de bibtex pr\'oprio para eles.}
+Use of a commercial UAV - 3DR IRIS + - in the intralogistics \footnote{Internal Logistics of movement and storage.}, aiming to give another option of agility in the manufacturing process. Additionally, it will be approached a study of evaluation of the cost of the missions that the UAV executes in this process.
 
 Logistics has become a competitive and fundamental factor for organizations, involving the management, conservation and supervision of freight transport. In addition, excellent logistics means customer satisfaction, so speed is still an important factor in a successful logistics process \cite{drone4logistic}. Currently, one of the solutions to this type of problem is the use of UAVs, which are any and every type of aircraft that does not require on board pilots to be guided. Nowadays, UAVs are mostly remotely piloted vehicles (RPV), since their operations are carried out by ground operators. If the tasks performed by a UAV were performed autonomously, it would relieve the work of these operators, since they perform tedious and repetitive tasks \cite{pascarella2013autonomic}.
 
@@ -146,13 +144,17 @@ Autonomous UAVs need to know what will happen in a future instant and what is th
 
 This paper presents a methodology that evaluate the cost of mission planners for a commercial UAV. The evaluation is made by comparing the mission execution time with the cost of an optimal solution solved by CPLEX solver. Additionally, a middleware was developed to interface the mission planning application and the embedded control software, adapting the UAV for intra-logistics. Finally, experiments were done to verify the consistency of evaluation methodology.
 
-The remaining of this work is organized as follows:\commentib{COMPLETAR. DIga o que vir\'a em cada se\c{c}\~ao. Aconselho que voc\^e crie um label para cada se\c{c}\~ao para que possa referenciar (veja como fi\ na introdu\c{c}\~ao}).
+The remaining of this work is organized as follows: A background section was inserted to give a better understanding of mission planning and optimization problems. There is methodology section to show the explanation of the methods that this project uses. The next section shows the experimental results of this work. Finally, last section presents the conclusion of this project.
 
 
 \section{Background}
+\label{sec:background}
 
 \subsection{Mission Planning}
-Mission planning for UAVs can be defined as the process of location planning (waypoints) to be visited and the actions of the vehicle (loading/unloading, filming/photos, capturing information), usually within a certain range of time \commentib{Essa defini\c{c}\~ao est\'a um pouco sem sentido. Procure uma defini\c{c}\~ao na literatura e insira a cita\c{c}\~ao da sua fonte.}. Functionally, mission planning lies above the trajectory planning process, where the mission planner generates a desired mission plan, and then the trajectory planner generates the flight plan (trajectories) between the waypoints. \commentib{Acho que voc\^e pode reformular esse par\'agrafo, defina primeiramente o que \'e uma miss\~ao, depois d\^e essa defini\c{c}\~ao de planejamento (como vc fez), e finalmente diga o que \'e o planejador. Deixe claro que o planejador \'e um software.}
+\label{subsec:missionplanning}
+Firstly, a mission can be defined as a goal that need to be completed. In the context of this work, the mission of the UAV is delivery of packages acording to a set of well defined rules. A definition to mission planning for UAV is the process of planning the locations to visit (waypoints) and the actions that the vehicles can perform (loading/dropping a load, taking videos/pictures, etc.), typically over a time period \cite{ramirez2014solving}. An important term in this work is the concept of planner which is the agent (software implementation) that generate a mission. Functionally, mission planning lies above the trajectory planning process, where the mission planner generates a desired mission plan, and then the trajectory planner generates the flight plan (trajectories) between the waypoints.
+
+\subsubsection{Related Works in Mission Planning}
 
 In the literature, there are some attempts to implement UAV guidance systems that perform mission planning. \protect\citeasnoun{doherty2009temporal} presented an architecture of a framework for mission planning and execution tracking applied to an unmanned helicopter. During the execution of the mission, knowledge was acquired through sensors which was used to create state structures. These structures will allow the construction of a logical model, representing the real development of the system and its environment over time. Then, the planning and monitoring modules use temporal action logic (TAL) to reason about actions and changes.
 
@@ -162,8 +164,6 @@ A similar project, called Ressac (Research and Rescue by Cooperative Autonomous 
 
 Finally, the German Aerospace Center (DLR) has also developed a mission management system based on the behavior paradigm \cite{adolf2010onboard}, which has been integrated with the ARTIS helicopter and validated in different scenarios, including follower of waypoints and search and tracking mission.
 
-\commentib{Os par\'agrafos anteriores n\~ao fazem parte de um background sobre mission planning, eles s\~ao trabalhos relacionados. Crie uma se\c{c}\~ao s\'o para isso.}
-
 %\subsection{UAV Navigation}
 
 
@@ -172,13 +172,13 @@ Finally, the German Aerospace Center (DLR) has also developed a mission manageme
 
 An optimization problem is about finding the best solution (relative to a certain criterion) among a set of available alternatives. For example, the popular bin packaging problem that aims to find the number of boxes of a certain size to store a set of objects of indicated sizes; optimization involves, for example, finding the least amount of boxes.
 
-Two distinctions need to be made to better understand the universe of optimization problems. The first is to distinguish a problem which refers to a more general class, for example, the problem of packaging, and an example representing a special type of problem, for example the problem of packaging, wherein there are 5 packages for packaging 25 objects of different sizes. The second distinction concerns the existence of two categories of problem classes: the abstract problem classes and the concrete problem classes. As the name itself suggests, the second category refers to problems that have "concrete existence," that is, problems for which instances can be created. The BPP corresponds to this category. Together they are also part of a more abstract class: grouping problems. Only with the problem of abstract classes, it is impossible to define instances. In fact, as shown in Figure ~\ref{fig: Optimization problems}, the classes of concrete and abstract problems form a hierarchy of optimization problems.
+Two distinctions need to be made to better understand the universe of optimization problems. The first is to distinguish a problem which refers to a more general class, for example, the problem of packaging, and an example representing a special type of problem, for example the problem of packaging, wherein there are 5 packages for packaging 25 objects of different sizes. The second distinction concerns the existence of two categories of problem classes: the abstract problem classes and the concrete problem classes. As the name itself suggests, the second category refers to problems that have "concrete existence," that is, problems for which instances can be created. The BPP corresponds to this category. Together they are also part of a more abstract class: grouping problems. Only with the problem of abstract classes, it is impossible to define instances. In fact, as shown in Figure~\ref{fig:problemasDeOtimizacao}, the classes of concrete and abstract problems form a hierarchy of optimization problems.
 
-\begin{figure}[H]
+\begin{figure*}[h]
 	\centering
-	\includegraphics[width=0.47\textwidth]{figuras/problemasDeOtimizacao.eps}
-	\caption{Some Optimization Problems.\commentib{N\~ao \'e poss\'ivel ler essa figura.} \label{fig:problemasDeOtimizacao}}
-	\end{figure}
+	\includegraphics[width=1.0\textwidth]{figuras/problemasDeOtimizacao.eps}
+	\caption{Some Optimization Problems.\commentib{Falta apenas traduzir a imagem.} \label{fig:problemasDeOtimizacao}}
+	\end{figure*}
 	
 	An optimization problem can be defined as a finite set of variables, where the correct values for the variables specify the optimal solution. If the variables are of the set of real, the problem is called continuous, and if they can only have a finite set of distinct values, the problem is called combinatorial \cite{francq2011optimization}.
 	
