@@ -65,6 +65,8 @@
 \usepackage{caption}
 \usepackage{subcaption}
 
+\usepackage{url}
+
 
 %-----------------------
 \usepackage{mathtools, nccmath}
@@ -138,7 +140,7 @@ Use of a commercial UAV - 3DR IRIS + - in the intralogistics \footnote{Internal 
 
 Logistics has become a competitive and fundamental factor for organizations, involving the management, conservation and supervision of freight transport. In addition, excellent logistics means customer satisfaction, so speed is still an important factor in a successful logistics process \cite{drone4logistic}. Currently, one of the solutions to this type of problem is the use of UAVs, which are any and every type of aircraft that does not require on board pilots to be guided. Nowadays, UAVs are mostly remotely piloted vehicles (RPV), since their operations are carried out by ground operators. If the tasks performed by a UAV were performed autonomously, it would relieve the work of these operators, since they perform tedious and repetitive tasks \cite{pascarella2013autonomic}.
 
-A probable improvement of these logistics systems is the increase of the automation of the UAVs, what results in minimization of the costs. However, one of the main problems with the use of autonomous UAVs is the reliability and intelligence of the system. Because of these factors, investments and studies related to stand-alone UAVs are still considered small \protect\cite{hern2014dhl}. Thus, increased employment of autonomous UAVs requires the development of devices that are capable of performing tasks and interacting with the environment intelligently and reliably.
+A probable improvement of these logistics systems is the increase of the automation of the UAVs, what results in minimization of the costs. However, one of the main problems with the use of autonomous UAVs is the reliability and intelligence of the system. Because of these factors, investments and studies related to stand-alone UAVs are still considered small \cite{hern2014dhl}. Thus, increased employment of autonomous UAVs requires the development of devices that are capable of performing tasks and interacting with the environment intelligently and reliably.
 
 Autonomous UAVs need to know what will happen in a future instant and what is the best decision to make at the present time, and therefore require strategies not only to decompose their missions into meaningful sub-tasks but also to track progress toward mission goals and the evolution of these tasks relative to the capabilities of autonomous UAVs \cite{finn2012developments}. As a consequence, in order to perform a mission successfully, it is recommended to make a plan to the task \cite{successplan}. Mission planning problems consist of planning events to meet certain requirements associated with the plan and improving mission objectives \cite{krozel1988search}. Therefore, this is one of the main challenges faced in solving this type of problem.
 
@@ -156,7 +158,7 @@ Firstly, a mission can be defined as a goal that need to be completed. In the co
 
 \subsubsection{Related Works in Mission Planning}
 
-In the literature, there are some attempts to implement UAV guidance systems that perform mission planning. \protect\citeasnoun{doherty2009temporal} presented an architecture of a framework for mission planning and execution tracking applied to an unmanned helicopter. During the execution of the mission, knowledge was acquired through sensors which was used to create state structures. These structures will allow the construction of a logical model, representing the real development of the system and its environment over time. Then, the planning and monitoring modules use temporal action logic (TAL) to reason about actions and changes.
+In the literature, there are some attempts to implement UAV guidance systems that perform mission planning. \citeasnoun{doherty2009temporal} presented an architecture of a framework for mission planning and execution tracking applied to an unmanned helicopter. During the execution of the mission, knowledge was acquired through sensors which was used to create state structures. These structures will allow the construction of a logical model, representing the real development of the system and its environment over time. Then, the planning and monitoring modules use temporal action logic (TAL) to reason about actions and changes.
 
 The NASA/U.S. Army autonomous helicopter project has developed a guidance system for the autonomous surveillance planning problem for multiple and different targets \cite{whalley2005design}, which generates mission plans using a theoretical approach to decision making. A high-level standalone control is provided by the framework Apex \cite{baer1998nasa}, a reactive procedure-based scheduler/planner used to perform mission-level tasks. Apex synthesizes a course of action primarily by linking elemental procedures expressed in procedural definition language (PDL), a notation developed specifically for the Apex reactive planner. This guidance system was integrated into a robotic helicopter and tested in more than 240 scenarios.
 
@@ -180,7 +182,7 @@ Two distinctions need to be made to better understand the universe of optimizati
 	\caption{Some Optimization Problems.\commentib{Falta apenas traduzir a imagem.} \label{fig:problemasDeOtimizacao}}
 	\end{figure*}
 	
-	An optimization problem can be defined as a finite set of variables, where the correct values for the variables specify the optimal solution. If the variables are of the set of real, the problem is called continuous, and if they can only have a finite set of distinct values, the problem is called combinatorial \cite{francq2011optimization}.
+	An optimization problem can be defined as a finite set of variables, where the correct values for the variables specify the optimal solution. If the variables are of the set of real, the problem is called continuous, and if they can only have a finite set of distinct values, the problem is called combinatorial \protect\cite{francq2011optimization}.
 	
 	In order for the optimization problems to be solved, it is necessary to develop a method that solves them, which are the algorithms. An important category of problems are the NP-hard problems, where they can only be solved by certain algorithms that try to arrive at the optimal solution of that determined problem.
 	
@@ -225,7 +227,7 @@ The purpose of this subsection is to elaborate a modelling of the mission planni
 
 It is assumed that the processing time $ p_i $ is the total time of production, that is, considering the sum of the time that the UAV stays in the stock collecting inputs, the time in which it stays in the production line leaving inputs and collecting products, And the time it takes for the UAV to move from the production line to the stock or to the customer. We also assume that the production time (setup) $s_i$ is the time the product takes to be produced, after having in line all the inputs needed to produce it. Therefore, the total time for the production of a given product is the sum of the processing time $p_i$ and of setup $s_i$.
 
-In this modelling, the fictive task or dummy of the scheduling, $j_0$, with processing time proportional to the time that the UAV collect the input and leads to the production line. In the literature, production lines are called unrelated parallel machines, for optimization problems of scalable tasks (when there are $m$ machines in parallel with performances depending on the task to be executed, notation used is $R$) \cite{Du2008scheduling}.
+In this modelling, the fictive task or dummy of the scheduling, $j_0$, with processing time proportional to the time that the UAV collect the input and leads to the production line. In the literature, production lines are called unrelated parallel machines, for optimization problems of scalable tasks (when there are $m$ machines in parallel with performances depending on the task to be executed, notation used is $R$) \cite{du2008scheduling}.
 
 
 \begin{itemize}

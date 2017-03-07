@@ -2,7 +2,7 @@
 %
 % LaTeX2e class
 %
-% SBA -- Sociedade Brasileira de Autom·tica
+% SBA -- Sociedade Brasileira de Autom√°tica
 %
 % Version: 1.0 alpha
 %

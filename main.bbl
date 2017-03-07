@@ -1,0 +1,137 @@
+\begin{thebibliography}{xx}
+
+\harvarditem{Adolf \harvardand\ Andert}{2010}{adolf2010onboard}
+Adolf, F. \harvardand\ Andert, F.  \harvardyearleft 2010\harvardyearright .
+\newblock {\em Onboard mission management for a VTOL UAV using sequence and
+  supervisory control}, INTECH Open Access Publisher.
+
+\harvarditem{Baer-Riedhart}{1998}{baer1998nasa}
+Baer-Riedhart, J.  \harvardyearleft 1998\harvardyearright .
+\newblock Nasa environmental research aircraft and sensor technology program,
+  {\em Aerospace America, January} .
+
+\harvarditem{de~Andrade}{1933}{serafim}
+de~Andrade, O.  \harvardyearleft 1933\harvardyearright .
+\newblock {\em Serafim Ponte Grande}, Editora Globo.
+
+\harvarditem[Doherty et~al.]{Doherty, Kvarnstr{\"o}m \harvardand\
+  Heintz}{2009}{doherty2009temporal}
+Doherty, P., Kvarnstr{\"o}m, J. \harvardand\ Heintz, F.  \harvardyearleft
+  2009\harvardyearright .
+\newblock A temporal logic-based planning and execution monitoring framework
+  for unmanned aircraft systems, {\em Autonomous Agents and Multi-Agent
+  Systems} {\bf 19}(3):~332--377.
+
+\harvarditem{Du \harvardand\ Brucker}{2008}{du2008scheduling}
+Du, D. \harvardand\ Brucker, P.  \harvardyearleft 2008\harvardyearright .
+\newblock Scheduling algorithms.
+
+\harvarditem[Fabiani et~al.]{Fabiani, Fuertes, Piquereau, Mampey \harvardand\
+  Teichteil-K{\"o}nigsbuch}{2007}{fabiani2007autonomous}
+Fabiani, P., Fuertes, V., Piquereau, A., Mampey, R. \harvardand\
+  Teichteil-K{\"o}nigsbuch, F.  \harvardyearleft 2007\harvardyearright .
+\newblock Autonomous flight and navigation of vtol uavs: from autonomy
+  demonstrations to out-of-sight flights, {\em Aerospace Science and
+  Technology} {\bf 11}(2):~183--193.
+
+\harvarditem{Filho}{1992}{manual}
+Filho, E. L.~M.  \harvardyearleft 1992\harvardyearright .
+\newblock {\em Manual de Reda\c{c}\~{a}o e Estilo}, Maltese.
+
+\harvarditem{Finn \harvardand\ Scheding}{2012}{finn2012developments}
+Finn, A. \harvardand\ Scheding, S.  \harvardyearleft 2012\harvardyearright .
+\newblock {\em Developments and challenges for autonomous unmanned vehicles},
+  Springer.
+
+\harvarditem{Francq}{n.d.}{francq2011optimization}
+Francq, P.  \harvardyearleft n.d.\harvardyearright .
+\newblock Optimization problems.
+\newline\harvardurl{\url{http://www.otlet-institute.org/wikics/Optimization_Problems.html}}
+
+\harvarditem{Garecht}{2010}{successplan}
+Garecht, J.  \harvardyearleft 2010\harvardyearright .
+\newblock How to write a successful fundraising plan.
+\newblock Accessed in: 17/10/2015.
+\newline\harvardurl{\url{http://www.thefundraisingauthority.com/fundraising-basics/fundraising-plan/}}
+
+\harvarditem{Gossens \harvardand\ Mittelbach}{1993}{latex:companion}
+Gossens, M. \harvardand\ Mittelbach, F.  \harvardyearleft 1993\harvardyearright
+  .
+\newblock {\em The {\rm \LaTeX} Companion}, Addison-Wesley, Reading, MA.
+
+\harvarditem[Graham et~al.]{Graham, Lawler, Lenstra \harvardand\
+  Kan}{1979}{graham1979optimization}
+Graham, R.~L., Lawler, E.~L., Lenstra, J.~K. \harvardand\ Kan, A.~R.
+  \harvardyearleft 1979\harvardyearright .
+\newblock Optimization and approximation in deterministic sequencing and
+  scheduling: a survey, {\em Annals of discrete mathematics} {\bf 5}:~287--326.
+
+\harvarditem{Heller}{1996}{catch22}
+Heller, J.~L.  \harvardyearleft 1996\harvardyearright .
+\newblock {\em Catch - 22}, reprint edn, Scribner.
+
+\harvarditem{Hern}{2014}{hern2014dhl}
+Hern, A.  \harvardyearleft 2014\harvardyearright .
+\newblock Dhl launches first commercial drone ‘parcelcopter’delivery
+  service, {\em The Guardian} .
+
+\harvarditem{Kopka \harvardand\ Daly}{1993}{latex:guide}
+Kopka, H. \harvardand\ Daly, P.~W.  \harvardyearleft 1993\harvardyearright .
+\newblock {\em A Guide to {\LaTeX \rm:} {D}ocument Preparation for Beginners
+  and Advanced Users}, Addison-Wesley.
+
+\harvarditem{Krozel}{1988}{krozel1988search}
+Krozel, J.~A.  \harvardyearleft 1988\harvardyearright .
+\newblock Search problems in mission planning and navigation of autonomous
+  aircraft, {\em Technical report}.
+
+\harvarditem{Lamport}{1986}{latex}
+Lamport, L.  \harvardyearleft 1986\harvardyearright .
+\newblock {\em {\LaTeX \rm:} {A} Document Preparation System}, Addison-Wesley.
+
+\harvarditem[Pascarella et~al.]{Pascarella, Venticinque \harvardand\
+  Aversa}{2013}{pascarella2013autonomic}
+Pascarella, D., Venticinque, S. \harvardand\ Aversa, R.  \harvardyearleft
+  2013\harvardyearright .
+\newblock Autonomic agents for real time uav mission planning, {\em Ubiquitous
+  Intelligence and Computing, 2013 IEEE 10th International Conference on and
+  10th International Conference on Autonomic and Trusted Computing (UIC/ATC)},
+  IEEE, pp.~410--415.
+
+\harvarditem[Ramirez-Atencia et~al.]{Ramirez-Atencia, Bello-Orgaz, R-Moreno
+  \harvardand\ Camacho}{2014}{ramirez2014solving}
+Ramirez-Atencia, C., Bello-Orgaz, G., R-Moreno, M.~D. \harvardand\ Camacho, D.
+  \harvardyearleft 2014\harvardyearright .
+\newblock Solving uav mission planning based on temporal constaint satisfaction
+  problem using genetic algorithms, {\em Proceedings of Doctoral Program of the
+  20th International Conference on Principles and Practice of Constraint
+  Programming}, pp.~65--71.
+
+\harvarditem{Service-drone}{2014}{drone4logistic}
+Service-drone  \harvardyearleft 2014\harvardyearright .
+\newblock Drones for logistic and transport | multirotor.
+\newblock Accessed in: 12/02/2016.
+\newline\harvardurl{\url{http://www.service-drone.com/en/production/logistics-and-transport}}
+
+\harvarditem{Teichteil-K{\"o}nigsbuch \harvardand\
+  Fabiani}{2007}{teichteil2007multi}
+Teichteil-K{\"o}nigsbuch, F. \harvardand\ Fabiani, P.  \harvardyearleft
+  2007\harvardyearright .
+\newblock A multi-thread decisional architecture for real-time planning under
+  uncertainty, {\em 3rd ICAPS'07 Workshop on Planning and Plan Execution for
+  Real-World Systems}.
+
+\harvarditem[Whalley et~al.]{Whalley, Freed, Harris, Takahashi, Schulein
+  \harvardand\ Howlett}{2005}{whalley2005design}
+Whalley, M., Freed, M., Harris, R., Takahashi, M., Schulein, G. \harvardand\
+  Howlett, J.  \harvardyearleft 2005\harvardyearright .
+\newblock Design, integration, and flight test results for an autonomous
+  surveillance helicopter, {\em Proceedings of the AHS International
+  Specialists' Meeting on Unmanned Rotorcraft}.
+
+\harvarditem{Williams \harvardand\ Schnier}{1998}{harvard}
+Williams, P. \harvardand\ Schnier, T.  \harvardyearleft 1998\harvardyearright .
+\newblock The harvard family of bibliography styles.
+\newblock Documenta\c{c}\~ao que acompanha o pacote \verb+harvard+.
+
+\end{thebibliography}

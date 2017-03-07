@@ -1,0 +1,57 @@
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: main.aux
+The style file: dcu.bst
+Database file #1: exemplo.bib
+I was expecting a `,' or a `}'---line 82 of file exemplo.bib
+ :   
+ :   note = {Accessed in: 20/09/2016},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 292 of file exemplo.bib
+ : @misc{du2008scheduling
+ :                       ,
+I'm skipping whatever remains of this entry
+Warning--empty institution in krozel1988search
+You've used 23 entries,
+            2921 wiz_defined-function locations,
+            754 strings with 8380 characters,
+and the built_in function-call counts, 90948 in all, are:
+= -- 14880
+> -- 1136
+< -- 0
++ -- 7066
+- -- 343
+* -- 7669
+:= -- 18448
+add.period$ -- 49
+call.type$ -- 23
+change.case$ -- 316
+chr.to.int$ -- 23
+cite$ -- 24
+duplicate$ -- 321
+empty$ -- 660
+format.name$ -- 423
+if$ -- 16309
+int.to.chr$ -- 5
+int.to.str$ -- 0
+missing$ -- 25
+newline$ -- 101
+num.names$ -- 236
+pop$ -- 135
+preamble$ -- 1
+purify$ -- 345
+quote$ -- 0
+skip$ -- 267
+stack$ -- 0
+substring$ -- 20892
+swap$ -- 35
+text.length$ -- 322
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 76
+warning$ -- 1
+while$ -- 495
+width$ -- 0
+write$ -- 322
+(There were 2 error messages)
