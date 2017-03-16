@@ -796,12 +796,12 @@
 \restylefloat{\algocf@float}%
 \floatstyle{\before@algostyle}% in order to keep the default for new float
 \floatname{algocf}{\algorithmcfname}
-\newcommand{\listofalgorithms}{% if algos are figures, we print the list of figures
-  \ifthenelse{\equal{\algocf@float}{figure}}{\listoffigures%
-    }{ %else we effectively put the list of algorithms
-    \listof{algocf}{\listalgorithmcfname}%
-    }%
-  }%
+%\newcommand{\listofalgorithms}{% if algos are figures, we print the list of figures
+%  \ifthenelse{\equal{\algocf@float}{figure}}{\listoffigures%
+%    }{ %else we effectively put the list of algorithms
+%    \listof{algocf}{\listalgorithmcfname}%
+%    }%
+%  }%
 %%
 \newcommand{\restylealgo}[1]{%
   \ifthenelse{\equal{#1}{algoruled}}{% then

@@ -35,7 +35,9 @@
 \usepackage{float}
 
 \usepackage[lined,ruled,boxed]{algorithm2e}
-\usepackage{algorithmic}
+%\usepackage{algorithmic}
+
+
 
 \usepackage[table]{xcolor}
 \usepackage{booktabs}
@@ -104,17 +106,39 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Use of a commercial UAV - 3DR IRIS + - in the intra-logistics \footnote{Internal Logistics of movement and storage.}, aiming to give another option of agility in the manufacturing process. Additionally, it will be approached a study of evaluation of the cost of the missions that the UAV executes in this process.
+% Use of a commercial UAV - 3DR IRIS + in the intra-logistics, {\it i.e., Internal Logistics of movement and storage.}, aiming to give another option of agility in the manufacturing process. Additionally, it will be approached a study of evaluation of the cost of the missions that the UAV executes in this process.
 
-Logistics has become a competitive and fundamental factor for organizations, involving the management, conservation and supervision of freight transport. In addition, excellent logistics means customer satisfaction, so speed is still an important factor in a successful logistics process \cite{drone4logistic}. Currently, one of the solutions to this type of problem is the use of UAVs, which are any and every type of aircraft that does not require on board pilots to be guided. Nowadays, UAVs are mostly remotely piloted vehicles (RPV), since their operations are carried out by ground operators. If the tasks performed by a UAV were performed autonomously, it would relieve the work of these operators, since they perform tedious and repetitive tasks \cite{pascarella2013autonomic}.
+Logistics has become a competitive and fundamental factor for organizations, involving the management, conservation and supervision of freight transport. In addition, excellent logistics means customer satisfaction, so speed is still an important factor in a successful logistics process \cite{drone4logistic}. Currently, one of the solutions to this type of problem is the use of UAVs \commentib{A primeira vez que uma sigla aparece, o seu significado deve ser mostrado}. Nowadays, UAVs are mostly remotely piloted vehicles (RPV), since their operations are carried out by ground operators. If the tasks performed by a UAV were performed autonomously, it would relieve the work of these operators, since they perform tedious and repetitive tasks \cite{pascarella2013autonomic}.
 
-A probable improvement of these logistics systems is the increase of the automation of the UAVs, what results in minimization of the costs. However, one of the main problems with the use of autonomous UAVs is the reliability and intelligence of the system. Because of these factors, investments and studies related to stand-alone UAVs are still considered small \cite{hern2014dhl}. Thus, increased employment of autonomous UAVs requires the development of devices that are capable of performing tasks and interacting with the environment intelligently and reliably.
+A probable improvement of these logistics systems is the increase of the automation of the UAVs, what results in minimization of the costs \commentib{Que tipo de custo?}. Consequently, investments and studies related to stand-alone UAVs are important to the development of smart factories \cite{hern2014dhl}. However, one of the main problems with the use of autonomous UAVs is the reliability and intelligence of the system. Thus, increased employment of autonomous UAVs requires the development of devices that are capable of performing tasks and interacting with the environment intelligently and reliably.
 
 Autonomous UAVs need to know what will happen in a future instant and what is the best decision to make at the present time, and therefore require strategies not only to decompose their missions into meaningful sub-tasks but also to track progress toward mission goals and the evolution of these tasks relative to the capabilities of autonomous UAVs \cite{finn2012developments}. As a consequence, in order to perform a mission successfully, it is recommended to make a plan to the task \cite{successplan}. Mission planning problems consist of planning events to meet certain requirements associated with the plan and improving mission objectives \cite{krozel1988search}. Therefore, this is one of the main challenges faced in solving this type of problem.
 
-This paper presents a methodology that evaluate the cost of mission planners for a commercial UAV. The evaluation is made by comparing the mission execution time with the cost of an optimal solution solved by CPLEX solver. Additionally, a middleware was developed to interface the mission planning application and the embedded control software, adapting the UAV for intra-logistics. Finally, experiments were done to verify the consistency of evaluation methodology.
+\commentib{Aqui \'e necess\'ario um ou dois par\'agrafos de trabalhos relacionados/estado da arte. Voc\^e deve pesquisar/comentar alguns trabalhos sobre otimiza\c{c}\~ao/avalia\c{c}\~ao de planos de miss\~ao.  Eu te mandei uns por email}
 
-The remaining of this work is organized as follows: A background section was inserted to give a better understanding of mission planning and optimization problems. There is methodology section to show the explanation of the methods that this project uses. The next section shows the experimental results of this work. Finally, last section presents the conclusion of this project.
+This paper presents a methodology that evaluate the cost of mission planners for a commercial UAV. \commentib{Ao inv\'es de falar que voc\^e falar que simplesmente compara, diga que desenvolvel uma m\'etrica que avalia o custo relativo do planejado em rela\c{c}\~ao ao custo \'otimo calculado pelo CPLEX.} The evaluation is made by comparing the mission execution time with the cost of an optimal solution solved by CPLEX solver. Additionally, a middleware was developed to interface the mission planning application and the embedded control software, adapting the UAV for intra-logistics. Finally, experiments were done to verify the consistency of evaluation methodology.
+
+Summarizing, the main contributions of this work are:
+\begin{itemize}
+\item \commentib{primeira cont.}
+\item \commentib{segunda cont.}
+\item \commentib{preencha isso ...}
+\end{itemize}
+
+The remaining of this work is organized as follows: Section~\ref{sec:related} presents some previous works related to mission planning, optimization and evaluation, Section~\ref{sec:background} provides the fundamentals of mission planning and optimization problems, Section~\ref{sec:method} explains the proposed evaluation methodology in details, Section~\ref{sec:results} shows the experimental procedures and results in order to explore and demonstrate the potential of methodology, and, finally, Section~\ref{sec:conclusao}concludes the work.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Related works}
+\label{sec:related}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In the literature, there are some attempts to implement UAV guidance systems that perform mission planning. \citeasnoun{doherty2009temporal} presented an architecture of a framework for mission planning and execution tracking applied to an unmanned helicopter. During the execution of the mission, knowledge was acquired through sensors which was used to create state structures. These structures will allow the construction of a logical model, representing the real development of the system and its environment over time. Then, the planning and monitoring modules use temporal action logic (TAL) to reason about actions and changes.
+
+The NASA/U.S. Army autonomous helicopter project has developed a guidance system for the autonomous surveillance planning problem for multiple and different targets \cite{whalley2005design}, which generates mission plans using a theoretical approach to decision making. A high-level standalone control is provided by the framework Apex \cite{baer1998nasa}, a reactive procedure-based scheduler/planner used to perform mission-level tasks. Apex synthesizes a course of action primarily by linking elemental procedures expressed in procedural definition language (PDL), a notation developed specifically for the Apex reactive planner. This guidance system was integrated into a robotic helicopter and tested in more than 240 scenarios.
+
+A similar project, called Ressac (Research and Rescue by Cooperative Autonomous System), was conducted by the French Aerospace Laboratory (ONERA) for a search and rescue scenario \cite{fabiani2007autonomous}. This architecture for an exploration mission was developed based on the idea of decomposing the mission into a sequence of tasks or macro-actions associated with rewards. The problem was modeled using a Markov decision process framework (MDP) and dynamic programming algorithms for mission planning. Konigsbuch \cite{teichteil2007multi} extends the guidance system and integrates with a robotic helicopter.
+
+Finally, the German Aerospace Center (DLR) has also developed a mission management system based on the behavior paradigm \cite{adolf2010onboard}, which has been integrated with the ARTIS helicopter and validated in different scenarios, including follower of waypoints and search and tracking mission.
 
 \section{Background}
 \label{sec:background}
@@ -124,15 +148,9 @@ The remaining of this work is organized as follows: A background section was ins
 
 Firstly, a mission can be defined as a goal that need to be completed. In the context of this work, the mission of the UAV is delivery of packages according to a set of well defined rules. A definition to mission planning for UAV is the process of planning the locations to visit (waypoints) and the actions that the vehicles can perform (loading/dropping a load, taking videos/pictures, etc.), typically over a time period \cite{ramirez2014solving}. An important term in this work is the concept of planner which is the agent (software implementation) that generate a mission. Functionally, mission planning lies above the trajectory planning process, where the mission planner generates a desired mission plan, and then the trajectory planner generates the flight plan (trajectories) between the waypoints.
 
-\subsubsection{Related Works in Mission Planning}
+%\subsubsection{Related Works in Mission Planning}
 
-In the literature, there are some attempts to implement UAV guidance systems that perform mission planning. \citeasnoun{doherty2009temporal} presented an architecture of a framework for mission planning and execution tracking applied to an unmanned helicopter. During the execution of the mission, knowledge was acquired through sensors which was used to create state structures. These structures will allow the construction of a logical model, representing the real development of the system and its environment over time. Then, the planning and monitoring modules use temporal action logic (TAL) to reason about actions and changes.
 
-The NASA/U.S. Army autonomous helicopter project has developed a guidance system for the autonomous surveillance planning problem for multiple and different targets \cite{whalley2005design}, which generates mission plans using a theoretical approach to decision making. A high-level standalone control is provided by the framework Apex \cite{baer1998nasa}, a reactive procedure-based scheduler/planner used to perform mission-level tasks. Apex synthesizes a course of action primarily by linking elemental procedures expressed in procedural definition language (PDL), a notation developed specifically for the Apex reactive planner. This guidance system was integrated into a robotic helicopter and tested in more than 240 scenarios.
-
-A similar project, called Ressac (Research and Rescue by Cooperative Autonomous System), was conducted by the French Aerospace Laboratory (ONERA) for a search and rescue scenario \cite{fabiani2007autonomous}. This architecture for an exploration mission was developed based on the idea of decomposing the mission into a sequence of tasks or macro-actions associated with rewards. The problem was modeled using a Markov decision process framework (MDP) and dynamic programming algorithms for mission planning. Konigsbuch \cite{teichteil2007multi} extends the guidance system and integrates with a robotic helicopter.
-
-Finally, the German Aerospace Center (DLR) has also developed a mission management system based on the behavior paradigm \cite{adolf2010onboard}, which has been integrated with the ARTIS helicopter and validated in different scenarios, including follower of waypoints and search and tracking mission.
 
 %\subsection{UAV Navigation}
 
@@ -175,8 +193,12 @@ Two distinctions need to be made to better understand the universe of optimizati
 	\caption{Walking through the space of solutions\label{fig:sol}}
 \end{figure}
 
+%%%%%%%%%%%%%%%
 \section{Methodology}
+\label{sec:method}
+%%%%%%%%%%%%%%%
 
+\commentib{Modifique o t\'itulo (expanda). Metodologia de qu\^e?? Tente fazer algo parecido com o do trabalho.}
 	In this section, there will be a brief clarification of the contents of this paper.
 \subsection{UAV Movement System}
 
@@ -334,7 +356,10 @@ Crel_X=\frac{c_o}{c_X}
 
 As we know $0 \leq Crel_X \leq 1$, we can verify that the closer to $1$ the $Crel_X$ is, the less the cost of the solution.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental Evaluation}
+\label{sec:results}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
 \subsection{Case Study}
 \label{sec:ec}
@@ -397,6 +422,7 @@ wait Y to be produced\;
 bring Y to the client\;
 }
 }
+\captionsetup{list=no}
 \caption{Planner A}\label{alg:planA}
 \end{algorithm}
 
@@ -405,10 +431,7 @@ In planner B, unlike planner A where the UAV is idle waiting for each product to
 
 The pseudo code of this algorithm is shown in the Algorithm~\ref{alg:planB}:
 
-\begin{center}
-    \scalebox{0.75}{
-    \begin{minipage}{1.3\linewidth}
-      \begin{algorithm}[H]
+\begin{algorithm}[H]
 \KwIn{warehouse}
 \KwIn{order}
 \KwOut{mission file \textit{.mission}}
@@ -451,11 +474,9 @@ keep producing\;
 		go back to producing\;}
 }
 }
+\captionsetup{list=no}
 \caption{Planner B}\label{alg:planB}
 \end{algorithm}
-    \end{minipage}%
-    }
-\end{center}
 
 \subsection{Evaluation Cost}
 \label{sec:acusto}
@@ -592,7 +613,7 @@ In Figure~\ref{fig:GraPlannersReal} is shown a graph of the flight times of both
 	As shown in the section~\ref{sec:acusto}, planner B was faster than planner A. This can also be verified in real environment, as shown in tables \ref{table:plannersSimulado} and \ref{table:plannersReal} of mission execution time in simulated and real environment.
 
 \section{Conclusions}
-\label{chapter:conclusao}
+\label{sec:conclusao}
 
 In this work, a common application of intra logistics performed by a VANT was developed, as well as the implementation of two mission planning strategies, as well as the cost evaluation of the same, compared to the optimal cost obtained by the CPLEX optimizer.
 
@@ -608,490 +629,490 @@ Finally, it was possible to say that the manipulation and control of the 3DR IRI
 Further works includes the use of computational vision for the recognition of inputs, improve the modeling of the optimization problem for better results in cost evaluation, and use a solver to directly generate an optimized mission.
 
 
-\selectlanguage{brazil}
-
-\section{Como utilizar o estilo \SBATeX}
-Este texto serve de guia de utilização do estilo \SBATeX para
-\LaTeXe. Com este estilo é possível gerar artigo no formato utilizado pelo \emph{Congresso
-  Brasileiro de Automática} e \emph{Simpósio Brasileiro de Automação Inteligente} na produção das versões acabadas dos artigos
-  nos anais.
-
-O seguinte parâmetro deve ser passado (entre colchetes) como argumento do comando
-\verb+\documentclass+, que deve ser o primeiro comando a aparecer no
-artigo. Por exemplo, o comando
-\begin{verbatim}
-  \documentclass[conference]{sbatex}
-\end{verbatim}
-é utilizado no início deste arquivo para geração do formato final
-para o \emph{Congresso Brasileiro de Automática} e o
-\emph{Simpósio Brasileiro de Automação Inteligente}.
-
-Pode-se adicionar ao comando \verb+\documentclass+ a seguinte
-opção:
-\begin{itemize}
-  \item \verb+harvard+: inclui o pacote \verb+harvard+, utilizado para
-  produção das referências bibliográficas. Pode ser usado em conjunto
-  com qualquer das outras opções. Veja seção~\ref{sec:bibliografia}.
-\end{itemize}
-Por exemplo, para propor um artigo ao congresso e utilizar o pacote de
-referências bibliográficas \verb+harvard+ usa-se o comando
-\begin{verbatim}
-  \documentclass[conference,harvard]{sbatex}
-\end{verbatim}
-A ordem dos parâmetros não é relevante.
-
-Os seguintes \emph{pacotes} \LaTeX\ estão disponíveis
-automaticamente\footnote{Isto também significa que \emph{é necessário
-ter estes pacotes instalados} para que se possa utilizar o estilo
-\SBATeX.} com o estilo \SBATeX:
-\begin{itemize}
-\item \verb+ifthen+: pacote com comandos de controle de fluxo do tipo
-`if', `then' e `else'; utilizado internamente para controle das opções de
-formatação.
-\item \verb+fancyhdr+: pacote para formatação dos cabeçalhos e rodapés.
-\item \verb+babel+: pacote para escrita em múltiplos idiomas; os
-idiomas/dialetos \verb+english+, \verb+brazil+ e \verb+spanish+ já
-estão habilitados.
-\item \verb+theorem+: pacote para controle dos ambientes \verb+theorem+,
-\verb+lemma+, \verb+corollary+ e \verb+proof+.
-\item \verb+geometry+: pacote para controle da dimensões do texto na página.
-\item \verb+latexsym+: pacote com símbolos extras do \LaTeXe.
-\end{itemize}
-
-A opção \verb+submission+ provê o pacote:
-\begin{itemize}
-\item \verb+setspace+: pacote para controle de espaçamento duplo entre
-linhas.
-\end{itemize}
-E a opção \verb+harvard+ provê o pacote:
-\begin{itemize}
-\item \verb+harvard+: pacote para formatação das referências
-bibliográficas.
-\end{itemize}
-
-Não é necessário incluir explicitamente as cláusulas
-\verb+\usepackage+ correspondentes a estes pacotes no artigo para que
-se possa utilizá-los. Caso a instalação do \LaTeX\ não contenha alguns
-destes pacotes, consulte a página
-\begin{verbatim}
-  http://www.ctan.org
-\end{verbatim}
-
-
-
-Com a opção \verb+conference+, e devido à escolha de um conjunto de
-fontes diferentes, recomenda-se subsituir o pacote \verb+fontenc+ pelo
-pacote \verb+ae+ (\emph{Almost European Computer Modern}), o que pode
-ser feito com o comando
-\begin{verbatim}
-  \usepackage{ae}
-\end{verbatim}
-Neste caso não é necessário adicionar explicitamente o pacote
-\verb+fontenc+, que já é carregado automaticamente pelo pacote
-\verb+ae+. Veja também a seção~\ref{sec:esqueleto}.
-
-Após o preâmbulo, inicia-se o texto propriamente dito por meio do
-comando
-\begin{verbatim}
-  \begin{document}
-\end{verbatim}
-O passo seguinte é a declaração do título do artigo, autores e
-afiliações.
-
-\subsection{Título, autores e afiliações}
-
-O título do artigo é declarado por meio do comando \verb+\title+. Por
-exemplo, o título deste artigo foi gerado com o comando:
-\begin{verbatim}
-  \title{Artigo Exemplo}
-\end{verbatim}
-O título não deve conter agradecimentos, os quais devem aparecer em
-uma seção separada, no final do artigo.
-
-Em seguida, definem-se os autores com seus endereços eletrônicos e
-afiliações por meio dos comandos \verb+\author+ e
-\verb+\address+. Por exemplo, o nome e endereço do primeiro autor
-deste artigo, João da Silva, é introduzido por meio dos comandos:
-\begin{verbatim}
-  \author{João da Silva}
-         {jsilva@silva.com}
-  \address{Endereço do João e da Maria\\
-           Em algum lugar\\
-           Cidade, Estado, País}
-\end{verbatim}
-Note-se que o comando \verb+\author+ requer dois argumentos: o nome e
-o endereço eletrônico. Quebras de linha podem ser obtidas na afiliação
-por meio do comando~\verb+\\+. Segue-se, neste exemplo, a declaração
-do nome e afiliação do segundo autor:
-\begin{verbatim}
-  \author{Joaquim Pereira}
-         {jpereira@pereira.org}
-  \address{Endereço do Joaquim\\
-           Em algum lugar\\
-           Cidade, Estado, País}
-\end{verbatim}
-
-Em geral, para cada comando \verb+\author+ deve haver um comando
-\verb+\address+ correspondente, salvo o caso de compartilhamento
-de endereços. Neste caso, omite-se o comando \verb+\address+ para
-o segundo autor e indica-se o número do endereço que se deseja
-compartilhar como um parâmetro adicional do comando
-\verb+\author+. Por exemplo, o comando:
-\begin{verbatim}
-  \author[1]{Maria da Silva}
-            {maria@pereira.org}
-\end{verbatim}
-indica que a Maria da Silva utilizará o endereço de número 1, que
-corresponde ao endereço de João da Silva.
-
-Os autores seguintes possuem endereços independentes e são
-introduzidos da maneira convencional:
-\begin{verbatim}
-  \author{Pedro Manoel}
-         {pedro@pedro.com}
-  \address{Endereço do Pedro e do Rafael\\
-           Em algum lugar\\
-           Cidade, Estado, País}
-
-  \author{José Rodrigues}
-         {jose@rodrigues}
-  \address{Endereço do José\\
-           Em algum lugar\\
-           Cidade, Estado, País}
-\end{verbatim}
-
-Finalmente, o autor Rafael é definido como
-\begin{verbatim}
-  \author[3]{Rafael Pires}
-            {rafael@pires}
-\end{verbatim}
-o que indica que Rafael compartilha o endereço de número 3 com Pedro
-Manoel. Lembre-se de que, apesar de Pedro Manoel ser o autor de número
-4, o seu endereço é o de número 3, uma vez que a Maria já compartilha
--- sem segundas intenções -- do mesmo endereço com o João.
-
-O comando
-\begin{verbatim}
-  \maketitle
-\end{verbatim}
-coloca o título e os autores no formato adequado.
-
-
-\subsection{Resumo, abstract e palavras-chave}
-
-Os artigos devem conter um resumo em português (ou espanhol) e em
-inglês. O ambiente para definição dos resumos, em qualquer idioma, é o
-\verb+abstract+. Para diferenciar os idiomas utiliza-se o comando
-\verb+\selectlanguage+, do pacote \verb+babel+. Por exemplo, a seqüência
-de comandos produz um \emph{Abstract} seguido de um \emph{Resumo}:
-\begin{verbatim}
-  \selectlanguage{english}
-  \begin{abstract}
-    Yossarian says, ...
-  \end{abstract}
-
-  \selectlanguage{brazil}
-  \begin{abstract}
-    O Largo da Sé ...
-  \end{abstract}
-\end{verbatim}
-
-As \emph{palavras-chave} devem ser definidas por meio do comando:
-\begin{verbatim}
-  \keywords{Exemplo, Ilustração}
-\end{verbatim}
-
-Deste ponto em diante selecione o idioma a ser utilizado e
-inicie o texto da sua contribuição.
-
-\textbf{IMPORTANTE:} Caso esteja se produzindo um texto com a
-opção \verb+conference+, colocam-se os comandos que vão de
-\verb+\maketitle+ a \verb+\keywords+ dentro de um ambiente
-\verb+twocolumn+. Isto é necessário para que os resumos sejam
-formatados em coluna simples\footnote{Como este arquivo está
-adaptado para utilizar o formato adequado para o \emph{Congresso
-Brasileiro de Automática} e o \emph{Simpósio Brasileiro de
-Automação Inteligente}, isto já está feito}. Veja
-seção~\ref{sec:esqueleto}.
-
-
-\subsection{Teoremas, lemas, corolários e provas}
-
-Quatro ambientes já se encontram pré-definidos no estilo \SBATeX. São
-eles
-\begin{itemize}
-\item \verb+theorem+: ambiente para teoremas.
-\item \verb+corollary+: ambiente para corolários.
-\item \verb+lemma+: ambiente para lemas.
-\item \verb+proof+: ambiente para provas.
-\end{itemize}
-Segue-se um exemplo de utilização destes ambientes:
-\begin{lemma}[Desigualdade Subtrativa]
-Em um espaço vetorial linear normado $\|x\| - \|y\| \leq \|x - y\|$
-para quaisquer vetores $x$, $y$.
-\end{lemma}
-\begin{proof}
-\begin{align*}
-\|x\| - \|y\| &= \|x - y + y\| - \|y\| \ \\
-              &\leq \|x - y \| + \|y\| - \|y\| \\
-              &= \|x - y\|.
-\end{align*}
-\end{proof}
-Este lema é produzido pela seguinte sequência de comandos:
-\begin{verbatim}
-  \begin{lemma}[Desigualdade Subtrativa]
-    Em um espaço vetorial linear ...
-  \end{lemma}
-  \begin{proof}
-    ...
-  \end{proof}
-\end{verbatim}
-
-Estes ambientes, com exceção do ambiente \verb+proof+, aceitam
-um parâmetro opcional que define um nome. No exemplo acima, o nome
-\emph{Desigualdade Subtrativa} foi produzido por meio deste argumento.
-
-
-\subsection{Bibliografia}
-\label{sec:bibliografia}
-
-As referências são reunidas ao fim do manuscrito, arranjadas
-alfabeticamente pelo primeiro autor e cronologicamente para cada
-autor.
-
-\textbf{IMPORTANTE:} Todas referências citadas devem aparecer em algum
-outro ponto do texto.
-
-As citações seguem um estilo autor/ano (o mesmo
-usado na revista {\em Automatica}). O pacote \verb+harvard+ (já
-incluído pelo \SBATeX) provê vários comandos para inclusão de
-citações. Dois dois mais utilizados são o tradicional \verb+\cite+ e o
-\verb+\citeasnoun+. Veja um exemplo:
-\begin{verbatim}
-  O resumo deste artigo é um trecho do
-  livro~\citeasnoun{serafim}. Já o abstract é
-  extraído de~\citeasnoun{catch22}.
-  Informações sobre o estilo bibliográfico
-  \verb+harvard+ encontram-se
-  em~\citeasnoun{harvard}. Os interessados
-  devem consultar referências adicionais
-  sobre \LaTeX~\cite{latex,%
-  latex:guide,latex:companion}.
-\end{verbatim}
-produz o trecho:
-
-\begin{em}
-  O resumo deste artigo é um trecho do
-  livro~\citeasnoun{serafim}. Já o abstract é
-  extraído de~\citeasnoun{catch22}.
-  Informações sobre o estilo bibliográfico
-  \verb+harvard+ encontram-se
-  em~\citeasnoun{harvard}. Os interessados
-  devem consultar referências adicionais
-  sobre \LaTeX~\cite{latex,latex:guide,latex:companion}.
-\end{em}
-
-Recomenda-se a utilização do programa BibTeX para gerar as suas
-referências ~\cite{latex,latex:guide,latex:companion}. Note-se que
-não é necessário definir o estilo bibliográfico com o comando
-\verb+\bibliographystyle+, pois o mesmo é definido automaticamente
-pelo estilo \SBATeX. Basta incluir o arquivo de bibliografias,
-neste exemplo o artigo \verb+exemplo.bib+ por meio do comando.
-\begin{verbatim}
-    ...
-
-    \bibliography{exemplo}
-
-  \end{document}
-\end{verbatim}
-Note-se que este comando deve ser colocado logo antes do
-encerramento do artigo, o que é feito pelo comando
-\verb+\end{document}+, de tal forma a garantir que a bibliografia
-seja o último item do artigo.
-
-
-\subsection{Esqueleto deste arquivo no formato \SBATeX}
-\label{sec:esqueleto}
-
-Este arquivo, adaptado para gerar o formato adequado para o
-\emph{Congresso Brasileiro de Automática} e o  \emph{Simpósio
-Brasileiro de Automação Inteligente}, faz uso da seguintes
-instruções:
-
-\begin{verbatim}
-\documentclass[conference,harvard,brazil,english]{sbatex}
-  \usepackage[utf8]{inputenc}
-  \usepackage{ae}
-
-    ...
-
-    \twocolumn[
-      \maketitle
-
-      \selectlanguage{english}
-      \begin{abstract}
-        Yossarian says, ...
-      \end{abstract}
-
-      \selectlanguage{brazil}
-      \begin{abstract}
-        O Largo da Sé ...
-      \end{abstract}
-
-      \keywords{Exemplo, Ilustração}
-    ]
-
-    ...
-\end{verbatim}
-
-
-\section{Contribuição deste artigo}
-
-\subsection{Os vinte e sete erros mais comuns (de uma lista de cem)}
-\label{sec:27erros}
-
-Erros gramaticais e ortográficos devem, por princípio, ser
-evitados. Alguns, no entanto, como ocorrem com maior frequência,
-merecem atenção redobrada. O primeiro capítulo deste manual inclui
-explicações mais completas a respeito de cada um deles. Veja os cem
-mais comuns do idioma e use esta relação como um roteiro para fugir
-deles~\cite{manual}.
-
-\begin{enumerate}
-\item ``Mal cheiro'', ``mau-humorado''. Mal opõe-se a bem e mau, a
-bom. Assim: mau cheiro (bom cheiro), mal-humorado
-(bem-humorado). Igualmente: mau humor, mal-intencionado, mau jeito,
-mal-estar.
-
-\item ``Fazem'' cinco anos. Fazer, quando exprime tempo, é impessoal:
-Faz cinco anos.~/~Fazia dois séculos.~/~Fez 15 dias.
-
-\item ``Houveram'' muitos acidentes. Haver, como existir, também é
-invariável: Houve muitos acidentes.~/~Havia muitas pessoas.~/~Deve
-haver muitos casos iguais.
-
-\item ``Existe'' muitas esperanças. Existir, bastar, faltar, restar e
-sobrar admitem normalmente o plural: Existem muitas esperanças. /
-Bastariam dois dias.~/~Faltavam poucas peças.~/~Restaram alguns
-objetos.~/~Sobravam idéias.
-
-\item Para ``mim'' fazer. Mim não faz, porque não pode ser
-sujeito. Assim: Para eu fazer, para eu dizer, para eu trazer.
-
-\item Entre ``eu'' e você. Depois de preposição, usa-se mim ou ti: Entre
-mim e você.~/~Entre eles e ti.
-
-\item ``Há'' dez anos ``atrás''. Há e atrás indicam passado na frase. Use
-apenas há dez anos ou dez anos atrás.
-
-\item ``Entrar dentro''. O certo: entrar em. Veja outras redundâncias:
-Sair fora ou para fora, elo de ligação, monopólio exclusivo, já não há
-mais, ganhar grátis, viúva do falecido.
-
-\item ``Venda à prazo''. Não existe crase antes de palavra masculina, a
-menos que esteja subentendida a palavra moda: Salto à (moda de) Luís
-XV. Nos demais casos: A salvo, a bordo, a pé, a esmo, a cavalo, a
-caráter.
-
-\item ``Porque'' você foi? Sempre que estiver clara ou implícita a
-palavra razão, use por que separado: Por que (razão) você foi?~/~Não
-sei por que (razão) ele faltou.~/~Explique por que razão você se
-atrasou. Porque é usado nas respostas: Ele se atrasou porque o
-trânsito estava congestionado.
-
-\item Vai assistir ``o'' jogo hoje. Assistir como presenciar exige a:
-Vai assistir ao jogo, à missa, à sessão.  Outros verbos com a: A
-medida não agradou (desagradou) à população.~/~Eles obedeceram
-(desobedeceram) aos avisos.~/~Aspirava ao cargo de diretor.~/~Pagou ao
-amigo.~/~Respondeu à carta.~/~Sucedeu ao pai.~/~Visava aos estudantes.
-
-\item Preferia ir ``do que'' ficar. Prefere-se sempre uma coisa a outra:
-Preferia ir a ficar. É preferível segue a mesma norma: É preferível
-lutar a morrer sem glória.
-
-\item O resultado do jogo, não o abateu. Não se separa com vírgula o
-sujeito do predicado. Assim: O resultado do jogo não o abateu. Outro
-erro: O prefeito prometeu, novas denúncias. Não existe o sinal entre o
-predicado e o complemento: O prefeito prometeu novas denúncias.
-
-\item Não há regra sem ``excessão''. O certo é exceção. Veja outras
-grafias erradas e, entre parênteses, a forma correta: ``paralizar''
-(paralisar), ``beneficiente'' (beneficente), ``xuxu'' (chuchu),
-``previlégio'' (privilégio), ``vultuoso'' (vultoso), ``cincoenta''
-(cinqüenta), ``zuar'' (zoar), ``frustado'' (frustrado), ``calcáreo''
-(calcário), ``advinhar'' (adivinhar), ``benvindo'' (bem-vindo), ``ascenção''
-(ascensão), ``pixar'' (pichar), ``impecilho'' (empecilho), ``envólucro''
-(invólucro).
-
-\item Quebrou ``o'' óculos. Concordância no plural: os óculos, meus
-óculos. Da mesma forma: Meus parabéns, meus pêsames, seus ciúmes,
-nossas férias, felizes núpcias.
-
-\item Comprei ``ele'' para você. Eu, tu, ele, nós, vós e eles não podem
-ser objeto direto. Assim: Comprei-o para você. Também: Deixe-os sair,
-mandou-nos entrar, viu-a, mandou-me.
-
-\item Nunca ``lhe'' vi. Lhe substitui a ele, a eles, a você e a vocês e
-por isso não pode ser usado com objeto direto: Nunca o vi.~/~Não o
-convidei.~/~A mulher o deixou.~/~Ela o ama.
-
-\item ``Aluga-se'' casas. O verbo concorda com o sujeito: Alugam-se
-casas.~/~Fazem-se consertos.~/~É assim que se evitam acidentes. /
-Compram-se terrenos.~/~Procuram-se empregados.
-
-\item ``Tratam-se'' de. O verbo seguido de preposição não varia nesses
-casos: Trata-se dos melhores profissionais.~/~Precisa-se de
-empregados.~/~Apela-se para todos.~/~Conta-se com os amigos.
-
-\item Chegou ``em'' São Paulo. Verbos de movimento exigem a, e não em:
-Chegou a São Paulo.~/~Vai amanhã ao cinema.~/~Levou os filhos ao
-circo.
-
-\item Atraso implicará ``em'' punição. Implicar é direto no sentido de
-acarretar, pressupor: Atraso implicará punição.~/~Promoção implica
-responsabilidade.
-
-\item Vive ``às custas'' do pai. O certo: Vive à custa do pai. Use
-também em via de, e não ``em vias de'': Espécie em via de extinção. /
-Trabalho em via de conclusão.
-
-\item Todos somos ``cidadões''. O plural de cidadão é cidadãos. Veja
-outros: caracteres (de caráter), juniores, seniores, escrivães,
-tabeliães, gângsteres.
-
-\item O ingresso é ``gratuíto''. A pronúncia correta é gratúito, assim
-como circúito, intúito e fortúito (o acento não existe e só indica a
-letra tônica). Da mesma forma: flúido, condôr, recórde, aváro, ibéro,
-pólipo.
-
-\item A última ``seção'' de cinema. Seção significa divisão, repartição,
-e sessão equivale a tempo de uma reunião, função: Seção Eleitoral,
-Seção de Esportes, seção de brinquedos; sessão de cinema, sessão de
-pancadas, sessão do Congresso.
-
-\item Vendeu ``uma'' grama de ouro. Grama, peso, é palavra masculina: um
-grama de ouro, vitamina C de dois gramas. Femininas, por exemplo, são
-a agravante, a atenuante, a alface, a cal, etc.
-
-\item ``Porisso''. Duas palavras, por isso, como de repente e a partir
-de.
-
-\end{enumerate}
-
-\subsection{Observação importante}
-
-Os erros de português porventura presentes neste artigo
-\begin{itemize}
-\item ou foram introduzidos propositalmente para deleite dos leitores
-atentos,
-\item ou não constam da lista da seção~\ref{sec:27erros}.
-\end{itemize}
-
-\section{Conclusões}
-Nada resta senão desejar-lhe boa sorte na preparação de seu artigo. Contamos com seu trabalho e sua presença no SBAI 2017 a ser realizado em Porto Alegre-RS.
-
-\section*{Agradecimentos}
-Mencione aqui seus agradecimentos as agências de fomento e colaboradores no trabalho.
+%\selectlanguage{brazil}
+%
+%\section{Como utilizar o estilo \SBATeX}
+%Este texto serve de guia de utilização do estilo \SBATeX para
+%\LaTeXe. Com este estilo é possível gerar artigo no formato utilizado pelo \emph{Congresso
+%  Brasileiro de Automática} e \emph{Simpósio Brasileiro de Automação Inteligente} na produção das versões acabadas dos artigos
+%  nos anais.
+%
+%O seguinte parâmetro deve ser passado (entre colchetes) como argumento do comando
+%\verb+\documentclass+, que deve ser o primeiro comando a aparecer no
+%artigo. Por exemplo, o comando
+%\begin{verbatim}
+%  \documentclass[conference]{sbatex}
+%\end{verbatim}
+%é utilizado no início deste arquivo para geração do formato final
+%para o \emph{Congresso Brasileiro de Automática} e o
+%\emph{Simpósio Brasileiro de Automação Inteligente}.
+%
+%Pode-se adicionar ao comando \verb+\documentclass+ a seguinte
+%opção:
+%\begin{itemize}
+%  \item \verb+harvard+: inclui o pacote \verb+harvard+, utilizado para
+%  produção das referências bibliográficas. Pode ser usado em conjunto
+%  com qualquer das outras opções. Veja seção~\ref{sec:bibliografia}.
+%\end{itemize}
+%Por exemplo, para propor um artigo ao congresso e utilizar o pacote de
+%referências bibliográficas \verb+harvard+ usa-se o comando
+%\begin{verbatim}
+%  \documentclass[conference,harvard]{sbatex}
+%\end{verbatim}
+%A ordem dos parâmetros não é relevante.
+%
+%Os seguintes \emph{pacotes} \LaTeX\ estão disponíveis
+%automaticamente\footnote{Isto também significa que \emph{é necessário
+%ter estes pacotes instalados} para que se possa utilizar o estilo
+%\SBATeX.} com o estilo \SBATeX:
+%\begin{itemize}
+%\item \verb+ifthen+: pacote com comandos de controle de fluxo do tipo
+%`if', `then' e `else'; utilizado internamente para controle das opções de
+%formatação.
+%\item \verb+fancyhdr+: pacote para formatação dos cabeçalhos e rodapés.
+%\item \verb+babel+: pacote para escrita em múltiplos idiomas; os
+%idiomas/dialetos \verb+english+, \verb+brazil+ e \verb+spanish+ já
+%estão habilitados.
+%\item \verb+theorem+: pacote para controle dos ambientes \verb+theorem+,
+%\verb+lemma+, \verb+corollary+ e \verb+proof+.
+%\item \verb+geometry+: pacote para controle da dimensões do texto na página.
+%\item \verb+latexsym+: pacote com símbolos extras do \LaTeXe.
+%\end{itemize}
+%
+%A opção \verb+submission+ provê o pacote:
+%\begin{itemize}
+%\item \verb+setspace+: pacote para controle de espaçamento duplo entre
+%linhas.
+%\end{itemize}
+%E a opção \verb+harvard+ provê o pacote:
+%\begin{itemize}
+%\item \verb+harvard+: pacote para formatação das referências
+%bibliográficas.
+%\end{itemize}
+%
+%Não é necessário incluir explicitamente as cláusulas
+%\verb+\usepackage+ correspondentes a estes pacotes no artigo para que
+%se possa utilizá-los. Caso a instalação do \LaTeX\ não contenha alguns
+%destes pacotes, consulte a página
+%\begin{verbatim}
+%  http://www.ctan.org
+%\end{verbatim}
+%
+%
+%
+%Com a opção \verb+conference+, e devido à escolha de um conjunto de
+%fontes diferentes, recomenda-se subsituir o pacote \verb+fontenc+ pelo
+%pacote \verb+ae+ (\emph{Almost European Computer Modern}), o que pode
+%ser feito com o comando
+%\begin{verbatim}
+%  \usepackage{ae}
+%\end{verbatim}
+%Neste caso não é necessário adicionar explicitamente o pacote
+%\verb+fontenc+, que já é carregado automaticamente pelo pacote
+%\verb+ae+. Veja também a seção~\ref{sec:esqueleto}.
+%
+%Após o preâmbulo, inicia-se o texto propriamente dito por meio do
+%comando
+%\begin{verbatim}
+%  \begin{document}
+%\end{verbatim}
+%O passo seguinte é a declaração do título do artigo, autores e
+%afiliações.
+%
+%\subsection{Título, autores e afiliações}
+%
+%O título do artigo é declarado por meio do comando \verb+\title+. Por
+%exemplo, o título deste artigo foi gerado com o comando:
+%\begin{verbatim}
+%  \title{Artigo Exemplo}
+%\end{verbatim}
+%O título não deve conter agradecimentos, os quais devem aparecer em
+%uma seção separada, no final do artigo.
+%
+%Em seguida, definem-se os autores com seus endereços eletrônicos e
+%afiliações por meio dos comandos \verb+\author+ e
+%\verb+\address+. Por exemplo, o nome e endereço do primeiro autor
+%deste artigo, João da Silva, é introduzido por meio dos comandos:
+%\begin{verbatim}
+%  \author{João da Silva}
+%         {jsilva@silva.com}
+%  \address{Endereço do João e da Maria\\
+%           Em algum lugar\\
+%           Cidade, Estado, País}
+%\end{verbatim}
+%Note-se que o comando \verb+\author+ requer dois argumentos: o nome e
+%o endereço eletrônico. Quebras de linha podem ser obtidas na afiliação
+%por meio do comando~\verb+\\+. Segue-se, neste exemplo, a declaração
+%do nome e afiliação do segundo autor:
+%\begin{verbatim}
+%  \author{Joaquim Pereira}
+%         {jpereira@pereira.org}
+%  \address{Endereço do Joaquim\\
+%           Em algum lugar\\
+%           Cidade, Estado, País}
+%\end{verbatim}
+%
+%Em geral, para cada comando \verb+\author+ deve haver um comando
+%\verb+\address+ correspondente, salvo o caso de compartilhamento
+%de endereços. Neste caso, omite-se o comando \verb+\address+ para
+%o segundo autor e indica-se o número do endereço que se deseja
+%compartilhar como um parâmetro adicional do comando
+%\verb+\author+. Por exemplo, o comando:
+%\begin{verbatim}
+%  \author[1]{Maria da Silva}
+%            {maria@pereira.org}
+%\end{verbatim}
+%indica que a Maria da Silva utilizará o endereço de número 1, que
+%corresponde ao endereço de João da Silva.
+%
+%Os autores seguintes possuem endereços independentes e são
+%introduzidos da maneira convencional:
+%\begin{verbatim}
+%  \author{Pedro Manoel}
+%         {pedro@pedro.com}
+%  \address{Endereço do Pedro e do Rafael\\
+%           Em algum lugar\\
+%           Cidade, Estado, País}
+%
+%  \author{José Rodrigues}
+%         {jose@rodrigues}
+%  \address{Endereço do José\\
+%           Em algum lugar\\
+%           Cidade, Estado, País}
+%\end{verbatim}
+%
+%Finalmente, o autor Rafael é definido como
+%\begin{verbatim}
+%  \author[3]{Rafael Pires}
+%            {rafael@pires}
+%\end{verbatim}
+%o que indica que Rafael compartilha o endereço de número 3 com Pedro
+%Manoel. Lembre-se de que, apesar de Pedro Manoel ser o autor de número
+%4, o seu endereço é o de número 3, uma vez que a Maria já compartilha
+%-- sem segundas intenções -- do mesmo endereço com o João.
+%
+%O comando
+%\begin{verbatim}
+%  \maketitle
+%\end{verbatim}
+%coloca o título e os autores no formato adequado.
+%
+%
+%\subsection{Resumo, abstract e palavras-chave}
+%
+%Os artigos devem conter um resumo em português (ou espanhol) e em
+%inglês. O ambiente para definição dos resumos, em qualquer idioma, é o
+%\verb+abstract+. Para diferenciar os idiomas utiliza-se o comando
+%\verb+\selectlanguage+, do pacote \verb+babel+. Por exemplo, a seqüência
+%de comandos produz um \emph{Abstract} seguido de um \emph{Resumo}:
+%\begin{verbatim}
+%  \selectlanguage{english}
+%  \begin{abstract}
+%    Yossarian says, ...
+%  \end{abstract}
+%
+%  \selectlanguage{brazil}
+%  \begin{abstract}
+%    O Largo da Sé ...
+%  \end{abstract}
+%\end{verbatim}
+%
+%As \emph{palavras-chave} devem ser definidas por meio do comando:
+%\begin{verbatim}
+%  \keywords{Exemplo, Ilustração}
+%\end{verbatim}
+%
+%Deste ponto em diante selecione o idioma a ser utilizado e
+%inicie o texto da sua contribuição.
+%
+%\textbf{IMPORTANTE:} Caso esteja se produzindo um texto com a
+%opção \verb+conference+, colocam-se os comandos que vão de
+%\verb+\maketitle+ a \verb+\keywords+ dentro de um ambiente
+%\verb+twocolumn+. Isto é necessário para que os resumos sejam
+%formatados em coluna simples\footnote{Como este arquivo está
+%adaptado para utilizar o formato adequado para o \emph{Congresso
+%Brasileiro de Automática} e o \emph{Simpósio Brasileiro de
+%Automação Inteligente}, isto já está feito}. Veja
+%seção~\ref{sec:esqueleto}.
+%
+%
+%\subsection{Teoremas, lemas, corolários e provas}
+%
+%Quatro ambientes já se encontram pré-definidos no estilo \SBATeX. São
+%eles
+%\begin{itemize}
+%\item \verb+theorem+: ambiente para teoremas.
+%\item \verb+corollary+: ambiente para corolários.
+%\item \verb+lemma+: ambiente para lemas.
+%\item \verb+proof+: ambiente para provas.
+%\end{itemize}
+%Segue-se um exemplo de utilização destes ambientes:
+%\begin{lemma}[Desigualdade Subtrativa]
+%Em um espaço vetorial linear normado $\|x\| - \|y\| \leq \|x - y\|$
+%para quaisquer vetores $x$, $y$.
+%\end{lemma}
+%\begin{proof}
+%\begin{align*}
+%\|x\| - \|y\| &= \|x - y + y\| - \|y\| \ \\
+%              &\leq \|x - y \| + \|y\| - \|y\| \\
+%              &= \|x - y\|.
+%\end{align*}
+%\end{proof}
+%Este lema é produzido pela seguinte sequência de comandos:
+%\begin{verbatim}
+%  \begin{lemma}[Desigualdade Subtrativa]
+%    Em um espaço vetorial linear ...
+%  \end{lemma}
+%  \begin{proof}
+%    ...
+%  \end{proof}
+%\end{verbatim}
+%
+%Estes ambientes, com exceção do ambiente \verb+proof+, aceitam
+%um parâmetro opcional que define um nome. No exemplo acima, o nome
+%\emph{Desigualdade Subtrativa} foi produzido por meio deste argumento.
+%
+%
+%\subsection{Bibliografia}
+%\label{sec:bibliografia}
+%
+%As referências são reunidas ao fim do manuscrito, arranjadas
+%alfabeticamente pelo primeiro autor e cronologicamente para cada
+%autor.
+%
+%\textbf{IMPORTANTE:} Todas referências citadas devem aparecer em algum
+%outro ponto do texto.
+%
+%As citações seguem um estilo autor/ano (o mesmo
+%usado na revista {\em Automatica}). O pacote \verb+harvard+ (já
+%incluído pelo \SBATeX) provê vários comandos para inclusão de
+%citações. Dois dois mais utilizados são o tradicional \verb+\cite+ e o
+%\verb+\citeasnoun+. Veja um exemplo:
+%\begin{verbatim}
+%  O resumo deste artigo é um trecho do
+%  livro~\citeasnoun{serafim}. Já o abstract é
+%  extraído de~\citeasnoun{catch22}.
+%  Informações sobre o estilo bibliográfico
+%  \verb+harvard+ encontram-se
+%  em~\citeasnoun{harvard}. Os interessados
+%  devem consultar referências adicionais
+%  sobre \LaTeX~\cite{latex,%
+%  latex:guide,latex:companion}.
+%\end{verbatim}
+%produz o trecho:
+%
+%\begin{em}
+%  O resumo deste artigo é um trecho do
+%  livro~\citeasnoun{serafim}. Já o abstract é
+%  extraído de~\citeasnoun{catch22}.
+%  Informações sobre o estilo bibliográfico
+%  \verb+harvard+ encontram-se
+%  em~\citeasnoun{harvard}. Os interessados
+%  devem consultar referências adicionais
+%  sobre \LaTeX~\cite{latex,latex:guide,latex:companion}.
+%\end{em}
+%
+%Recomenda-se a utilização do programa BibTeX para gerar as suas
+%referências ~\cite{latex,latex:guide,latex:companion}. Note-se que
+%não é necessário definir o estilo bibliográfico com o comando
+%\verb+\bibliographystyle+, pois o mesmo é definido automaticamente
+%pelo estilo \SBATeX. Basta incluir o arquivo de bibliografias,
+%neste exemplo o artigo \verb+exemplo.bib+ por meio do comando.
+%\begin{verbatim}
+%    ...
+%
+%    \bibliography{exemplo}
+%
+%  \end{document}
+%\end{verbatim}
+%Note-se que este comando deve ser colocado logo antes do
+%encerramento do artigo, o que é feito pelo comando
+%\verb+\end{document}+, de tal forma a garantir que a bibliografia
+%seja o último item do artigo.
+%
+%
+%\subsection{Esqueleto deste arquivo no formato \SBATeX}
+%\label{sec:esqueleto}
+%
+%Este arquivo, adaptado para gerar o formato adequado para o
+%\emph{Congresso Brasileiro de Automática} e o  \emph{Simpósio
+%Brasileiro de Automação Inteligente}, faz uso da seguintes
+%instruções:
+%
+%\begin{verbatim}
+%\documentclass[conference,harvard,brazil,english]{sbatex}
+%  \usepackage[utf8]{inputenc}
+%  \usepackage{ae}
+%
+%    ...
+%
+%    \twocolumn[
+%      \maketitle
+%
+%      \selectlanguage{english}
+%      \begin{abstract}
+%        Yossarian says, ...
+%      \end{abstract}
+%
+%      \selectlanguage{brazil}
+%      \begin{abstract}
+%        O Largo da Sé ...
+%      \end{abstract}
+%
+%      \keywords{Exemplo, Ilustração}
+%    ]
+%
+%    ...
+%\end{verbatim}
+%
+%
+%\section{Contribuição deste artigo}
+%
+%\subsection{Os vinte e sete erros mais comuns (de uma lista de cem)}
+%\label{sec:27erros}
+%
+%Erros gramaticais e ortográficos devem, por princípio, ser
+%evitados. Alguns, no entanto, como ocorrem com maior frequência,
+%merecem atenção redobrada. O primeiro capítulo deste manual inclui
+%explicações mais completas a respeito de cada um deles. Veja os cem
+%mais comuns do idioma e use esta relação como um roteiro para fugir
+%deles~\cite{manual}.
+%
+%\begin{enumerate}
+%\item ``Mal cheiro'', ``mau-humorado''. Mal opõe-se a bem e mau, a
+%bom. Assim: mau cheiro (bom cheiro), mal-humorado
+%(bem-humorado). Igualmente: mau humor, mal-intencionado, mau jeito,
+%mal-estar.
+%
+%\item ``Fazem'' cinco anos. Fazer, quando exprime tempo, é impessoal:
+%Faz cinco anos.~/~Fazia dois séculos.~/~Fez 15 dias.
+%
+%\item ``Houveram'' muitos acidentes. Haver, como existir, também é
+%invariável: Houve muitos acidentes.~/~Havia muitas pessoas.~/~Deve
+%haver muitos casos iguais.
+%
+%\item ``Existe'' muitas esperanças. Existir, bastar, faltar, restar e
+%sobrar admitem normalmente o plural: Existem muitas esperanças. /
+%Bastariam dois dias.~/~Faltavam poucas peças.~/~Restaram alguns
+%objetos.~/~Sobravam idéias.
+%
+%\item Para ``mim'' fazer. Mim não faz, porque não pode ser
+%sujeito. Assim: Para eu fazer, para eu dizer, para eu trazer.
+%
+%\item Entre ``eu'' e você. Depois de preposição, usa-se mim ou ti: Entre
+%mim e você.~/~Entre eles e ti.
+%
+%\item ``Há'' dez anos ``atrás''. Há e atrás indicam passado na frase. Use
+%apenas há dez anos ou dez anos atrás.
+%
+%\item ``Entrar dentro''. O certo: entrar em. Veja outras redundâncias:
+%Sair fora ou para fora, elo de ligação, monopólio exclusivo, já não há
+%mais, ganhar grátis, viúva do falecido.
+%
+%\item ``Venda à prazo''. Não existe crase antes de palavra masculina, a
+%menos que esteja subentendida a palavra moda: Salto à (moda de) Luís
+%XV. Nos demais casos: A salvo, a bordo, a pé, a esmo, a cavalo, a
+%caráter.
+%
+%\item ``Porque'' você foi? Sempre que estiver clara ou implícita a
+%palavra razão, use por que separado: Por que (razão) você foi?~/~Não
+%sei por que (razão) ele faltou.~/~Explique por que razão você se
+%atrasou. Porque é usado nas respostas: Ele se atrasou porque o
+%trânsito estava congestionado.
+%
+%\item Vai assistir ``o'' jogo hoje. Assistir como presenciar exige a:
+%Vai assistir ao jogo, à missa, à sessão.  Outros verbos com a: A
+%medida não agradou (desagradou) à população.~/~Eles obedeceram
+%(desobedeceram) aos avisos.~/~Aspirava ao cargo de diretor.~/~Pagou ao
+%amigo.~/~Respondeu à carta.~/~Sucedeu ao pai.~/~Visava aos estudantes.
+%
+%\item Preferia ir ``do que'' ficar. Prefere-se sempre uma coisa a outra:
+%Preferia ir a ficar. É preferível segue a mesma norma: É preferível
+%lutar a morrer sem glória.
+%
+%\item O resultado do jogo, não o abateu. Não se separa com vírgula o
+%sujeito do predicado. Assim: O resultado do jogo não o abateu. Outro
+%erro: O prefeito prometeu, novas denúncias. Não existe o sinal entre o
+%predicado e o complemento: O prefeito prometeu novas denúncias.
+%
+%\item Não há regra sem ``excessão''. O certo é exceção. Veja outras
+%grafias erradas e, entre parênteses, a forma correta: ``paralizar''
+%(paralisar), ``beneficiente'' (beneficente), ``xuxu'' (chuchu),
+%``previlégio'' (privilégio), ``vultuoso'' (vultoso), ``cincoenta''
+%(cinqüenta), ``zuar'' (zoar), ``frustado'' (frustrado), ``calcáreo''
+%(calcário), ``advinhar'' (adivinhar), ``benvindo'' (bem-vindo), ``ascenção''
+%(ascensão), ``pixar'' (pichar), ``impecilho'' (empecilho), ``envólucro''
+%(invólucro).
+%
+%\item Quebrou ``o'' óculos. Concordância no plural: os óculos, meus
+%óculos. Da mesma forma: Meus parabéns, meus pêsames, seus ciúmes,
+%nossas férias, felizes núpcias.
+%
+%\item Comprei ``ele'' para você. Eu, tu, ele, nós, vós e eles não podem
+%ser objeto direto. Assim: Comprei-o para você. Também: Deixe-os sair,
+%mandou-nos entrar, viu-a, mandou-me.
+%
+%\item Nunca ``lhe'' vi. Lhe substitui a ele, a eles, a você e a vocês e
+%por isso não pode ser usado com objeto direto: Nunca o vi.~/~Não o
+%convidei.~/~A mulher o deixou.~/~Ela o ama.
+%
+%\item ``Aluga-se'' casas. O verbo concorda com o sujeito: Alugam-se
+%casas.~/~Fazem-se consertos.~/~É assim que se evitam acidentes. /
+%Compram-se terrenos.~/~Procuram-se empregados.
+%
+%\item ``Tratam-se'' de. O verbo seguido de preposição não varia nesses
+%casos: Trata-se dos melhores profissionais.~/~Precisa-se de
+%empregados.~/~Apela-se para todos.~/~Conta-se com os amigos.
+%
+%\item Chegou ``em'' São Paulo. Verbos de movimento exigem a, e não em:
+%Chegou a São Paulo.~/~Vai amanhã ao cinema.~/~Levou os filhos ao
+%circo.
+%
+%\item Atraso implicará ``em'' punição. Implicar é direto no sentido de
+%acarretar, pressupor: Atraso implicará punição.~/~Promoção implica
+%responsabilidade.
+%
+%\item Vive ``às custas'' do pai. O certo: Vive à custa do pai. Use
+%também em via de, e não ``em vias de'': Espécie em via de extinção. /
+%Trabalho em via de conclusão.
+%
+%\item Todos somos ``cidadões''. O plural de cidadão é cidadãos. Veja
+%outros: caracteres (de caráter), juniores, seniores, escrivães,
+%tabeliães, gângsteres.
+%
+%\item O ingresso é ``gratuíto''. A pronúncia correta é gratúito, assim
+%como circúito, intúito e fortúito (o acento não existe e só indica a
+%letra tônica). Da mesma forma: flúido, condôr, recórde, aváro, ibéro,
+%pólipo.
+%
+%\item A última ``seção'' de cinema. Seção significa divisão, repartição,
+%e sessão equivale a tempo de uma reunião, função: Seção Eleitoral,
+%Seção de Esportes, seção de brinquedos; sessão de cinema, sessão de
+%pancadas, sessão do Congresso.
+%
+%\item Vendeu ``uma'' grama de ouro. Grama, peso, é palavra masculina: um
+%grama de ouro, vitamina C de dois gramas. Femininas, por exemplo, são
+%a agravante, a atenuante, a alface, a cal, etc.
+%
+%\item ``Porisso''. Duas palavras, por isso, como de repente e a partir
+%de.
+%
+%\end{enumerate}
+%
+%\subsection{Observação importante}
+%
+%Os erros de português porventura presentes neste artigo
+%\begin{itemize}
+%\item ou foram introduzidos propositalmente para deleite dos leitores
+%atentos,
+%\item ou não constam da lista da seção~\ref{sec:27erros}.
+%\end{itemize}
+%
+%\section{Conclusões}
+%Nada resta senão desejar-lhe boa sorte na preparação de seu artigo. Contamos com seu trabalho e sua presença no SBAI 2017 a ser realizado em Porto Alegre-RS.
+%
+%\section*{Agradecimentos}
+%Mencione aqui seus agradecimentos as agências de fomento e colaboradores no trabalho.
 
 
 \selectlanguage{english}

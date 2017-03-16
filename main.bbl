@@ -10,10 +10,6 @@ Baer-Riedhart, J.  \harvardyearleft 1998\harvardyearright .
 \newblock Nasa environmental research aircraft and sensor technology program,
   {\em Aerospace America, January} .
 
-\harvarditem{de~Andrade}{1933}{serafim}
-de~Andrade, O.  \harvardyearleft 1933\harvardyearright .
-\newblock {\em Serafim Ponte Grande}, Editora Globo.
-
 \harvarditem[Doherty et~al.]{Doherty, Kvarnstr{\"o}m \harvardand\
   Heintz}{2009}{doherty2009temporal}
 Doherty, P., Kvarnstr{\"o}m, J. \harvardand\ Heintz, F.  \harvardyearleft
@@ -34,10 +30,6 @@ Fabiani, P., Fuertes, V., Piquereau, A., Mampey, R. \harvardand\
   demonstrations to out-of-sight flights, {\em Aerospace Science and
   Technology} {\bf 11}(2):~183--193.
 
-\harvarditem{Filho}{1992}{manual}
-Filho, E. L.~M.  \harvardyearleft 1992\harvardyearright .
-\newblock {\em Manual de Reda\c{c}\~{a}o e Estilo}, Maltese.
-
 \harvarditem{Finn \harvardand\ Scheding}{2012}{finn2012developments}
 Finn, A. \harvardand\ Scheding, S.  \harvardyearleft 2012\harvardyearright .
 \newblock {\em Developments and challenges for autonomous unmanned vehicles},
@@ -54,11 +46,6 @@ Garecht, J.  \harvardyearleft 2010\harvardyearright .
 \newblock Accessed in: 17/10/2015.
 \newline\harvardurl{\url{http://www.thefundraisingauthority.com/fundraising-basics/fundraising-plan/}}
 
-\harvarditem{Gossens \harvardand\ Mittelbach}{1993}{latex:companion}
-Gossens, M. \harvardand\ Mittelbach, F.  \harvardyearleft 1993\harvardyearright
-  .
-\newblock {\em The {\rm \LaTeX} Companion}, Addison-Wesley, Reading, MA.
-
 \harvarditem[Graham et~al.]{Graham, Lawler, Lenstra \harvardand\
   Kan}{1979}{graham1979optimization}
 Graham, R.~L., Lawler, E.~L., Lenstra, J.~K. \harvardand\ Kan, A.~R.
@@ -66,28 +53,15 @@ Graham, R.~L., Lawler, E.~L., Lenstra, J.~K. \harvardand\ Kan, A.~R.
 \newblock Optimization and approximation in deterministic sequencing and
   scheduling: a survey, {\em Annals of discrete mathematics} {\bf 5}:~287--326.
 
-\harvarditem{Heller}{1996}{catch22}
-Heller, J.~L.  \harvardyearleft 1996\harvardyearright .
-\newblock {\em Catch - 22}, reprint edn, Scribner.
-
 \harvarditem{Hern}{2014}{hern2014dhl}
 Hern, A.  \harvardyearleft 2014\harvardyearright .
 \newblock Dhl launches first commercial drone ‘parcelcopter’delivery
   service, {\em The Guardian} .
 
-\harvarditem{Kopka \harvardand\ Daly}{1993}{latex:guide}
-Kopka, H. \harvardand\ Daly, P.~W.  \harvardyearleft 1993\harvardyearright .
-\newblock {\em A Guide to {\LaTeX \rm:} {D}ocument Preparation for Beginners
-  and Advanced Users}, Addison-Wesley.
-
 \harvarditem{Krozel}{1988}{krozel1988search}
 Krozel, J.~A.  \harvardyearleft 1988\harvardyearright .
 \newblock Search problems in mission planning and navigation of autonomous
   aircraft, {\em Technical report}.
-
-\harvarditem{Lamport}{1986}{latex}
-Lamport, L.  \harvardyearleft 1986\harvardyearright .
-\newblock {\em {\LaTeX \rm:} {A} Document Preparation System}, Addison-Wesley.
 
 \harvarditem[Pascarella et~al.]{Pascarella, Venticinque \harvardand\
   Aversa}{2013}{pascarella2013autonomic}
@@ -128,10 +102,5 @@ Whalley, M., Freed, M., Harris, R., Takahashi, M., Schulein, G. \harvardand\
 \newblock Design, integration, and flight test results for an autonomous
   surveillance helicopter, {\em Proceedings of the AHS International
   Specialists' Meeting on Unmanned Rotorcraft}.
-
-\harvarditem{Williams \harvardand\ Schnier}{1998}{harvard}
-Williams, P. \harvardand\ Schnier, T.  \harvardyearleft 1998\harvardyearright .
-\newblock The harvard family of bibliography styles.
-\newblock Documenta\c{c}\~ao que acompanha o pacote \verb+harvard+.
 
 \end{thebibliography}
