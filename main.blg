@@ -1,6 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2014/dev)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
-The top-level auxiliary file: main.aux
+This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
 The style file: dcu.bst
 Database file #1: exemplo.bib
 I was expecting a `,' or a `}'---line 82 of file exemplo.bib
@@ -13,45 +11,4 @@ Repeated entry---line 292 of file exemplo.bib
  :                       ,
 I'm skipping whatever remains of this entry
 Warning--empty institution in krozel1988search
-You've used 16 entries,
-            2921 wiz_defined-function locations,
-            722 strings with 7759 characters,
-and the built_in function-call counts, 71871 in all, are:
-= -- 11829
-> -- 899
-< -- 0
-+ -- 5667
-- -- 273
-* -- 6148
-:= -- 14404
-add.period$ -- 34
-call.type$ -- 16
-change.case$ -- 223
-chr.to.int$ -- 16
-cite$ -- 17
-duplicate$ -- 223
-empty$ -- 475
-format.name$ -- 327
-if$ -- 12915
-int.to.chr$ -- 5
-int.to.str$ -- 0
-missing$ -- 13
-newline$ -- 72
-num.names$ -- 166
-pop$ -- 88
-preamble$ -- 1
-purify$ -- 240
-quote$ -- 0
-skip$ -- 203
-stack$ -- 0
-substring$ -- 16727
-swap$ -- 29
-text.length$ -- 224
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 60
-warning$ -- 1
-while$ -- 348
-width$ -- 0
-write$ -- 228
 (There were 2 error messages)

@@ -63,6 +63,14 @@ Krozel, J.~A.  \harvardyearleft 1988\harvardyearright .
 \newblock Search problems in mission planning and navigation of autonomous
   aircraft, {\em Technical report}.
 
+\harvarditem[M{\"u}ller et~al.]{M{\"u}ller, Hopf \harvardand\
+  Krones}{2012}{muller2012analyzing}
+M{\"u}ller, E., Hopf, H. \harvardand\ Krones, M.  \harvardyearleft
+  2012\harvardyearright .
+\newblock Analyzing energy consumption for factory and logistics planning
+  processes, {\em IFIP International Conference on Advances in Production
+  Management Systems}, Springer, pp.~49--56.
+
 \harvarditem[Pascarella et~al.]{Pascarella, Venticinque \harvardand\
   Aversa}{2013}{pascarella2013autonomic}
 Pascarella, D., Venticinque, S. \harvardand\ Aversa, R.  \harvardyearleft
@@ -80,6 +88,11 @@ Ramirez-Atencia, C., Bello-Orgaz, G., R-Moreno, M.~D. \harvardand\ Camacho, D.
   problem using genetic algorithms, {\em Proceedings of Doctoral Program of the
   20th International Conference on Principles and Practice of Constraint
   Programming}, pp.~65--71.
+
+\harvarditem{Schwarz \harvardand\ Sauer}{2012}{schwarz2012towards}
+Schwarz, C. \harvardand\ Sauer, J.  \harvardyearleft 2012\harvardyearright .
+\newblock Towards decentralised agv control with negotiations., {\em STAIRS},
+  pp.~270--281.
 
 \harvarditem{Service-drone}{2014}{drone4logistic}
 Service-drone  \harvardyearleft 2014\harvardyearright .

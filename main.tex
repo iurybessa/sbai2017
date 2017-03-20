@@ -108,24 +108,23 @@
 
 % Use of a commercial UAV - 3DR IRIS + in the intra-logistics, {\it i.e., Internal Logistics of movement and storage.}, aiming to give another option of agility in the manufacturing process. Additionally, it will be approached a study of evaluation of the cost of the missions that the UAV executes in this process.
 
-Logistics has become a competitive and fundamental factor for organizations, involving the management, conservation and supervision of freight transport. In addition, excellent logistics means customer satisfaction, so speed is still an important factor in a successful logistics process \cite{drone4logistic}. Currently, one of the solutions to this type of problem is the use of UAVs \commentib{A primeira vez que uma sigla aparece, o seu significado deve ser mostrado}. Nowadays, UAVs are mostly remotely piloted vehicles (RPV), since their operations are carried out by ground operators. If the tasks performed by a UAV were performed autonomously, it would relieve the work of these operators, since they perform tedious and repetitive tasks \cite{pascarella2013autonomic}.
+Logistics has become a competitive and fundamental factor for organizations, involving the management, conservation and supervision of freight transport. In addition, excellent logistics means customer satisfaction, so speed is still an important factor in a successful logistics process \cite{drone4logistic}. Currently, one of the solutions to this type of problem is the use of Unmanned Aerial Vehicles(UAVs). Nowadays, UAVs are mostly remotely piloted vehicles (RPV), since their operations are carried out by ground operators. If the tasks performed by a UAV were performed autonomously, it would relieve the work of these operators, since they perform tedious and repetitive tasks \cite{pascarella2013autonomic}.
 
-A probable improvement of these logistics systems is the increase of the automation of the UAVs, what results in minimization of the costs \commentib{Que tipo de custo?}. Consequently, investments and studies related to stand-alone UAVs are important to the development of smart factories \cite{hern2014dhl}. However, one of the main problems with the use of autonomous UAVs is the reliability and intelligence of the system. Thus, increased employment of autonomous UAVs requires the development of devices that are capable of performing tasks and interacting with the environment intelligently and reliably.
+A probable improvement of these logistics systems is the increase of the automation of the UAVs, what results in minimization of the costs, e.g. in terms of time. Consequently, investments and studies related to stand-alone UAVs are important to the development of smart factories \cite{hern2014dhl}. However, one of the main problems with the use of autonomous UAVs is the reliability and intelligence of the system. Thus, increased employment of autonomous UAVs requires the development of devices that are capable of performing tasks and interacting with the environment intelligently and reliably.
 
 Autonomous UAVs need to know what will happen in a future instant and what is the best decision to make at the present time, and therefore require strategies not only to decompose their missions into meaningful sub-tasks but also to track progress toward mission goals and the evolution of these tasks relative to the capabilities of autonomous UAVs \cite{finn2012developments}. As a consequence, in order to perform a mission successfully, it is recommended to make a plan to the task \cite{successplan}. Mission planning problems consist of planning events to meet certain requirements associated with the plan and improving mission objectives \cite{krozel1988search}. Therefore, this is one of the main challenges faced in solving this type of problem.
 
-\commentib{Aqui \'e necess\'ario um ou dois par\'agrafos de trabalhos relacionados/estado da arte. Voc\^e deve pesquisar/comentar alguns trabalhos sobre otimiza\c{c}\~ao/avalia\c{c}\~ao de planos de miss\~ao.  Eu te mandei uns por email}
+Some researches about evaluation and optimization of mission planning have been done in the last years. \citeasnoun{schwarz2012towards} have used ant colony to optimize missions for an automated guided vehicle (AVG). Another paper investigates energy consumption for a factory and evaluate the logistic planning processes using a metric of evaluation\cite{muller2012analyzing}.
 
-This paper presents a methodology that evaluate the cost of mission planners for a commercial UAV. \commentib{Ao inv\'es de falar que voc\^e falar que simplesmente compara, diga que desenvolvel uma m\'etrica que avalia o custo relativo do planejado em rela\c{c}\~ao ao custo \'otimo calculado pelo CPLEX.} The evaluation is made by comparing the mission execution time with the cost of an optimal solution solved by CPLEX solver. Additionally, a middleware was developed to interface the mission planning application and the embedded control software, adapting the UAV for intra-logistics. Finally, experiments were done to verify the consistency of evaluation methodology.
+This paper presents a methodology that evaluate the cost of mission planners for a commercial UAV. We developed a evaluation metric that evaluate the relative cost of a planning strategy related with the optimal cost generated by the CPLEX optimizer. %The evaluation is made by comparing the mission execution time with the cost of an optimal solution solved by CPLEX solver. Additionally, a middleware was developed to interface the mission planning application and the embedded control software, adapting the UAV for intra-logistics. Finally, experiments were done to verify the consistency of evaluation methodology.
 
 Summarizing, the main contributions of this work are:
 \begin{itemize}
-\item \commentib{primeira cont.}
-\item \commentib{segunda cont.}
-\item \commentib{preencha isso ...}
+\item planner evaluation metric;
+\item use of a commercial UAV in intralogistics.
 \end{itemize}
 
-The remaining of this work is organized as follows: Section~\ref{sec:related} presents some previous works related to mission planning, optimization and evaluation, Section~\ref{sec:background} provides the fundamentals of mission planning and optimization problems, Section~\ref{sec:method} explains the proposed evaluation methodology in details, Section~\ref{sec:results} shows the experimental procedures and results in order to explore and demonstrate the potential of methodology, and, finally, Section~\ref{sec:conclusao}concludes the work.
+The remaining of this work is organized as follows: Section~\ref{sec:related} presents some previous works related to mission planning, optimization and evaluation, Section~\ref{sec:background} provides the fundamentals of mission planning and optimization problems, Section~\ref{sec:method} explains the proposed evaluation methodology in details, Section~\ref{sec:results} shows the experimental procedures and results in order to explore and demonstrate the potential of methodology, and, finally, Section~\ref{sec:conclusao} concludes the work.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Related works}
@@ -194,23 +193,30 @@ Two distinctions need to be made to better understand the universe of optimizati
 \end{figure}
 
 %%%%%%%%%%%%%%%
-\section{Methodology}
+\section{Methodology of Time Cost Evaluation, UAV use and Mission Planning}
 \label{sec:method}
 %%%%%%%%%%%%%%%
 
 \commentib{Modifique o t\'itulo (expanda). Metodologia de qu\^e?? Tente fazer algo parecido com o do trabalho.}
-	In this section, there will be a brief clarification of the contents of this paper.
+
+	In this section, there will have a brief clarification of the contents of this paper.
 \subsection{UAV Movement System}
 
+In this section, we first investigate the platform used in this work, verifying the hardware characteristics and how to control it by software. The core hardware of the UAV IRIS+ is the Pixhawk and we can control it using a Python library - dronekit that uses MAVLink\footnote{MAVLink or Micro Air Vehicle Link is a protocol for communicating with small unmanned vehicle. It is designed as a header-only message marshalling library} protocol. Secondly, we integrate a robot gripper to the UAV to take and leave packages during the mission. After that, we created movement functions to make the UAV movement and control it using some resources of the dronekit API.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.25\textwidth]{movement.eps}
+	\caption{UAV Movement Systems.\label{fig:movement}}
+\end{figure}
+
+%\subsection{Mission Planning}
+%\label{mission}
 
 
-\subsection{Mission Planning}
-\label{mission}
-
-\subsection{Optimization Problem Modeling and Planner Evaluation Technique}
+\subsection{Optimization Problem Modelling and Planner Evaluation Technique}
 \label{modelo}
 
-The purpose of this subsection is to elaborate a modeling of the mission planning problem in an optimization problem. In order to find later, the shortest execution time of all the tasks (minimization), based on the data below:
+The purpose of this subsection is to elaborate a modelling of the mission planning problem in an optimization problem. In order to find later, the shortest execution time of all the tasks (minimization), based on the data below:
 
 It is assumed that the processing time $ p_i $ is the total time of production, that is, considering the sum of the time that the UAV stays in the stock collecting inputs, the time in which it stays in the production line leaving inputs and collecting products, And the time it takes for the UAV to move from the production line to the stock or to the customer. We also assume that the production time (setup) $s_i$ is the time the product takes to be produced, after having in line all the inputs needed to produce it. Therefore, the total time for the production of a given product is the sum of the processing time $p_i$ and of setup $s_i$.
 
