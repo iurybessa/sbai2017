@@ -155,52 +155,48 @@ Firstly, a mission can be defined as a goal that need to be completed. In the co
 
 \subsection{Optimization Problems}
 
-An optimization problem is about finding the best solution (relative to a certain criterion) among a set of available alternatives. For example, the popular bin packaging problem that aims to find the number of boxes of a certain size to store a set of objects of indicated sizes; optimization involves, for example, finding the least amount of boxes.
-
-Two distinctions need to be made to better understand the universe of optimization problems. The first is to distinguish a problem which refers to a more general class, for example, the problem of packaging, and an example representing a special type of problem, for example the problem of packaging, wherein there are 5 packages for packaging 25 objects of different sizes. The second distinction concerns the existence of two categories of problem classes: the abstract problem classes and the concrete problem classes. As the name itself suggests, the second category refers to problems that have "concrete existence," that is, problems for which instances can be created. The BPP corresponds to this category. Together they are also part of a more abstract class: grouping problems. Only with the problem of abstract classes, it is impossible to define instances. In fact, as shown in Figure~\ref{fig:problemasDeOtimizacao}, the classes of concrete and abstract problems form a hierarchy of optimization problems.
-
-\begin{figure*}[h]
-	\centering
-	\includegraphics[width=1.0\textwidth]{problemasDeOtimizacao.eps}
-	\caption{Some Optimization Problems.\commentib{Falta apenas traduzir a imagem.} \label{fig:problemasDeOtimizacao}}
-	\end{figure*}
-	
-	An optimization problem can be defined as a finite set of variables, where the correct values for the variables specify the optimal solution. If the variables are of the set of real, the problem is called continuous, and if they can only have a finite set of distinct values, the problem is called combinatorial \protect\cite{francq2011optimization}.
-	
-	In order for the optimization problems to be solved, it is necessary to develop a method that solves them, which are the algorithms. An important category of problems are the NP-hard problems, where they can only be solved by certain algorithms that try to arrive at the optimal solution of that determined problem.
-	
-	When the optimal solution of an NP-hard problem is not guaranteed, this type of method is called a heuristic. A heuristic is an intuitive way of solving a particular problem, where the best possible solution is not guaranteed.
-	
-	Every optimization problem is basically characterized by having an objective function, which can be called cost function when it is desired to minimize it or utility function when it is desired to maximize it, and a set of constraints that delimit the space of viable solutions, or Be the region where the solutions are that can be accepted. The objective function contains a set of variables to which values must be assigned in a systematic way so as to walk through the search space and find the one that optimizes the result to be searched, in case a maximization problem finds the highest possible value while in a Minimize the value. In both cases the solution must satisfy the set of constraints imposed to be accepted. The formatting of an optimization problem mathematically occurs as follows:
-
-	\begin{equation}
-		\label{eq:optproblem}
-		\begin{array}{cc}
+An optimization problem is about finding the best solution (relative to a certain criterion) among a set of available alternatives. For example, the popular bin packaging problem that aims to find the number of boxes of a certain size to store a set of objects of indicated sizes; optimization involves, for example, finding the least amount of boxes. An optimization problem is usually represented as follows:
+\begin{equation}
+	\label{eq:optproblem}
+	\begin{array}{cc}
 		\min & f(\textbf{x}),  \\
 		\textrm{ s.t. } & \textbf{x}\in\Omega.\\
-		\end{array}
-	\end{equation}	
+	\end{array}
+\end{equation}	
 	
-	
-	Where \(A\) is the set of workable solutions that the function \(f\) can generate.
-	
-	One can interpret the space of solutions as being a subset of Euclidean space \(\R^n\). Each variable is a dimension of space. For a function with two variables it is possible to form in a two-dimensional space and with the addition of a third dimension to the result of the function with \(x\) and \(y\) as input it is possible to observe the behaviour of the function as The \(x\) and the \(y\) of the function undergo variation. In Figure ~\ref{fig:sol} a two-dimensional graph is shown in which the variation of the function value causes changes in the gray scale. For larger values ??a darker gray is obtained and for smaller values ??a lighter gray is obtained. With this, one can observe the space of solutions in a panoramic way in the two-dimensional space and it is verified that as it approaches the center the function generates smaller values. In it it is also possible to notice that the x-shaped marks, which represent the solutions found, vary towards the local minimum that is in the middle of the search space. The heuristic used to search for the optimal solution in this case was to look for neighbouring solutions that minimized the cost of the function in the same way that a sphere that rolls over an inclined plane stabilizes when it reaches a valley that would be the local minimum Function. However, this heuristic is not always the most adequate, as will be seen later.
+\commentib{Todo esse texto sobre otimização era desnecess\'ario. Sugiro resumir todo esse texto comentado em um \'unico breve par\'agrafo a ser adicionado aqui. As imagens podem ser deixadas para l\'a.}	
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{sol.eps}
-	\caption{Walking through the space of solutions\label{fig:sol}}
-\end{figure}
+%Two distinctions need to be made to better understand the universe of optimization problems. The first is to distinguish a problem which refers to a more general class, for example, the problem of packaging, and an example representing a special type of problem, for example the problem of packaging, wherein there are 5 packages for packaging 25 objects of different sizes. The second distinction concerns the existence of two categories of problem classes: the abstract problem classes and the concrete problem classes. As the name itself suggests, the second category refers to problems that have "concrete existence," that is, problems for which instances can be created. The BPP corresponds to this category. Together they are also part of a more abstract class: grouping problems. Only with the problem of abstract classes, it is impossible to define instances. In fact, as shown in Figure~\ref{fig:problemasDeOtimizacao}, the classes of concrete and abstract problems form a hierarchy of optimization problems.
+%
+%\begin{figure*}[h]
+%	\centering
+%	\includegraphics[width=1.0\textwidth]{problemasDeOtimizacao.eps}
+%	\caption{Some Optimization Problems.\commentib{Falta apenas traduzir a imagem.} \label{fig:problemasDeOtimizacao}}
+%	\end{figure*}
+%	
+%	An optimization problem can be defined as a finite set of variables, where the correct values for the variables specify the optimal solution. If the variables are of the set of real, the problem is called continuous, and if they can only have a finite set of distinct values, the problem is called combinatorial \protect\cite{francq2011optimization}.
+%	
+%	In order for the optimization problems to be solved, it is necessary to develop a method that solves them, which are the algorithms. An important category of problems are the NP-hard problems, where they can only be solved by certain algorithms that try to arrive at the optimal solution of that determined problem.
+%	
+%	When the optimal solution of an NP-hard problem is not guaranteed, this type of method is called a heuristic. A heuristic is an intuitive way of solving a particular problem, where the best possible solution is not guaranteed.
+%	
+%	Every optimization problem is basically characterized by having an objective function, which can be called cost function when it is desired to minimize it or utility function when it is desired to maximize it, and a set of constraints that delimit the space of viable solutions, or Be the region where the solutions are that can be accepted. The objective function contains a set of variables to which values must be assigned in a systematic way so as to walk through the search space and find the one that optimizes the result to be searched, in case a maximization problem finds the highest possible value while in a Minimize the value. In both cases the solution must satisfy the set of constraints imposed to be accepted. 
+
+
+%	One can interpret the space of solutions as being a subset of Euclidean space \(\R^n\). Each variable is a dimension of space. For a function with two variables it is possible to form in a two-dimensional space and with the addition of a third dimension to the result of the function with \(x\) and \(y\) as input it is possible to observe the behaviour of the function as The \(x\) and the \(y\) of the function undergo variation. In Figure ~\ref{fig:sol} a two-dimensional graph is shown in which the variation of the function value causes changes in the gray scale. For larger values ??a darker gray is obtained and for smaller values ??a lighter gray is obtained. With this, one can observe the space of solutions in a panoramic way in the two-dimensional space and it is verified that as it approaches the center the function generates smaller values. In it it is also possible to notice that the x-shaped marks, which represent the solutions found, vary towards the local minimum that is in the middle of the search space. The heuristic used to search for the optimal solution in this case was to look for neighbouring solutions that minimized the cost of the function in the same way that a sphere that rolls over an inclined plane stabilizes when it reaches a valley that would be the local minimum Function. However, this heuristic is not always the most adequate, as will be seen later.
+%
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.5\textwidth]{sol.eps}
+%	\caption{Walking through the space of solutions\label{fig:sol}}
+%\end{figure}
 
 %%%%%%%%%%%%%%%
-\section{Methodology of Time Cost Evaluation, UAV use and Mission Planning}
-\label{sec:method}
+\section{UAV Movement System}
+\label{sec:uav}
 %%%%%%%%%%%%%%%
 
-\commentib{Modifique o t\'itulo (expanda). Metodologia de qu\^e?? Tente fazer algo parecido com o do trabalho.}
-
-	In this section, there will have a brief clarification of the contents of this paper.
-\subsection{UAV Movement System}
+% \subsection{UAV Movement System}
 
 In this section, we first investigate the platform used in this work, verifying the hardware characteristics and how to control it by software. The core hardware of the UAV IRIS+ is the Pixhawk and we can control it using a Python library - dronekit that uses MAVLink\footnote{MAVLink or Micro Air Vehicle Link is a protocol for communicating with small unmanned vehicle. It is designed as a header-only message marshalling library} protocol. Secondly, we integrate a robot gripper to the UAV to take and leave packages during the mission. After that, we created movement functions to make the UAV movement and control it using some resources of the dronekit API.
 \begin{figure}[H]
@@ -209,16 +205,33 @@ In this section, we first investigate the platform used in this work, verifying 
 	\caption{UAV Movement Systems.\label{fig:movement}}
 \end{figure}
 
+\commentib{Fale um pouco mais aqui...}
+
 %\subsection{Mission Planning}
 %\label{mission}
 
 
-\subsection{Optimization Problem Modelling and Planner Evaluation Technique}
+%%%%%%%%%%%%%%%
+\section{Methodology of Time Cost Evaluation, UAV use and Mission Planning}
+\label{sec:method}
+%%%%%%%%%%%%%%%
+
+%\commentib{Modifique o t\'itulo (expanda). Metodologia de qu\^e?? Tente fazer algo parecido com o do trabalho.}
+
+	%In this section, there will have a brief clarification of the contents of this paper.
+
+\commentib{outline here}
+
+%%%%%%%%%%%%%%%
+\subsection{Optimization Problem Modelling and Planner Evaluation Methodology}
 \label{modelo}
+%%%%%%%%%%%%%%%
 
-The purpose of this subsection is to elaborate a modelling of the mission planning problem in an optimization problem. In order to find later, the shortest execution time of all the tasks (minimization), based on the data below:
 
-It is assumed that the processing time $ p_i $ is the total time of production, that is, considering the sum of the time that the UAV stays in the stock collecting inputs, the time in which it stays in the production line leaving inputs and collecting products, And the time it takes for the UAV to move from the production line to the stock or to the customer. We also assume that the production time (setup) $s_i$ is the time the product takes to be produced, after having in line all the inputs needed to produce it. Therefore, the total time for the production of a given product is the sum of the processing time $p_i$ and of setup $s_i$.
+
+%The purpose of this subsection is to elaborate a modelling of the mission planning problem in an optimization problem. In order to find later, the shortest execution time of all the tasks (minimization), based on the data below:
+
+It is assumed that the processing time $ p_i $ is the total time of production of $i$-th \commentib{dizer aqui o significado do \'indice $i$}, that is the time demanded to leave and take \commentib{quais produtos??} products, considering the sum of the time that the UAV stays in the stock collecting inputs and the time that demanded for the UAV movement. We also assume that the setup (production) time $s_i$ is the time required only for the manufacturing of a product, considering that all the required inputs are available in the production line. Therefore, the total time for the production of a given product is the sum of the processing  and setup time ($p_i$  and$s_i$).
 
 In this modeling, the fictive task or dummy of the scheduling, $j_0$, with processing time proportional to the time that the UAV collect the input and leads to the production line. In the literature, production lines are called unrelated parallel machines, for optimization problems of scalable tasks (when there are $m$ machines in parallel with performances depending on the task to be executed, notation used is $R$) \cite{du2008scheduling}.
 
