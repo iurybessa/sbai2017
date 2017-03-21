@@ -223,7 +223,7 @@ In this section, we first investigate the platform used in this work, verifying 
 \commentib{outline here}
 
 %%%%%%%%%%%%%%%
-\subsection{Optimization Problem Modelling and Planner Evaluation Methodology}
+\subsection{Modeling an UAV Intralogistics Mission as an Optimization Problem }
 \label{modelo}
 %%%%%%%%%%%%%%%
 
@@ -233,7 +233,7 @@ In this section, we first investigate the platform used in this work, verifying 
 
 It is assumed that the processing time $ p_i $ is the total time of production of $i$-th \commentib{dizer aqui o significado do \'indice $i$}, that is the time demanded to leave and take \commentib{quais produtos??} products, considering the sum of the time that the UAV stays in the stock collecting inputs and the time that demanded for the UAV movement. We also assume that the setup (production) time $s_i$ is the time required only for the manufacturing of a product, considering that all the required inputs are available in the production line. Therefore, the total time for the production of a given product is the sum of the processing  and setup time ($p_i$  and$s_i$).
 
-In this modeling, the fictive task or dummy of the scheduling, $j_0$, with processing time proportional to the time that the UAV collect the input and leads to the production line. In the literature, production lines are called unrelated parallel machines, for optimization problems of scalable tasks (when there are $m$ machines in parallel with performances depending on the task to be executed, notation used is $R$) \cite{du2008scheduling}.
+\textcolor{red}{ The fictive task or dummy of the scheduling, $j_0$, with processing time proportional to the time that the UAV collect the input and leads to the production line.}\commentib{Reescrever frase anterior} In the literature, production lines are called considered parallel machines \commentib{diga o que \'e isso} for optimization problems of scalable tasks (when there are $m$ machines in parallel with performances depending on the task to be executed, notation used is $R$ \commentib{explique melhor o que est\'a nesse par\^entese e tire do par\^entese}) \cite{du2008scheduling}.
 
 
 \begin{itemize}
@@ -327,6 +327,12 @@ For a better understanding what the summation means, let's suppose that there ar
 \end{align*}
 
 \end{enumerate}
+
+%%%%%%%%%%%%%%%
+\subsection{Planner Evaluation Methodology}
+\label{ssec:evaluationmethod}
+%%%%%%%%%%%%%%%
+
 
 In order to evaluate the cost of the two solutions implemented in this work, a generalized evaluation metric was developed, as shown below.
 

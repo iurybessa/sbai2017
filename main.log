@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.6-1.40.14 (TeX Live 2014/dev) (format=pdflatex 2015.7.10)  21 MAR 2017 08:59
+This is pdfTeX, Version 3.1415926-2.6-1.40.14 (TeX Live 2014/dev) (format=pdflatex 2015.7.10)  21 MAR 2017 11:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -965,26 +965,26 @@ Package epstopdf Info: Source file: <useCase.eps>
 (epstopdf)                    size: 515333 bytes
 (epstopdf)             Command: <repstopdf --outfile=useCase-eps-converted-to.p
 df useCase.eps>
-(epstopdf)             \includegraphics on input line 390.
+(epstopdf)             \includegraphics on input line 396.
 Package epstopdf Info: Output file is already uptodate.
 
 <useCase-eps-converted-to.pdf, id=37, 586.19pt x 355.3275pt>
 File: useCase-eps-converted-to.pdf Graphic file (type pdf)
 
 <use useCase-eps-converted-to.pdf>
-Package pdftex.def Info: useCase-eps-converted-to.pdf used on input line 390.
+Package pdftex.def Info: useCase-eps-converted-to.pdf used on input line 396.
 (pdftex.def)             Requested size: 203.90855pt x 123.60199pt.
  [4]
 
-LaTeX Warning: Reference `mission' on page 5 undefined on input line 402.
+LaTeX Warning: Reference `mission' on page 5 undefined on input line 408.
 
 
-Overfull \hbox (36.13498pt too wide) in paragraph at lines 445--445
+Overfull \hbox (36.13498pt too wide) in paragraph at lines 451--451
 [] [] 
  []
 
 
-Overfull \hbox (36.13498pt too wide) in paragraph at lines 497--497
+Overfull \hbox (36.13498pt too wide) in paragraph at lines 503--503
 [] [] 
  []
 
@@ -1004,7 +1004,7 @@ Package epstopdf Info: Source file: <GraPlannersSimulado.eps>
 (epstopdf)                    size: 10312 bytes
 (epstopdf)             Command: <repstopdf --outfile=GraPlannersSimulado-eps-co
 nverted-to.pdf GraPlannersSimulado.eps>
-(epstopdf)             \includegraphics on input line 591.
+(epstopdf)             \includegraphics on input line 597.
 Package epstopdf Info: Output file is already uptodate.
 
 <GraPlannersSimulado-eps-converted-to.pdf, id=76, 407.5225pt x 268.00125pt>
@@ -1012,17 +1012,17 @@ File: GraPlannersSimulado-eps-converted-to.pdf Graphic file (type pdf)
 
 <use GraPlannersSimulado-eps-converted-to.pdf>
 Package pdftex.def Info: GraPlannersSimulado-eps-converted-to.pdf used on input
- line 591.
+ line 597.
 (pdftex.def)             Requested size: 226.56659pt x 149.00008pt.
 
-Overfull \hbox (10.8406pt too wide) in paragraph at lines 591--592
+Overfull \hbox (10.8406pt too wide) in paragraph at lines 597--598
  [][] 
  []
 
 <mapsUseCase.PNG, id=77, 483.8075pt x 322.70563pt>
 File: mapsUseCase.PNG Graphic file (type png)
  <use mapsUseCase.PNG>
-Package pdftex.def Info: mapsUseCase.PNG used on input line 601.
+Package pdftex.def Info: mapsUseCase.PNG used on input line 607.
 (pdftex.def)             Requested size: 212.97314pt x 142.05492pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1035,7 +1035,7 @@ Package epstopdf Info: Source file: <GraPlannersReal.eps>
 (epstopdf)                    size: 10327 bytes
 (epstopdf)             Command: <repstopdf --outfile=GraPlannersReal-eps-conver
 ted-to.pdf GraPlannersReal.eps>
-(epstopdf)             \includegraphics on input line 628.
+(epstopdf)             \includegraphics on input line 634.
 Package epstopdf Info: Output file is already uptodate.
 
 <GraPlannersReal-eps-converted-to.pdf, id=79, 407.5225pt x 268.00125pt>
@@ -1043,10 +1043,10 @@ File: GraPlannersReal-eps-converted-to.pdf Graphic file (type pdf)
 
 <use GraPlannersReal-eps-converted-to.pdf>
 Package pdftex.def Info: GraPlannersReal-eps-converted-to.pdf used on input lin
-e 628.
+e 634.
 (pdftex.def)             Requested size: 226.56659pt x 149.00008pt.
 
-Overfull \hbox (10.8406pt too wide) in paragraph at lines 628--629
+Overfull \hbox (10.8406pt too wide) in paragraph at lines 634--635
  [][] 
  []
 
@@ -1094,10 +1094,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 12311 strings out of 493344
- 210018 string characters out of 6141392
- 288425 words of memory out of 5000000
- 15463 multiletter control sequences out of 15000+600000
+ 12312 strings out of 493344
+ 210041 string characters out of 6141392
+ 288435 words of memory out of 5000000
+ 15464 multiletter control sequences out of 15000+600000
  39453 words of font info for 80 fonts, out of 8000000 for 9000
  953 hyphenation exceptions out of 8191
  41i,24n,38p,10435b,533s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1119,7 +1119,7 @@ ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (9 pages, 1403348 bytes).
+Output written on main.pdf (9 pages, 1403508 bytes).
 PDF statistics:
  167 PDF objects out of 1000 (max. 8388607)
  96 compressed objects within 1 object stream
