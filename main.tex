@@ -202,7 +202,7 @@ In this section, we first investigate the platform used in this work, verifying 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.25\textwidth]{movement.eps}
-	\caption{UAV Movement Systems.\label{fig:movement}}
+	\caption{UAV Movement Systems. \commentib{Vc poderia refazer a figura na horizontal para ocupar menos espa\c{c}o?} \label{fig:movement}}
 \end{figure}
 
 \commentib{Fale um pouco mais aqui...}
@@ -224,7 +224,7 @@ In this section, we first investigate the platform used in this work, verifying 
 
 %%%%%%%%%%%%%%%
 \subsection{Modeling an UAV Intralogistics Mission as an Optimization Problem }
-\label{modelo}
+\label{ssec:modelo}
 %%%%%%%%%%%%%%%
 
 
@@ -235,31 +235,53 @@ It is assumed that the processing time $ p_i $ is the total time of production o
 
 \textcolor{red}{ The fictive task or dummy of the scheduling, $j_0$, with processing time proportional to the time that the UAV collect the input and leads to the production line.}\commentib{Reescrever frase anterior} In the literature, production lines are called considered parallel machines \commentib{diga o que \'e isso} for optimization problems of scalable tasks (when there are $m$ machines in parallel with performances depending on the task to be executed, notation used is $R$ \commentib{explique melhor o que est\'a nesse par\^entese e tire do par\^entese}) \cite{du2008scheduling}.
 
-
+\paragraph{Model variables} To obtain a model for our UAV intralogistics mission planning problem, we must consider the following variables:
 \begin{itemize}
-\item $J = \set{j_1,~j_2,~...,~j_n}$ is the set of tasks;
-\item $M = \set{m_1,~m_2,~...,~m_n}$ is the set of machines (production lines);
-\item $P = \set{p_1,~p_2,~...,~p_n}$ is the processing time of each task;
-\item $S = \set{s_1,~s_2,~...,~s_n}$ is the setup time (production time of each production line);
-\item $R||C_{max}$ (Three-field notation\footnote{Notation $\alpha | \beta | \gamma$, where $\alpha$: processing environment, $\beta$: problem constraints and $\gamma$: optimization criterion.} used in the literature to represent a given task scheduling problem, in this case, minimizing the makespan \footnote{Makespan is the termination time of the most loaded processor.} in an unrelated parallel machine environment \cite{graham1979optimization}.
-\end{itemize}
+\item $\mathcal{T} = \set{T_j \vert j\in \mathbb{N}^{*},i\leq N}$ is the set of $N$ tasks;
+\item $\mathcal{M} = \set{m_i \vert i\in \mathbb{N}^{*},i\leq M}$ is the set of $M$ machines (production lines);
+\item $\mathcal{P} = \set{p_j \vert j\in \mathbb{N}^{*},i\leq N}$ is the processing time of each $j$-th task;
+\item $S = \set{s_i \vert s\in \mathbb{N}^{*},i\leq M}$  is the setup (production) time of each $i$-th production line;
+\item $R||C_{max}$ (Three-field notation\footnote{Notation $\alpha | \beta | \gamma$, where $\alpha$: processing environment, $\beta$: problem constraints and $\gamma$: optimization criterion.} used in the literature to represent a given task scheduling problem, in this case, minimizing the makespan \footnote{Makespan is the termination time of the most loaded processor.} in an unrelated parallel machine environment \cite{graham1979optimization}. \commentib{Isso \'e necess\'ario msm? N\~ao parece ser usado em nenhum lugar.}
+\end{itemize}	
 
+\paragraph{Objective function}
+
+The objective function is the variable $C_ {max}$ (total process execution time) that needs to be minimized.
+\begin{equation}
+	\begin{array}{cc}
+		\min & C_{max}  \\
+	\end{array}
+\end{equation}
+\commentib{Podemos modelar de alguma forma o $C_{max}$?}
+
+\paragraph{Constraints}
+
+The binary variable $x_ {ij}$ is equal to $1$ if and only if the task $j$ is running on the machine $i$, and $0$ otherwise, {\it i.e.}, $x_ {ij}$ is defined as follows:
+\begin{equation}
+\begin{split}
+x_{ij}=\begin{cases}
+    1,       & \quad \text{if the task } j \text{ is running in} \\
+ &\text{ the machine }i\\
+    0,  & \quad \text{otherwise}\\
+  \end{cases}
+\end{split}
+\end{equation}
+
+The first constraint related to our intralogistics mission planning optimization problem is related to the exclusivity execution of a task, {\it i.e.}, each task must be executed/processed in an unique machine:
+\begin{equation}
+\sum_{i=1}^{M}{\sum_{j=1}^{N}{x_{ij}}}=1
+\end{equation}
+
+% For a better understanding what the summation means, let's suppose that there are two production lines and tree products to be produced (tasks), therefore, $x_{00}+x_{10}+x_{20}=1$, $x_{01}+x_{11}+x_{21}=1$ and $x_{02}+x_{12}+x_{22}=1$, so, it can be verified that those restrictions are set, there will be only one task running in a machine.
+
+\paragraph{Resulting optimization problem}
+{\color{red}
 Model:
 
 \begin{enumerate}
 \item \textbf{Choosing the constraints:}
 
-The variable $x_ {ij}$ is a binary constraint which takes the value $1$ if the task $j$ is running on the machine $i$, and $0$ otherwise. The variable $C_ {max}$ is the variable that will be optimized.
 
-\begin{equation}
-\begin{split}
-x_{ij}=\begin{cases}
-    1,       & \quad \text{if the task } j \text{ is running in} \\
- &\text{ the machine (production line) }i\\
-    0,  & \quad \text{otherwise}\\
-  \end{cases}
-\end{split}
-\end{equation}
 
 \begin{equation}
 C_{max}=makespan \text{ (duration of a mission)}
@@ -327,95 +349,70 @@ For a better understanding what the summation means, let's suppose that there ar
 \end{align*}
 
 \end{enumerate}
-
+}
 %%%%%%%%%%%%%%%
 \subsection{Planner Evaluation Methodology}
 \label{ssec:evaluationmethod}
 %%%%%%%%%%%%%%%
 
+The main contribution of this work is a methodology to evaluate UAV mission planner algorithms and find minimum cost planner. To this purpose, a generalized evaluation metric is developed. The objective (cost) function modeled in Section \ref{ssec:modelo} is related to the total tume spent for the execution of the mission. Our evaluation metric compares the cost of a planner algorithm with the best cost computed by the CPLEX \commentib{1 REF} solver. The metric presented here will be called Mission Planner Cost Index ($MPCI$).
 
-In order to evaluate the cost of the two solutions implemented in this work, a generalized evaluation metric was developed, as shown below.
+Firstly, the optimal cost of the problem is obtained through the CPLEX solver, which returns the optimum value (minimum mission execution time). The optimization problem is modeled with C++ {\color{red} with the aid of the CPLEX solver} \commentib{Como assim? Diga como o CPLEX ajuda a modela o problema em C++}. 
 
-The cost function evaluated in this work is the time spent for the execution of the mission. The evaluation metric compares the cost of the strategies developed with the cost of a solution generated by a solver.
+\commentib{Voc\^e deve deixar claro como o $c_X$ \'e calculado. O texto n\~ao fala sobre isso. Escreva nesse par\'agrafo}
 
-Firstly, the optimal cost of the problem is obtained through the CPLEX solver, which returns the optimum value (minimum mission execution time). The implementation of the modelling optimization problem is done in C ++ with the help of the CPLEX solver.
 
-Considering,
-
-\begin{itemize}
-	\item \textbf{$c_o$} - it is the optimal cost obtained by the CPLEX solver;
-	\item \textbf{$c_X$} - it is the cost of the solution generated by planner X;
-	\item \textbf{$Crel_X$} - it is the relative cost of the solution generated by planner X.
-	\end{itemize}
-	
-	The evaluation of each mission planner will be made relative to the optimal cost, therefore:
-	
-	\begin{equation}
-Crel_X=\frac{c_o}{c_X}
-\end{equation}
-
-Where $0 \leq Crel_X \leq 1$, it can be verified that as close of $1$ the $Crel_X$ is, the solution cost is smaller.
-
-\subsection{Mission Planners Cost Evaluation Metrics}
-\label{sec:ac}
-
-To evaluate the cost of mission planner solutions implemented, a generalized evaluation metric was developed, as shown below.
-
-The evaluation function in this work is the execution time of the mission. The evaluation metric compares the cost of the strategies developed with the cost of a solution generated by a solver.
-
-Firstly, the optimal cost of the problem is obtained through the CPLEX solver, which returns the optimal value (minimum mission execution time) under the same circumstances. The implementation of the optimization problem modeled in the subsection~\ref{modelo} is implemented in C++ using the CPLEX solver.
-
-Knowing that:
-
-\begin{itemize}
-	\item \textbf{$c_o$} - it's the optimal cost obtained by the CPLEX solver;
-	\item \textbf{$c_X$} - it's the cost of the solution generated by planner X;
-	\item \textbf{$Crel_X$} - it's the relative cost of the solution generated by planner X.
-	\end{itemize}
-	
-The evaluation of each planner will be made relative to the optimal cost, therefore:
-
+Finally, the evaluation of each mission planner is computed with relation to the optimal cost, therefore, the $MPCI_{X}$ of a planner $X$ is computed as follows:
 \begin{equation}
-Crel_X=\frac{c_o}{c_X}
+	MPCI_X=\frac{c_o}{c_X},
 \end{equation}
-
-As we know $0 \leq Crel_X \leq 1$, we can verify that the closer to $1$ the $Crel_X$ is, the less the cost of the solution.
+where $c_o$ is the optimal cost obtained by the CPLEX solver, \textbf{$c_X$} is the cost of the olution generated by planner $X$, and $0 \leq MPCI_X \leq 1$. Note that as close of $1$ the $MPCI_X$ is, the solution cost is smaller.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental Evaluation}
 \label{sec:results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Experimental Environmental and Objectives}
+\label{ssec:expobjandenv}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+ 
+\commentib{completar} 
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Case Study}
 \label{sec:ec}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-To perform the analysis of the techniques used and to evaluate the cost of the solutions addressed, the following case study was used:
+To demonstrate the use of the methodology of evaluation of UAV mission planners for intralogistics missions, the case study shown in Figure~\ref{fig:useCase} is used.
 
-	\begin{figure}[H]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.45\textwidth]{useCase.eps}
-	\caption{Case Study Representation.\label{fig:useCase}}
-	\end{figure}
+	\caption{Case Study Representation \commentib{traduzir figura e numerar/nomear linhas de produ\c{c}\~ao}.\label{fig:useCase}}
+\end{figure}
 	
-In the Figure~\ref{fig:useCase}, we can see that there are inputs in the warehouse of type A, B and C and two production lines that produce products of type X and Y.
-
-Each production line produces only one type of product and has a characteristic production time, as shown in Figure~\ref{fig:useCase}. In this case, to produce a product of type X, two inputs of type A and one input of type C are required. In order to produce a product of type Y, two inputs of type B and one input of type C are required. The production time of a X product is $4p.u.$ and the time of production of product Y is $6p.u.$. A production unit ($1u.p.$) was considered to be a \texttt{GoTo} command performed by the UAV.
+Figure~\ref{fig:useCase} shows that there are three types of inputs in the warehouse ({\it i.e.}, A, B, and C) and two production lines that produces two different products ({\it i.e.}, X and Y). Each production line produces only one type of product and has a characteristic production time.  Figure~\ref{fig:useCase} shows that to produce a product of type X, two inputs of type A and one input of type C are required, and to produce a product of type Y, two inputs of type B and one input of type C are required. The production time of a X product is $4 p.u.$ and the time of production of product Y is $6 p.u.$. A production unit ($1 p.u.$) was considered to be a \texttt{GoTo} command performed by the UAV. \commentib{O leitor n\~ao vai ter ideia do que \'e um goto. Tem que tido uma explica\c{c}\~ao sobre isso em algum lugar l\'a atr\'as.}
 
 The task to be performed is the production of the customer order, where the UAV will collect supplies from the warehouse, take to the production line and once the production of a certain product is finished, it will lead to the customer.
 
 \subsection{Mission Planners}
 
-In the context of this work, mission planner is a software developed with the purpose of generating a production mission given the warehouse and customer request. This program generates a \texttt{.mission} extension file containing a set of mission commands, as shown in the~\ref{mission} subsection.
+In this work, we considered that mission planner is a software that generates a production mission given the warehouse and customer order. This program generates a \texttt{.mission} extension file containing a set of mission commands, as shown in the~\ref{mission} subsection. \commentib{o leitor tb n\~ao saber\'a o que \'e esse .mission}. Two examples of planners are presented in this work and will be employed to demonstrate the cost evaluation methodology.
 
 \subsubsection{Planner A}
 
+{\color{red}
 In this strategy, the UAV starts moving toward the warehouse, takes two inputs of type A to produce a product X, then takes the type C input, waits on the production line for the product X to be produced. After being produced, it leads to the customer. If there is more products of type X to be produced, it goes to the warehouse and carries out the whole process again.
 
-After all the X products are produced and taken to the customer, the UAV will go to the warehouse and take the two type B inputs and then the type C input, wait for the first product Y to be produced and then take it to the customer. If you need to produce more Y products, the process is the same.
+After all the X products are produced and taken to the customer, the UAV will go to the warehouse and take the two type B inputs and then the type C input, wait for the first product Y to be produced and then take it to the customer. If you need to produce more Y products, the process is the same.}
 
-The pseudo code of this algorithm is shown in the Algorithm~\ref{alg:planA}:
+\commentib{Acho que o texto n\~ao est\'a bem explicado e est\'a longo. Voc\^e consegue resumir e melhorar a explica\c{c}\~ao?}
 
-\begin{algorithm}[H]
+The general steps of planner A are shown in the Algorithm~\ref{alg:planA}.
+
+\begin{algorithm}[ht]
 \footnotesize
 \KwIn{warehouse}
 \KwIn{order}
@@ -452,11 +449,12 @@ bring Y to the client\;
 \end{algorithm}
 
 \subsubsection{Planner B}
-In planner B, unlike planner A where the UAV is idle waiting for each product to be produced and only then takes the customer, the UAV continues the production process while the output of the products does not end. Once the production of each product is finished, the VANT for the task that was running and goes to the production line of that particular product, performs the collection and takes it to the customer. It then returns the task it was previously running, performing a scheduling of tasks.
+In planner B, unlike planner A where the UAV is idle waiting for each product to be produced and only then takes the customer, the UAV continues the production process while the output of the products does not end. Once the production of each product is finished, {\color{red} the UAV for the task that was running and goes to the production line of that particular product} \commentib{tem algo estranho nesse trecho... o que vc quis dizer?}, performs the collection and takes it to the customer. It then returns the task it was previously running, performing a scheduling of tasks.
 
-The pseudo code of this algorithm is shown in the Algorithm~\ref{alg:planB}:
+The general steps of planner B are shown in the Algorithm~\ref{alg:planB}:
 
-\begin{algorithm}[H]
+\begin{algorithm}[ht]
+\footnotesize
 \KwIn{warehouse}
 \KwIn{order}
 \KwOut{mission file \textit{.mission}}
@@ -503,8 +501,8 @@ keep producing\;
 \caption{Planner B}\label{alg:planB}
 \end{algorithm}
 
-\subsection{Evaluation Cost}
-\label{sec:acusto}
+\subsection{Cost Evaluation}
+\label{ssec:acusto}
 
 After the implementation of the algorithm of planners A and B, the metric shown in this work was used to evaluate the cost of the algorithms. The results of the proposed mission planning methods in this work were compared to the optimal solution obtained with the branch-and-cut algorithm of the IBM/ILOG CPLEX 12.4 tool developed in C++.
 
