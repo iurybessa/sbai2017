@@ -249,10 +249,17 @@ It is assumed that the processing time $ p_i $ is the total time of production o
 The objective function is the variable $C_ {max}$ (total process execution time) that needs to be minimized.
 \begin{equation}
 	\begin{array}{cc}
-		\min & C_{max}  \\
+		\min & C_{max}  \\,
 	\end{array}
 \end{equation}
-\commentib{Podemos modelar de alguma forma o $C_{max}$?}
+where,
+\begin{equation}
+\label{eq:cmax}
+C_{max} = \sum_{i=1}^{M}{\sum_{j=1}^{N}{
+ (p_j+s_j)x_{ij}}}
+\end{equation}
+
+\commentib{Explicar a eq anterior.}
 
 \paragraph{Constraints}
 
@@ -269,87 +276,94 @@ x_{ij}=\begin{cases}
 
 The first constraint related to our intralogistics mission planning optimization problem is related to the exclusivity execution of a task, {\it i.e.}, each task must be executed/processed in an unique machine:
 \begin{equation}
+\label{eq:unicity}
 \sum_{i=1}^{M}{\sum_{j=1}^{N}{x_{ij}}}=1
 \end{equation}
 
 % For a better understanding what the summation means, let's suppose that there are two production lines and tree products to be produced (tasks), therefore, $x_{00}+x_{10}+x_{20}=1$, $x_{01}+x_{11}+x_{21}=1$ and $x_{02}+x_{12}+x_{22}=1$, so, it can be verified that those restrictions are set, there will be only one task running in a machine.
 
 \paragraph{Resulting optimization problem}
-{\color{red}
-Model:
 
-\begin{enumerate}
-\item \textbf{Choosing the constraints:}
-
-
-
+The resulting optimization problem consists in minimizing $C_{max}$ \eqref{eq:cmax} with relation to the decision variables \commentib{quais s\~ao as vari\'aveis de decis\~ao?} constrained to the condition in Eq. \eqref{eq:unicity}. Thus, the optimization problem is represented as follows:
 \begin{equation}
-C_{max}=makespan \text{ (duration of a mission)}
-\end{equation}
-\item \textbf{Elaboration of the objective function:}
-The objective function is the variable $C_ {max}$ (total process execution time) that needs to be minimized.
-\begin{equation}
-\text{Minimize } C_{max}
-\end{equation}
-$C_{max}$ is the variable that need to be minimized (optimized).
-\item \textbf{Restrictions:}
-
-\begin{itemize}
-\item \textbf{Each task must be executed/processed in an unique machine (production line)}
-
-\begin{equation}
-\sum_{\substack{
-   i \in M\\
-   \forall j \in J
-  }} 
- x_{ij}=1
-\end{equation}
-
-For a better understanding what the summation means, let's suppose that there are two production lines and tree products to be produced (tasks), therefore, $x_{00}+x_{10}+x_{20}=1$, $x_{01}+x_{11}+x_{21}=1$ and $x_{02}+x_{12}+x_{22}=1$, so, it can be verified that those restrictions are set, there will be only one task running in a machine.
-
-\item \textbf{Time execution of the tasks in each machine}
-
-\begin{equation}
-\sum_{\substack{
-   j \in J\\
-   \forall i \in M
-  }} 
- (p_j+s_j)x_{ij}\leq C_{max}
-\end{equation}
-
-For a better understanding what the summation means, let's suppose that there are two machines and two tasks, and the time of processing and setup of each task are $p_0=100,~ p_1=100$ and $s_0=12,~ s_1=18$ respectively. Therefore, the production time of the product $0$ in the production line $0$ is $p_0 + s_0$ and so on. 
-\end{itemize}
-\item \textbf{Completeness and non-negativity:}
-
-\begin{equation}
-\begin{split}
- x_{ij} \in \{0,1\}~\forall i=1,2,...,M\text{ and }\\
- \forall j=0(dummy), 1,2,3,...,N
-\end{split}
-\end{equation}
-
-\item \textbf{Full model:}
-\begin{align*}
-\begin{split}
-\text{Minimize~~~}  & C_{max} \\
-    \text{Subject to~~~}  &\sum_{\substack{
-   i \in M\\
-   \forall j \in J
-  }} 
-  x_{ij}=1 \\
-    & \sum_{\substack{
-   j \in J\\
-   \forall i \in M
-  }} 
- (p_j+s_j)x_{ij}\leq C_{max} \\
- 	& x_{ij} \in \{0,1\}~\forall i=1,2,...,M ~e~
- 	\forall \\
- &j=0(dummy), 1,2,3,...,N
-\end{split}
-\end{align*}
-
-\end{enumerate}
-}
+	\label{eq:optproblem}
+	\begin{array}{cc}
+		\min & C_{max} = \sum_{i=1}^{M}{\sum_{j=1}^{N}{
+ (p_j+s_j)x_{ij}}},  \\
+  \\
+		\textrm{ s.t. } & \sum_{i=1}^{M}{\sum_{j=1}^{N}{x_{ij}}}=1.\\
+	\end{array}
+\end{equation}	
+%
+%{\color{red}
+%Model:
+%
+%\begin{enumerate}
+%\item \textbf{Choosing the constraints:}
+%
+%
+%
+%\begin{equation}
+%C_{max}=makespan \text{ (duration of a mission)}
+%\end{equation}
+%\item \textbf{Elaboration of the objective function:}
+%The objective function is the variable $C_{max}$ (total process execution time) that needs to be minimized.
+%\begin{equation}
+%\text{Minimize } C_{max}
+%\end{equation}
+%$C_{max}$ is the variable that need to be minimized (optimized).
+%\item \textbf{Restrictions:}
+%
+%\begin{itemize}
+%\item \textbf{Each task must be executed/processed in an unique machine (production line)}
+%
+%\begin{equation}
+%\sum_{\substack{
+%   i \in M\\
+%   \forall j \in J
+%  }} 
+% x_{ij}=1
+%\end{equation}
+%
+%For a better understanding what the summation means, let's suppose that there are two production lines and tree products to be produced (tasks), therefore, $x_{00}+x_{10}+x_{20}=1$, $x_{01}+x_{11}+x_{21}=1$ and $x_{02}+x_{12}+x_{22}=1$, so, it can be verified that those restrictions are set, there will be only one task running in a machine.
+%
+%\item \textbf{Time execution of the tasks in each machine}
+%
+%
+%
+%For a better understanding what the summation means, let's suppose that there are two machines and two tasks, and the time of processing and setup of each task are $p_0=100,~ p_1=100$ and $s_0=12,~ s_1=18$ respectively. Therefore, the production time of the product $0$ in the production line $0$ is $p_0 + s_0$ and so on. 
+%\end{itemize}
+%\item \textbf{Completeness and non-negativity:}
+%
+%\begin{equation}
+%\begin{split}
+% x_{ij} \in \{0,1\}~\forall i=1,2,...,M\text{ and }\\
+% \forall j=0(dummy), 1,2,3,...,N
+%\end{split}
+%\end{equation}
+%
+%\item \textbf{Full model:}
+%\begin{align*}
+%\begin{split}
+%\text{Minimize~~~}  & C_{max} \\
+%    \text{Subject to~~~}  &\sum_{\substack{
+%   i \in M\\
+%   \forall j \in J
+%  }} 
+%  x_{ij}=1 \\
+%    & \sum_{\substack{
+%   j \in J\\
+%   \forall i \in M
+%  }} 
+% (p_j+s_j)x_{ij}\leq C_{max} \\
+% 	& x_{ij} \in \{0,1\}~\forall i=1,2,...,M ~e~
+% 	\forall \\
+% &j=0(dummy), 1,2,3,...,N
+%\end{split}
+%\end{align*}
+%
+%\end{enumerate}
+%}
 %%%%%%%%%%%%%%%
 \subsection{Planner Evaluation Methodology}
 \label{ssec:evaluationmethod}
@@ -504,9 +518,7 @@ keep producing\;
 \subsection{Cost Evaluation}
 \label{ssec:acusto}
 
-After the implementation of the algorithm of planners A and B, the metric shown in this work was used to evaluate the cost of the algorithms. The results of the proposed mission planning methods in this work were compared to the optimal solution obtained with the branch-and-cut algorithm of the IBM/ILOG CPLEX 12.4 tool developed in C++.
-
-In order to obtain better results in the comparison, it was considered only the time in which the UAV takes to finish the production of a product, excluding the time in which it leaves its initial position and moves to the warehouse, the time in which it Moves from the customer to the warehouse and the time it takes to go to the end point and land. This was done due to the greater practicality of implementing the problem in the CPLEX solver. The problem was modelled considering the total processing time, that is, only the processing time of the task (production) and the time of set-up (time of production of the line). Thus, the execution time of each mission was measured and compared to the value obtained by the CPLEX solver (optimal time), as shown in Table~\ref{fig:comp}.
+The results of each mission planner is compared to the optimal solution obtained with the branch-and-cut algorithm of the IBM/ILOG CPLEX 12.4 tool developed in C++. In order to obtain better results in the comparison \commentib{como assim melhores?} , it was considered only the time in which the UAV takes to finish the production of a product, excluding the time in which the UAV leaves its initial position and moves to the warehouse, the time in which it Moves from the customer to the warehouse and the time it takes to go to the end point and land. This was done due to the greater practicality of implementing the problem in the CPLEX solver. The problem was modelled considering the total processing time, that is, only the processing time of the task (production) and the time of set-up (time of production of the line). Thus, the execution time of each mission was measured and compared to the value obtained by the CPLEX solver (optimal time), as shown in Table~\ref{fig:comp}.
 
 \begin{table}[H]
 \centering
