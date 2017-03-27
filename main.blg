@@ -1,14 +1,5 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
 The style file: dcu.bst
 Database file #1: exemplo.bib
-I was expecting a `,' or a `}'---line 82 of file exemplo.bib
- :   
- :   note = {Accessed in: 20/09/2016},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-Repeated entry---line 292 of file exemplo.bib
- : @misc{du2008scheduling
- :                       ,
-I'm skipping whatever remains of this entry
 Warning--empty institution in krozel1988search
-(There were 2 error messages)
+(There was 1 warning)

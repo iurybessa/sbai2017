@@ -67,6 +67,8 @@
 \usepackage{amsfonts}
 \newcommand{\commentib}[1]{{\color{blue} [IB: #1]}}
 
+\newtheorem{myDefinition}{Definition}
+
 \begin{document}
 
 % CABEÇALHO
@@ -157,14 +159,14 @@ Firstly, a mission can be defined as a goal that need to be completed. In the co
 
 An optimization problem is about finding the best solution (relative to a certain criterion) among a set of available alternatives. For example, the popular bin packaging problem that aims to find the number of boxes of a certain size to store a set of objects of indicated sizes; optimization involves, for example, finding the least amount of boxes. An optimization problem is usually represented as follows:
 \begin{equation}
-	\label{eq:optproblem}
+	\label{eq:optproblema}
 	\begin{array}{cc}
 		\min & f(\textbf{x}),  \\
 		\textrm{ s.t. } & \textbf{x}\in\Omega.\\
 	\end{array}
 \end{equation}	
 	
-\commentib{Todo esse texto sobre otimização era desnecess\'ario. Sugiro resumir todo esse texto comentado em um \'unico breve par\'agrafo a ser adicionado aqui. As imagens podem ser deixadas para l\'a.}	
+An optimization problem can be defined as a finite set of variables, where the correct values for the variables specify the optimal solution. If the variables are of the set of real, the problem is called continuous, and if they can only have a finite set of distinct values, the problem is called combinatorial \protect\cite{francq2011optimization}.
 
 %Two distinctions need to be made to better understand the universe of optimization problems. The first is to distinguish a problem which refers to a more general class, for example, the problem of packaging, and an example representing a special type of problem, for example the problem of packaging, wherein there are 5 packages for packaging 25 objects of different sizes. The second distinction concerns the existence of two categories of problem classes: the abstract problem classes and the concrete problem classes. As the name itself suggests, the second category refers to problems that have "concrete existence," that is, problems for which instances can be created. The BPP corresponds to this category. Together they are also part of a more abstract class: grouping problems. Only with the problem of abstract classes, it is impossible to define instances. In fact, as shown in Figure~\ref{fig:problemasDeOtimizacao}, the classes of concrete and abstract problems form a hierarchy of optimization problems.
 %
@@ -201,11 +203,12 @@ An optimization problem is about finding the best solution (relative to a certai
 In this section, we first investigate the platform used in this work, verifying the hardware characteristics and how to control it by software. The core hardware of the UAV IRIS+ is the Pixhawk and we can control it using a Python library - dronekit that uses MAVLink\footnote{MAVLink or Micro Air Vehicle Link is a protocol for communicating with small unmanned vehicle. It is designed as a header-only message marshalling library} protocol. Secondly, we integrate a robot gripper to the UAV to take and leave packages during the mission. After that, we created movement functions to make the UAV movement and control it using some resources of the dronekit API.
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.25\textwidth]{movement.eps}
-	\caption{UAV Movement Systems. \commentib{Vc poderia refazer a figura na horizontal para ocupar menos espa\c{c}o?} \label{fig:movement}}
+	\includegraphics[width=0.45\textwidth]{movement.eps}
+	\caption{UAV Movement Systems.\label{fig:movement}}
 \end{figure}
 
 \commentib{Fale um pouco mais aqui...}
+\commentib{O que mais eu poderia falar?}
 
 %\subsection{Mission Planning}
 %\label{mission}
@@ -218,33 +221,121 @@ In this section, we first investigate the platform used in this work, verifying 
 
 %\commentib{Modifique o t\'itulo (expanda). Metodologia de qu\^e?? Tente fazer algo parecido com o do trabalho.}
 
-	%In this section, there will have a brief clarification of the contents of this paper.
+In this section, there will have a brief clarification of the contents of this paper such as the way we used to evaluate the algorithm cost of the mission, a study case to a UAV and contents about mission planning.
 
-\commentib{outline here}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Case Study}
+\label{sec:ec}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In order to model the mission planning problem as an optimization problem, the case study shown in Figure~\ref{fig:useCase} is used.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.45\textwidth]{useCase.eps}
+	\caption{Case Study Representation \commentib{traduzir figura e numerar/nomear linhas de produ\c{c}\~ao}.\label{fig:useCase}}
+\end{figure}
+
+Some key definitions related to the case study and the application developed in this paper need to be clarified. All definitions below will be adopted in the remainder of this work.
+
+\begin{myDefinition}{Mission Command}
+
+Mission command is a command created to execute a task such as go to one location to another location, get a package using a robot gripper, land the drone, etc. The list of commands is shown below:
+
+\begin{itemize}
+\item \texttt{TakeOff}: takeoff command of the UAV;
+\item \texttt{GoTo}: command to move the  UAV to certain location;
+\item \texttt{TakePackage}: command to collect an input/product through a robot gripper;
+\item \texttt{LeavePackage}: command to leave an input or product from a robot gripper;
+\item \texttt{Wait}: command to make the UAV to hover (wait);
+\item \texttt{Land}: command to make the UAV landing.
+\end{itemize}
+
+\label{missao}
+\end{myDefinition}
+
+\begin{myDefinition}{Mission}
+
+Mission is the set of steps and mission commands that the UAV executes to produce the customer's order.
+\label{missao}
+\end{myDefinition}
+
+\begin{myDefinition}{Warehouse}
+
+Warehouse is the set of stored raw material available until the moment of entering the productive process. The raw materials, \textit{i.e.}, the inputs available in this work are inputs A, B and C.
+\label{almoxarifado}
+\end{myDefinition}
+
+\begin{myDefinition}{Order}
+
+Order is the requisition of products made by the client. In this work the products are of type X and Y.
+\label{pedido}
+\end{myDefinition}
+
+\begin{myDefinition}{Production Time}
+
+Production time is the time required to produce a product X or Y, after having available all the necessary inputs for the production, given by the production rule.
+\label{tempoProducao}
+\end{myDefinition}
+
+\begin{myDefinition}{Production Rule}
+
+Production rule tells what and how many inputs are needed to produce a particular product.
+\label{regraProducao}
+\end{myDefinition}
+
+\begin{myDefinition}{Mission Planner}
+
+Mission planner is the agent who performs the planning of a mission, that is, generating all the steps and commands necessary to carry out a mission.
+\label{planejadorMissao}
+\end{myDefinition}
+
+\begin{myDefinition}{Mission File}
+
+The mission file is a file that was created for the context of this work, with the extension \textsc{.mission} containing the mission itself.
+\label{arquivoMissao}
+\end{myDefinition}
+	
+The Figure~\ref{fig:useCase} shows that there are three types of inputs in the warehouse ({\it i.e.}, A, B, and C) and two production lines that produces two different products ({\it i.e.}, X and Y). Each production line produces only one type of product and has a characteristic production time.  In the Figure~\ref{fig:useCase} shows that to produce a product of type X, two inputs of type A and one input of type C are required, and to produce a product of type Y, two inputs of type B and one input of type C are required. The production time of a X product is $4 p.u.$ and the time of production of product Y is $6 p.u.$. A production unit ($1 p.u.$) was considered to be a \texttt{GoTo} command performed by the UAV.
+
+The task to be performed is the production of the customer order, where the UAV will collect supplies from the warehouse, take to the production line and once the production of a certain product is finished, it will lead to the customer.
 
 %%%%%%%%%%%%%%%
 \subsection{Modeling an UAV Intralogistics Mission as an Optimization Problem }
 \label{ssec:modelo}
 %%%%%%%%%%%%%%%
 
+The purpose of this subsection is to elaborate a modelling of the mission planning problem into an optimization problem. In order to find, afterwards, the shortest execution time of all the tasks (minimization), based on the case study explained in Section~\ref{sec:ec}.
 
+The notation used is given below:
 
-%The purpose of this subsection is to elaborate a modelling of the mission planning problem in an optimization problem. In order to find later, the shortest execution time of all the tasks (minimization), based on the data below:
-
-It is assumed that the processing time $ p_i $ is the total time of production of $i$-th \commentib{dizer aqui o significado do \'indice $i$}, that is the time demanded to leave and take \commentib{quais produtos??} products, considering the sum of the time that the UAV stays in the stock collecting inputs and the time that demanded for the UAV movement. We also assume that the setup (production) time $s_i$ is the time required only for the manufacturing of a product, considering that all the required inputs are available in the production line. Therefore, the total time for the production of a given product is the sum of the processing  and setup time ($p_i$  and$s_i$).
-
-\textcolor{red}{ The fictive task or dummy of the scheduling, $j_0$, with processing time proportional to the time that the UAV collect the input and leads to the production line.}\commentib{Reescrever frase anterior} In the literature, production lines are called considered parallel machines \commentib{diga o que \'e isso} for optimization problems of scalable tasks (when there are $m$ machines in parallel with performances depending on the task to be executed, notation used is $R$ \commentib{explique melhor o que est\'a nesse par\^entese e tire do par\^entese}) \cite{du2008scheduling}.
-
-\paragraph{Model variables} To obtain a model for our UAV intralogistics mission planning problem, we must consider the following variables:
 \begin{itemize}
-\item $\mathcal{T} = \set{T_j \vert j\in \mathbb{N}^{*},i\leq N}$ is the set of $N$ tasks;
-\item $\mathcal{M} = \set{m_i \vert i\in \mathbb{N}^{*},i\leq M}$ is the set of $M$ machines (production lines);
-\item $\mathcal{P} = \set{p_j \vert j\in \mathbb{N}^{*},i\leq N}$ is the processing time of each $j$-th task;
+\item $\mathcal{T} = \set{T_j \vert j\in \mathbb{N}^{*},j\leq N}$ is the set of $N$ tasks;
+\item $\mathcal{M} = \set{m_i \vert i\in \mathbb{N}^{*},i\leq M}$ is the set of $M$ production lines (machines);
+\item $\mathcal{P} = \set{p_j \vert j\in \mathbb{N}^{*},j\leq N}$ is the processing time of each $j$-th task;
 \item $S = \set{s_i \vert s\in \mathbb{N}^{*},i\leq M}$  is the setup (production) time of each $i$-th production line;
-\item $R||C_{max}$ (Three-field notation\footnote{Notation $\alpha | \beta | \gamma$, where $\alpha$: processing environment, $\beta$: problem constraints and $\gamma$: optimization criterion.} used in the literature to represent a given task scheduling problem, in this case, minimizing the makespan \footnote{Makespan is the termination time of the most loaded processor.} in an unrelated parallel machine environment \cite{graham1979optimization}. \commentib{Isso \'e necess\'ario msm? N\~ao parece ser usado em nenhum lugar.}
-\end{itemize}	
+\item $R||C_{max}$ (Three-field notation\footnote{Notation $\alpha | \beta | \gamma$, where $\alpha$: processing environment, $\beta$: problem constraints and $\gamma$: optimization criterion.} used in the literature to represent a given task scheduling problem, in this case, minimizing the makespan \footnote{Makespan is the termination time of the most loaded processor.} in an unrelated parallel machine environment \cite{graham1979optimization}. \commentib{Isso \'e necess\'ario msm? N\~ao parece ser usado em nenhum lugar.}\commentib{Acho que sim, na area de otimizacao usam essa notacao.}
+\end{itemize}
 
-\paragraph{Objective function}
+\paragraph{Decision variable}
+
+The variable $x_{ij}$ is a binary decision variable which takes the value $1$ if the task $j$ is running on the machine $i$, and $0$ otherwise. The variable $C_ {max}$ is the variable that we want to optimize.
+
+\begin{equation}
+\label{eq:decision}
+\begin{split}
+x_{ij}=\begin{cases}
+    1,       & \quad \text{if the task } j \text{ is running in} \\
+ &\text{ the machine (production line) }i\\
+    0,  & \quad \text{otherwise}\\
+  \end{cases}
+\end{split}
+\end{equation}
+\begin{equation}
+C_{max}=makespan
+\end{equation}
+
+\paragraph{Objective}
 
 The objective function is the variable $C_ {max}$ (total process execution time) that needs to be minimized.
 \begin{equation}
@@ -253,45 +344,50 @@ The objective function is the variable $C_ {max}$ (total process execution time)
 	\end{array}
 \end{equation}
 where,
-\begin{equation}
-\label{eq:cmax}
-C_{max} = \sum_{i=1}^{M}{\sum_{j=1}^{N}{
- (p_j+s_j)x_{ij}}}
-\end{equation}
 
-\commentib{Explicar a eq anterior.}
+$C_{max}$ is the variable to be minimized (optimized).
+%\begin{equation}
+%\label{eq:cmax}
+%C_{max} = \sum_{i=1}^{M}{\sum_{j=1}^{N}{
+% (p_j+s_j)x_{ij}}}
+%\end{equation}
+
 
 \paragraph{Constraints}
 
-The binary variable $x_ {ij}$ is equal to $1$ if and only if the task $j$ is running on the machine $i$, and $0$ otherwise, {\it i.e.}, $x_ {ij}$ is defined as follows:
-\begin{equation}
-\begin{split}
-x_{ij}=\begin{cases}
-    1,       & \quad \text{if the task } j \text{ is running in} \\
- &\text{ the machine }i\\
-    0,  & \quad \text{otherwise}\\
-  \end{cases}
-\end{split}
-\end{equation}
+\begin{itemize}
+\item Each task must be executed/processed in an unique machine:
 
-The first constraint related to our intralogistics mission planning optimization problem is related to the exclusivity execution of a task, {\it i.e.}, each task must be executed/processed in an unique machine:
 \begin{equation}
 \label{eq:unicity}
 \sum_{i=1}^{M}{\sum_{j=1}^{N}{x_{ij}}}=1
 \end{equation}
 
+\item Execution time of each machine:
+
+\begin{equation}
+\label{eq:execTime}
+\sum_{i=1}^{M}{\sum_{j=1}^{N}{
+ (p_j+s_j)x_{ij}}}\leq C_{max}
+\end{equation}
+
+The Eq.~\eqref{eq:execTime} represents the sum of the the duration time $p_j$ of each travel from one place another in the case study explained in Section~\ref{sec:ec}, considering the production time $s_j$ in each production line. The $x_{ij}$ shows which product is being produced in each production line. The left hand side of the Eq.~\eqref{eq:execTime} needs to be smaller than the right hand side of the Eq.~\eqref{eq:execTime}.
+\end{itemize}
+
 % For a better understanding what the summation means, let's suppose that there are two production lines and tree products to be produced (tasks), therefore, $x_{00}+x_{10}+x_{20}=1$, $x_{01}+x_{11}+x_{21}=1$ and $x_{02}+x_{12}+x_{22}=1$, so, it can be verified that those restrictions are set, there will be only one task running in a machine.
 
 \paragraph{Resulting optimization problem}
 
-The resulting optimization problem consists in minimizing $C_{max}$ \eqref{eq:cmax} with relation to the decision variables \commentib{quais s\~ao as vari\'aveis de decis\~ao?} constrained to the condition in Eq. \eqref{eq:unicity}. Thus, the optimization problem is represented as follows:
+The resulting optimization problem consists in minimizing $C_{max}$ with relation to the decision variable \eqref{eq:decision} constrained to the condition in Eq. \eqref{eq:unicity} and \eqref{eq:execTime}. Thus, the optimization problem is represented as follows:
 \begin{equation}
 	\label{eq:optproblem}
-	\begin{array}{cc}
-		\min & C_{max} = \sum_{i=1}^{M}{\sum_{j=1}^{N}{
- (p_j+s_j)x_{ij}}},  \\
+	\begin{array}{ccc}
+		\min & C_{max},  \\
   \\
-		\textrm{ s.t. } & \sum_{i=1}^{M}{\sum_{j=1}^{N}{x_{ij}}}=1.\\
+		\textrm{ s.t. } & \sum_{i=1}^{M}{\sum_{j=1}^{N}{x_{ij}}}=1, \\
+		& \sum_{i=1}^{M}{\sum_{j=1}^{N}{
+ (p_j+s_j)x_{ij}}}\leq C_{max}
+ \\
 	\end{array}
 \end{equation}	
 %
@@ -369,60 +465,40 @@ The resulting optimization problem consists in minimizing $C_{max}$ \eqref{eq:cm
 \label{ssec:evaluationmethod}
 %%%%%%%%%%%%%%%
 
-The main contribution of this work is a methodology to evaluate UAV mission planner algorithms and find minimum cost planner. To this purpose, a generalized evaluation metric is developed. The objective (cost) function modeled in Section \ref{ssec:modelo} is related to the total tume spent for the execution of the mission. Our evaluation metric compares the cost of a planner algorithm with the best cost computed by the CPLEX \commentib{1 REF} solver. The metric presented here will be called Mission Planner Cost Index ($MPCI$).
+The main contribution of this work is a methodology to evaluate UAV mission planner algorithms and find minimum cost planner. To this purpose, a generalized evaluation metric is developed. The objective (cost) function modeled in Section \ref{ssec:modelo} is related to the total time spent for the execution of the mission. Our evaluation metric compares the cost of a planner algorithm with the best cost computed by the CPLEX solver \cite{cplex2003ilog}. The metric presented here will be called Mission Planner Cost Index ($MPCI$).
 
-Firstly, the optimal cost of the problem is obtained through the CPLEX solver, which returns the optimum value (minimum mission execution time). The optimization problem is modeled with C++ {\color{red} with the aid of the CPLEX solver} \commentib{Como assim? Diga como o CPLEX ajuda a modela o problema em C++}. 
+Firstly, the optimal cost of the problem is obtained through the CPLEX solver, which returns the optimum value (minimum mission execution time). The model proposed in the Section~\ref{ssec:modelo} was implemented using the CPLEX solver library available for C++. 
 
-\commentib{Voc\^e deve deixar claro como o $c_X$ \'e calculado. O texto n\~ao fala sobre isso. Escreva nesse par\'agrafo}
-
+The cost of each planner strategy (algorithm \ref{alg:planA} and \ref{alg:planB}) $c_X$ is obtained by counting the number of \texttt{GoTo} commands which represents a process (task).
 
 Finally, the evaluation of each mission planner is computed with relation to the optimal cost, therefore, the $MPCI_{X}$ of a planner $X$ is computed as follows:
 \begin{equation}
 	MPCI_X=\frac{c_o}{c_X},
 \end{equation}
-where $c_o$ is the optimal cost obtained by the CPLEX solver, \textbf{$c_X$} is the cost of the olution generated by planner $X$, and $0 \leq MPCI_X \leq 1$. Note that as close of $1$ the $MPCI_X$ is, the solution cost is smaller.
+where $c_o$ is the optimal cost obtained by the CPLEX solver, \textbf{$c_X$} is the cost of the solution generated by planner $X$, and $0 \leq MPCI_X \leq 1$. Note that as close of $1$ the $MPCI_X$ is, the solution cost become smaller.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental Evaluation}
 \label{sec:results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
+ This section shows the experimental results obtained in this project, as well as the cost evaluation of two techniques used compared to the optimum cost implemented with the CPLEX solver.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experimental Environmental and Objectives}
 \label{ssec:expobjandenv}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
  
-\commentib{completar} 
- 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Case Study}
-\label{sec:ec}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In order to succeed the experimentations, we have used the IRIS+ UAV, dronekit API and a computer with windows 10 to run the program that sends the control commands to the UAV. The experimentation was made in a grass field at university  in order to have a clear area of operation.
 
-To demonstrate the use of the methodology of evaluation of UAV mission planners for intralogistics missions, the case study shown in Figure~\ref{fig:useCase} is used.
+The objectives of the experimentations were the measurements of execution time of the mission using different planning solutions.
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.45\textwidth]{useCase.eps}
-	\caption{Case Study Representation \commentib{traduzir figura e numerar/nomear linhas de produ\c{c}\~ao}.\label{fig:useCase}}
-\end{figure}
-	
-Figure~\ref{fig:useCase} shows that there are three types of inputs in the warehouse ({\it i.e.}, A, B, and C) and two production lines that produces two different products ({\it i.e.}, X and Y). Each production line produces only one type of product and has a characteristic production time.  Figure~\ref{fig:useCase} shows that to produce a product of type X, two inputs of type A and one input of type C are required, and to produce a product of type Y, two inputs of type B and one input of type C are required. The production time of a X product is $4 p.u.$ and the time of production of product Y is $6 p.u.$. A production unit ($1 p.u.$) was considered to be a \texttt{GoTo} command performed by the UAV. \commentib{O leitor n\~ao vai ter ideia do que \'e um goto. Tem que tido uma explica\c{c}\~ao sobre isso em algum lugar l\'a atr\'as.}
-
-The task to be performed is the production of the customer order, where the UAV will collect supplies from the warehouse, take to the production line and once the production of a certain product is finished, it will lead to the customer.
-
+We also have run the same experiments in a simulated environment. We have used the SITL\footnote{The SITL (software in the loop) simulator allows you to run Plane, Copter or Rover without any hardware.} simulator to run the experiments sing the same variables of experiment.
 \subsection{Mission Planners}
 
-In this work, we considered that mission planner is a software that generates a production mission given the warehouse and customer order. This program generates a \texttt{.mission} extension file containing a set of mission commands, as shown in the~\ref{mission} subsection. \commentib{o leitor tb n\~ao saber\'a o que \'e esse .mission}. Two examples of planners are presented in this work and will be employed to demonstrate the cost evaluation methodology.
+In this work, we considered that mission planner is a software that generates a production mission given the warehouse and customer order. This program generates a \texttt{.mission} extension file containing a set of mission commands, as shown in the Section~\ref{missao}. Two examples of planners are presented in this work and will be employed to demonstrate the cost evaluation methodology.
 
 \subsubsection{Planner A}
 
-{\color{red}
-In this strategy, the UAV starts moving toward the warehouse, takes two inputs of type A to produce a product X, then takes the type C input, waits on the production line for the product X to be produced. After being produced, it leads to the customer. If there is more products of type X to be produced, it goes to the warehouse and carries out the whole process again.
-
-After all the X products are produced and taken to the customer, the UAV will go to the warehouse and take the two type B inputs and then the type C input, wait for the first product Y to be produced and then take it to the customer. If you need to produce more Y products, the process is the same.}
-
-\commentib{Acho que o texto n\~ao est\'a bem explicado e est\'a longo. Voc\^e consegue resumir e melhorar a explica\c{c}\~ao?}
+In the Algorithm~\ref{alg:planA}, we show a strategy to solve the mission planning problem and we denoted as Planner A. In this Algorithm, it's produced all the X product in sequence, bringing the inputs in sequence as well (A,B and C) and then it's produced all the Y products in this order.
 
 The general steps of planner A are shown in the Algorithm~\ref{alg:planA}.
 
@@ -434,7 +510,7 @@ The general steps of planner A are shown in the Algorithm~\ref{alg:planA}.
 \Begin{
 check the order\;
 \Repeat{production of all X elements finish}{
-go to the warehouse}\;
+go to the warehouse\;
 \Repeat{until bring 2 A elements}{
 	get input A\;
 	bring to the production line X\;
@@ -444,7 +520,7 @@ get the input C\;
 bring to the production line X\;
 wait X to be produced\;
 bring X to the client\;
-
+}
 \Repeat{production of all Y elements finish}{
 go to the warehouse\;
 \Repeat{until bring 2 B elements}{
@@ -463,9 +539,9 @@ bring Y to the client\;
 \end{algorithm}
 
 \subsubsection{Planner B}
-In planner B, unlike planner A where the UAV is idle waiting for each product to be produced and only then takes the customer, the UAV continues the production process while the output of the products does not end. Once the production of each product is finished, {\color{red} the UAV for the task that was running and goes to the production line of that particular product} \commentib{tem algo estranho nesse trecho... o que vc quis dizer?}, performs the collection and takes it to the customer. It then returns the task it was previously running, performing a scheduling of tasks.
+In planner B, unlike planner A where the UAV is idle waiting for each product to be produced and only then head to the client, the UAV continues the production process while the output of the products does not end. After the production of each product is finished, the UAV stops the task that was running and goes to the production line of that particular product, performs the collection and takes it to the client. After that, it returns to run the task that was previously running, performing a scheduling of tasks.
 
-The general steps of planner B are shown in the Algorithm~\ref{alg:planB}:
+The general steps of planner B are shown in the Algorithm~\ref{alg:planB}.
 
 \begin{algorithm}[ht]
 \footnotesize
@@ -518,7 +594,7 @@ keep producing\;
 \subsection{Cost Evaluation}
 \label{ssec:acusto}
 
-The results of each mission planner is compared to the optimal solution obtained with the branch-and-cut algorithm of the IBM/ILOG CPLEX 12.4 tool developed in C++. In order to obtain better results in the comparison \commentib{como assim melhores?} , it was considered only the time in which the UAV takes to finish the production of a product, excluding the time in which the UAV leaves its initial position and moves to the warehouse, the time in which it Moves from the customer to the warehouse and the time it takes to go to the end point and land. This was done due to the greater practicality of implementing the problem in the CPLEX solver. The problem was modelled considering the total processing time, that is, only the processing time of the task (production) and the time of set-up (time of production of the line). Thus, the execution time of each mission was measured and compared to the value obtained by the CPLEX solver (optimal time), as shown in Table~\ref{fig:comp}.
+The results of each mission planner is compared to the optimal solution obtained with the branch-and-cut algorithm of the IBM/ILOG CPLEX 12.4 tool developed in C++. In order to obtain better results to do the comparison, it was considered only the time in which the UAV takes to finish the production of a product, excluding the time in which the UAV leaves its initial position and moves to the warehouse, the time in which it Moves from the customer to the warehouse and the time it takes to go to the end point and land. This was done due to the greater practicality of implementing the problem in the CPLEX solver. The problem was modelled considering the total processing time, that is, only the processing time of the task (production) and the time of set-up (time of production of the line). Thus, the execution time of each mission was measured and compared to the value obtained by the CPLEX solver (optimal time), as shown in Table~\ref{fig:comp}.
 
 \begin{table}[H]
 \centering

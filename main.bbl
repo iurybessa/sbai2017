@@ -10,6 +10,10 @@ Baer-Riedhart, J.  \harvardyearleft 1998\harvardyearright .
 \newblock Nasa environmental research aircraft and sensor technology program,
   {\em Aerospace America, January} .
 
+\harvarditem{CPLEX}{2003}{cplex2003ilog}
+CPLEX, S.  \harvardyearleft 2003\harvardyearright .
+\newblock Ilog, {\em Inc., Armonk, NY} .
+
 \harvarditem[Doherty et~al.]{Doherty, Kvarnstr{\"o}m \harvardand\
   Heintz}{2009}{doherty2009temporal}
 Doherty, P., Kvarnstr{\"o}m, J. \harvardand\ Heintz, F.  \harvardyearleft
@@ -17,10 +21,6 @@ Doherty, P., Kvarnstr{\"o}m, J. \harvardand\ Heintz, F.  \harvardyearleft
 \newblock A temporal logic-based planning and execution monitoring framework
   for unmanned aircraft systems, {\em Autonomous Agents and Multi-Agent
   Systems} {\bf 19}(3):~332--377.
-
-\harvarditem{Du \harvardand\ Brucker}{2008}{du2008scheduling}
-Du, D. \harvardand\ Brucker, P.  \harvardyearleft 2008\harvardyearright .
-\newblock Scheduling algorithms.
 
 \harvarditem[Fabiani et~al.]{Fabiani, Fuertes, Piquereau, Mampey \harvardand\
   Teichteil-K{\"o}nigsbuch}{2007}{fabiani2007autonomous}
@@ -35,9 +35,10 @@ Finn, A. \harvardand\ Scheding, S.  \harvardyearleft 2012\harvardyearright .
 \newblock {\em Developments and challenges for autonomous unmanned vehicles},
   Springer.
 
-\harvarditem{Francq}{n.d.}{francq2011optimization}
-Francq, P.  \harvardyearleft n.d.\harvardyearright .
+\harvarditem{Francq}{2011}{francq2011optimization}
+Francq, P.  \harvardyearleft 2011\harvardyearright .
 \newblock Optimization problems.
+\newblock Accessed in: 20/09/2016.
 \newline\harvardurl{\url{http://www.otlet-institute.org/wikics/Optimization_Problems.html}}
 
 \harvarditem{Garecht}{2010}{successplan}
