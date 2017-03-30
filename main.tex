@@ -122,7 +122,7 @@ This paper presents a methodology that evaluate the cost of mission planners for
 
 Summarizing, the main contributions of this work are:
 \begin{itemize}
-\item planner evaluation metric;
+\item an evaluation methodology for UAV mission planners algorithms, \commentib{fale um pouco mais};
 \item use of a commercial UAV in intralogistics.
 \end{itemize}
 
@@ -207,8 +207,7 @@ In this section, we first investigate the platform used in this work, verifying 
 	\caption{UAV Movement Systems.\label{fig:movement}}
 \end{figure}
 
-\commentib{Fale um pouco mais aqui...}
-\commentib{O que mais eu poderia falar?}
+\commentib{Fale um pouco mais aqui sobre o framework desenvolvido para comando do UAV }
 
 %\subsection{Mission Planning}
 %\label{mission}
@@ -240,7 +239,7 @@ Some key definitions related to the case study and the application developed in 
 
 \begin{myDefinition}{Mission Command}
 
-Mission command is a command created to execute a task such as go to one location to another location, get a package using a robot gripper, land the drone, etc. The list of commands is shown below:
+Mission command is a command created to execute a task such as go to one location to another location, get a package using a robot gripper, land the drone, etc. The list of commands is shown below: \commentib{Isso tem que aparecer na se\c{c}\~ao anterior.}
 
 \begin{itemize}
 \item \texttt{TakeOff}: takeoff command of the UAV;
@@ -334,6 +333,7 @@ x_{ij}=\begin{cases}
 \begin{equation}
 C_{max}=makespan
 \end{equation}
+\commentib{o que \'e isso? Esse modelo para $C_{max}$ n\~ao est\'a claro}
 
 \paragraph{Objective}
 
@@ -370,6 +370,7 @@ $C_{max}$ is the variable to be minimized (optimized).
 \sum_{i=1}^{M}{\sum_{j=1}^{N}{
  (p_j+s_j)x_{ij}}}\leq C_{max}
 \end{equation}
+\commentib{Isso t\'a errado. A fun\c{c}\~ao objetivo n\~ao pode ser limitada inferiormente conforme a eq anterior.}
 
 The Eq.~\eqref{eq:execTime} represents the sum of the the duration time $p_j$ of each travel from one place another in the case study explained in Section~\ref{sec:ec}, considering the production time $s_j$ in each production line. The $x_{ij}$ shows which product is being produced in each production line. The left hand side of the Eq.~\eqref{eq:execTime} needs to be smaller than the right hand side of the Eq.~\eqref{eq:execTime}.
 \end{itemize}
@@ -486,12 +487,10 @@ where $c_o$ is the optimal cost obtained by the CPLEX solver, \textbf{$c_X$} is 
 \subsection{Experimental Environmental and Objectives}
 \label{ssec:expobjandenv}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
- 
-In order to succeed the experimentations, we have used the IRIS+ UAV, dronekit API and a computer with windows 10 to run the program that sends the control commands to the UAV. The experimentation was made in a grass field at university  in order to have a clear area of operation.
 
-The objectives of the experimentations were the measurements of execution time of the mission using different planning solutions.
+In order to clarify the evaluation methodology efficiency, two mission planner algorithms are evaluated using the proposed metric, and the evaluation result is compared with practical execution time of algorithms that are implemented in a simulation tool \commentib{qual o simulador...? fale mais} and in a real 3DR IRIS+ UAV system. The mission planning algorithm and the command and control framework is executed in a \commentib{... especifique melhor as caracter\'isticas do computador usado, e diga o papel do dronekit API}
 
-We also have run the same experiments in a simulated environment. We have used the SITL\footnote{The SITL (software in the loop) simulator allows you to run Plane, Copter or Rover without any hardware.} simulator to run the experiments sing the same variables of experiment.
+
 \subsection{Mission Planners}
 
 In this work, we considered that mission planner is a software that generates a production mission given the warehouse and customer order. This program generates a \texttt{.mission} extension file containing a set of mission commands, as shown in the Section~\ref{missao}. Two examples of planners are presented in this work and will be employed to demonstrate the cost evaluation methodology.
@@ -594,7 +593,7 @@ keep producing\;
 \subsection{Cost Evaluation}
 \label{ssec:acusto}
 
-The results of each mission planner is compared to the optimal solution obtained with the branch-and-cut algorithm of the IBM/ILOG CPLEX 12.4 tool developed in C++. In order to obtain better results to do the comparison, it was considered only the time in which the UAV takes to finish the production of a product, excluding the time in which the UAV leaves its initial position and moves to the warehouse, the time in which it Moves from the customer to the warehouse and the time it takes to go to the end point and land. This was done due to the greater practicality of implementing the problem in the CPLEX solver. The problem was modelled considering the total processing time, that is, only the processing time of the task (production) and the time of set-up (time of production of the line). Thus, the execution time of each mission was measured and compared to the value obtained by the CPLEX solver (optimal time), as shown in Table~\ref{fig:comp}.
+The results of each mission planner is compared to the optimal solution obtained with the branch-and-cut algorithm of the IBM/ILOG CPLEX 12.4 tool developed in C++. In order to obtain better results to do the comparison, it was considered only the time in which the UAV takes to finish the production of a product.
 
 \begin{table}[H]
 \centering
@@ -611,21 +610,19 @@ The results of each mission planner is compared to the optimal solution obtained
 \label{fig:comp}
 \end{table}
 
-The Table~\ref{fig:comp} shows the mission execution times obtained using the scheduler algorithm A, the scheduler algorithm B, and the minimum value given by the solver.
-
-Using the metric shown in the section~\ref{sec:ac}, then:
+The Table~\ref{fig:comp} shows the mission execution times obtained using the planner algorithm A, the planner algorithm B, and the minimum value given by the solver. Using the metric shown in the section~\ref{sec:ac}, then:
 
 \begin{equation}
-Creal_A=\frac{134}{420}=0,319
+Creal_A=\frac{134}{420}=0.319
 \label{eq1}
 \end{equation}
 
 \begin{equation}
-Creal_B=\frac{134}{408}=0,328
+Creal_B=\frac{134}{408}=0.328
 \label{eq2}
 \end{equation}
 
-It can be seen in the Equation~\ref{eq2} that planner B performs the mission more quickly and has a lower cost than planner A, according to the metric used.
+It can be seen in the Equation~\ref{eq2} that the proposed evaluation methodology indicates that planner B performs the mission more quickly and has a lower cost than planner A.
 
 \subsection{Practical Results}
 
@@ -726,18 +723,9 @@ In Figure~\ref{fig:GraPlannersReal} is shown a graph of the flight times of both
 \section{Conclusions}
 \label{sec:conclusao}
 
-In this work, a common application of intra logistics performed by a VANT was developed, as well as the implementation of two mission planning strategies, as well as the cost evaluation of the same, compared to the optimal cost obtained by the CPLEX optimizer.
+In this work, a common application of intra logistics performed by a VANT was developed, as well as the implementation of two mission planning strategies, as well as the cost evaluation of the same, compared to the optimal cost obtained by the CPLEX optimizer. \commentib{Reescreva aqui as contribui\c{c}\~oes relevantes do trabalho... fale da metodologia de avalia\c{c}\~ao e ddo framework de controle desenvolvido.}
 
-It is understood that some contributions were made with the conclusion of this work, such as:
-
-In the manipulation and control of a commercial UAV, the ways of manipulating and controlling the 3DR IRIS + UAV of the UFAM Robotics Laboratory were investigated for future uses in undergraduate and postgraduate university projects.
-
-
-Another important contribution was the creation of a methodology for evaluating the cost of mission planners, since it allows to verify their effectiveness against optimal values obtained by an optimizer.
-
-Finally, it was possible to say that the manipulation and control of the 3DR IRIS+ UAV, as well as the creation of the cost evaluation methodology were successfully applied in simulated and real environments, thus validating the theory shown in the work.
-
-Further works includes the use of computational vision for the recognition of inputs, improve the modeling of the optimization problem for better results in cost evaluation, and use a solver to directly generate an optimized mission.
+Further works includes the use of computational vision for the recognition of inputs, and to improve the modeling of the optimization problem for better results in cost evaluation.
 
 
 %\selectlanguage{brazil}
