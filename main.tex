@@ -122,7 +122,7 @@ This paper presents a methodology that evaluate the cost of mission planners for
 
 Summarizing, the main contributions of this work are:
 \begin{itemize}
-\item an evaluation methodology for UAV mission planners algorithms, \commentib{fale um pouco mais};
+\item an evaluation methodology for UAV mission planners algorithms,  \commentib{fale um pouco mais}\commentib{nao sei oq mais falar rs};
 \item use of a commercial UAV in intralogistics.
 \end{itemize}
 
@@ -200,14 +200,35 @@ An optimization problem can be defined as a finite set of variables, where the c
 
 % \subsection{UAV Movement System}
 
-In this section, we first investigate the platform used in this work, verifying the hardware characteristics and how to control it by software. The core hardware of the UAV IRIS+ is the Pixhawk and we can control it using a Python library - dronekit that uses MAVLink\footnote{MAVLink or Micro Air Vehicle Link is a protocol for communicating with small unmanned vehicle. It is designed as a header-only message marshalling library} protocol. Secondly, we integrate a robot gripper to the UAV to take and leave packages during the mission. After that, we created movement functions to make the UAV movement and control it using some resources of the dronekit API.
+In this section, we first investigate the platform used in this work, verifying the hardware characteristics and how to control it by software. The core hardware of the UAV IRIS+ is the Pixhawk and we can control it using a Python library - dronekit that uses MAVLink\footnote{MAVLink or Micro Air Vehicle Link is a protocol for communicating with small unmanned vehicle. It is designed as a header-only message marshalling library} protocol. 
+
+Secondly, we integrate a robot gripper to the UAV to take and leave packages during the mission. We have connected a servo motor to the Pixhawk by one of the PWM (pulse width modulation) outputs. After that, we created movement functions to make the UAV movement, such as go to a location, and control it using some resources of the dronekit api. 
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.45\textwidth]{movement.eps}
 	\caption{UAV Movement Systems.\label{fig:movement}}
 \end{figure}
 
-\commentib{Fale um pouco mais aqui sobre o framework desenvolvido para comando do UAV }
+The movement functions are shown below:
+
+
+\begin{itemize}
+\item \texttt{TakeOff}: takeoff command of the UAV;
+\item \texttt{GoTo}: command to move the  UAV to certain location;
+\item \texttt{TakePackage}: command to collect an input/product through a robot gripper;
+\item \texttt{LeavePackage}: command to leave an input or product from a robot gripper;
+\item \texttt{Wait}: command to make the UAV to hover (wait);
+\item \texttt{Land}: command to make the UAV land.
+\end{itemize}
+
+As we can see in the Figure~\ref{fig:sysArch}, there is a mission planner that generates the mission through the existing inputs in the warehouse and the client's order. After mission generation (using some algorithmic strategy), the UAV receives the mission and executes it. In the Section~\ref{sec:method} there is a more comprehensive explanation of the terms used in this current section. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.45\textwidth]{systemArch.png}
+	\caption{System's Archtecture.\label{fig:sysArch}}
+\end{figure}
 
 %\subsection{Mission Planning}
 %\label{mission}
@@ -239,16 +260,8 @@ Some key definitions related to the case study and the application developed in 
 
 \begin{myDefinition}{Mission Command}
 
-Mission command is a command created to execute a task such as go to one location to another location, get a package using a robot gripper, land the drone, etc. The list of commands is shown below: \commentib{Isso tem que aparecer na se\c{c}\~ao anterior.}
+Mission command is a command created to execute a task such as go to one location to another location, get a package using a robot gripper, UAV landing, etc.
 
-\begin{itemize}
-\item \texttt{TakeOff}: takeoff command of the UAV;
-\item \texttt{GoTo}: command to move the  UAV to certain location;
-\item \texttt{TakePackage}: command to collect an input/product through a robot gripper;
-\item \texttt{LeavePackage}: command to leave an input or product from a robot gripper;
-\item \texttt{Wait}: command to make the UAV to hover (wait);
-\item \texttt{Land}: command to make the UAV landing.
-\end{itemize}
 
 \label{missao}
 \end{myDefinition}
@@ -300,7 +313,7 @@ The Figure~\ref{fig:useCase} shows that there are three types of inputs in the w
 The task to be performed is the production of the customer order, where the UAV will collect supplies from the warehouse, take to the production line and once the production of a certain product is finished, it will lead to the customer.
 
 %%%%%%%%%%%%%%%
-\subsection{Modeling an UAV Intralogistics Mission as an Optimization Problem }
+\subsection{Modelling an UAV Intralogistics Mission as an Optimization Problem }
 \label{ssec:modelo}
 %%%%%%%%%%%%%%%
 
@@ -313,7 +326,7 @@ The notation used is given below:
 \item $\mathcal{M} = \set{m_i \vert i\in \mathbb{N}^{*},i\leq M}$ is the set of $M$ production lines (machines);
 \item $\mathcal{P} = \set{p_j \vert j\in \mathbb{N}^{*},j\leq N}$ is the processing time of each $j$-th task;
 \item $S = \set{s_i \vert s\in \mathbb{N}^{*},i\leq M}$  is the setup (production) time of each $i$-th production line;
-\item $R||C_{max}$ (Three-field notation\footnote{Notation $\alpha | \beta | \gamma$, where $\alpha$: processing environment, $\beta$: problem constraints and $\gamma$: optimization criterion.} used in the literature to represent a given task scheduling problem, in this case, minimizing the makespan \footnote{Makespan is the termination time of the most loaded processor.} in an unrelated parallel machine environment \cite{graham1979optimization}. \commentib{Isso \'e necess\'ario msm? N\~ao parece ser usado em nenhum lugar.}\commentib{Acho que sim, na area de otimizacao usam essa notacao.}
+\item $R||C_{max}$ (Three-field notation\footnote{Notation $\alpha | \beta | \gamma$, where $\alpha$: processing environment, $\beta$: problem constraints and $\gamma$: optimization criterion.} used in the literature to represent a given task scheduling problem, in this case, minimizing the makespan \footnote{Makespan is the termination time of the most loaded processor.\label{nt:makespan}} in an unrelated parallel machine environment \cite{graham1979optimization}.
 \end{itemize}
 
 \paragraph{Decision variable}
@@ -333,7 +346,7 @@ x_{ij}=\begin{cases}
 \begin{equation}
 C_{max}=makespan
 \end{equation}
-\commentib{o que \'e isso? Esse modelo para $C_{max}$ n\~ao est\'a claro}
+\commentib{o que \'e isso? Esse modelo para $C_{max}$ n\~ao est\'a claro}\commentib{ja tem uma explicacao do que eh makespan anteriormente.}
 
 \paragraph{Objective}
 
@@ -370,7 +383,7 @@ $C_{max}$ is the variable to be minimized (optimized).
 \sum_{i=1}^{M}{\sum_{j=1}^{N}{
  (p_j+s_j)x_{ij}}}\leq C_{max}
 \end{equation}
-\commentib{Isso t\'a errado. A fun\c{c}\~ao objetivo n\~ao pode ser limitada inferiormente conforme a eq anterior.}
+\commentib{Isso t\'a errado. A fun\c{c}\~ao objetivo n\~ao pode ser limitada inferiormente conforme a eq anterior.}\commentib{eh uma restricao apenas iury. nao ta errado. a funcao objetivo eh o $C_{max}$ (ja eh outra coisa). Organizei exatamente como o pessoal de otimizacao usa nas literaturas.} 
 
 The Eq.~\eqref{eq:execTime} represents the sum of the the duration time $p_j$ of each travel from one place another in the case study explained in Section~\ref{sec:ec}, considering the production time $s_j$ in each production line. The $x_{ij}$ shows which product is being produced in each production line. The left hand side of the Eq.~\eqref{eq:execTime} needs to be smaller than the right hand side of the Eq.~\eqref{eq:execTime}.
 \end{itemize}
@@ -488,7 +501,7 @@ where $c_o$ is the optimal cost obtained by the CPLEX solver, \textbf{$c_X$} is 
 \label{ssec:expobjandenv}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-In order to clarify the evaluation methodology efficiency, two mission planner algorithms are evaluated using the proposed metric, and the evaluation result is compared with practical execution time of algorithms that are implemented in a simulation tool \commentib{qual o simulador...? fale mais} and in a real 3DR IRIS+ UAV system. The mission planning algorithm and the command and control framework is executed in a \commentib{... especifique melhor as caracter\'isticas do computador usado, e diga o papel do dronekit API}
+In order to clarify the evaluation methodology efficiency, two mission planner algorithms are evaluated using the proposed metric, and the evaluation result is compared with practical execution time of algorithms that are implemented in the simulation tool SITL\footnote{Simulator that allows executing a Plane, Copter or Rover without the need of a hardware)} and in a real UAV system (3DR IRIS+). The mission planning algorithms were executed in a computer running Linux Mint, core i7 processor and 8GB of RAM. In order to control the UAV, we run the control program, which uses the dronekit api as an interface between a high level program language (Python) and the protocol that the UAV understand (MAVLink), in the same computer where there is a radio module connected via usb communicating with the UAV radio module.
 
 
 \subsection{Mission Planners}
@@ -650,7 +663,7 @@ Below, we can verify the two mission files generated by the two strategies devel
 
 %The two mission files shown above, have exactly the same instances, that is, they have the same resources and have to perform the same mission that is to produce two products of type X and one of type Y. However, they execute the mission of Different way and have different performances. As discussed in Section~\ref{sec:acusto}, planner B has more \texttt{GoTo} commands than planner A (see Figure~\ref{fig:planArq}).
 
-The following is data about the mission being executed in the simulator SITL \footnote{Simulator that allows executing a Plane, Copter or Rover without the need of a hardware)}. The table below shows the performances of both schedulers relative to flight time.
+The following is data about the mission being executed in the simulator SITL. The table below shows the performances of both schedulers relative to flight time.
 
 \begin{table}[H]
 \centering
@@ -659,7 +672,7 @@ The following is data about the mission being executed in the simulator SITL \fo
 \begin{tabular}{@{}ccc@{}}
 \cmidrule(l){2-3}
                                         & \cellcolor[HTML]{FF7774}\textbf{Planner A} & \cellcolor[HTML]{5FCE89}\textbf{Planner B} \\ \cmidrule(l){2-3} 
-\cellcolor[HTML]{C0C0C0}\textbf{Testes} & \textit{\textbf{Flight Time (s)}}            & \textit{\textbf{Flight Time (s)}}            \\
+\cellcolor[HTML]{C0C0C0}\textbf{Tests} & \textit{\textbf{Flight Time (s)}}            & \textit{\textbf{Flight Time (s)}}            \\
 \cellcolor[HTML]{C0C0C0}1               & 460,405                                       & 430,830                                       \\
 \cellcolor[HTML]{C0C0C0}2               & 460,693                                       & 436,885                                       \\
 \cellcolor[HTML]{C0C0C0}3               & 462,080                                       & 441,681                                       \\
@@ -691,7 +704,7 @@ In Figure~\ref{fig:GraPlannersSimulado} is shown a graph of the flight times of 
 	\caption{Warehouse, Production Line X, Production Line Y and Costumer in the Map.\label{fig:maps}}
 	\end{figure}
 	
-	In Table~\ref{table:plannersReal}, it can be seen that the mission time executed by planner B in real environment also showed a shorter time compared to planner A in the five tests:
+	In Table~\ref{table:plannersReal}, it can be seen that the mission time executed by planner B in real environment also shown a shorter time compared to planner A in the five tests:
 	
 	\begin{table}[H]
 \centering
@@ -699,7 +712,7 @@ In Figure~\ref{fig:GraPlannersSimulado} is shown a graph of the flight times of 
 \begin{tabular}{@{}ccc@{}}
 \cmidrule(l){2-3}
                                         & \cellcolor[HTML]{FF7774}\textbf{Planner A} & \cellcolor[HTML]{5FCE89}\textbf{Planner B} \\ \cmidrule(l){2-3} 
-\cellcolor[HTML]{C0C0C0}\textbf{Testes} & \textit{\textbf{Flight Time (s)}}            & \textit{\textbf{Flight Time (s)}}            \\
+\cellcolor[HTML]{C0C0C0}\textbf{Tests} & \textit{\textbf{Flight Time (s)}}            & \textit{\textbf{Flight Time (s)}}            \\
 \cellcolor[HTML]{C0C0C0}1               & 455,12                                       & 441,72                                       \\
 \cellcolor[HTML]{C0C0C0}2               & 456,93                                       & 440,18                                       \\
 \cellcolor[HTML]{C0C0C0}3               & 457,19                                       & 447,51                                      \\
@@ -718,14 +731,16 @@ In Figure~\ref{fig:GraPlannersReal} is shown a graph of the flight times of both
 	\caption{Flight Time Graph of Mission Planners Relative to 5 Tests in a Real Environment.\label{fig:GraPlannersReal}}
 	\end{figure}
 	
-	As shown in the section~\ref{sec:acusto}, planner B was faster than planner A. This can also be verified in real environment, as shown in tables \ref{table:plannersSimulado} and \ref{table:plannersReal} of mission execution time in simulated and real environment.
+	As presented in the section, planner B was faster than planner A, relative to execution time. This can also be verified in real environment, as shown in tables \ref{table:plannersSimulado} and \ref{table:plannersReal} of mission execution time in simulated and real environment.
 
 \section{Conclusions}
 \label{sec:conclusao}
 
-In this work, a common application of intra logistics performed by a VANT was developed, as well as the implementation of two mission planning strategies, as well as the cost evaluation of the same, compared to the optimal cost obtained by the CPLEX optimizer. \commentib{Reescreva aqui as contribui\c{c}\~oes relevantes do trabalho... fale da metodologia de avalia\c{c}\~ao e ddo framework de controle desenvolvido.}
+We have developed an evaluation methodology for UAV mission planner in an industrial production scenario as illustrated in the Section~\ref{sec:method}. We used this methodology of evaluation to performs in two different algorithms in order to verify the performance of them.
 
-Further works includes the use of computational vision for the recognition of inputs, and to improve the modeling of the optimization problem for better results in cost evaluation.
+In addition, we have used a commercial UAV to perform our methodology. We have created a framework with a set of mission commands to control the UAV using dronekit api as presented in the Section~\ref{sec:uav} and \ref{sec:method}. 
+
+Further works includes the use of computational vision for the recognition of inputs, and to improve the modelling of the optimization problem for better results in cost evaluation.
 
 
 %\selectlanguage{brazil}
