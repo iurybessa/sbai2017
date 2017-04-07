@@ -44,7 +44,7 @@
 
 \usepackage{caption}
 \usepackage{subcaption}
-
+%\usepackage{hyperlinks}
 \usepackage{url}
 
 
@@ -73,12 +73,15 @@
 
 % CABEÇALHO
 
-\title{PLANNING AND UAV MISSION EVALUATION FOR INTRALOGISTICS PROBLEM}
+\title{PLANNING AND EVALUATION OF UAV MISSION FOR INTRALOGISTICS PROBLEM}
 
 \author{Thiago Cavalcante}{thiagorodrigoengcomp@gmail.com}
-\address{Graduate Program in Electrical and Computer Engineering, Federal University of Amazonas, Manaus, AM, Brazil}
+\address{Graduate Program in Electrical Engineering, Federal University of Amazonas, Manaus, AM, Brazil}
 
-\author{Iury Bessa}{iurybessa@ufam.edu.br}
+\author{Lucas Carvalho Cordeiro}{lucascordeiro@ufam.edu.br}
+\address{Department of Computer Science, University of Oxford, Oxford, United Kingdom}
+
+\author{Iury Valente de Bessa}{iurybessa@ufam.edu.br}
 \address{Department of Electricity, Federal University of Amazonas, Manaus, AM, Brazil}
 
 
@@ -110,20 +113,21 @@
 
 % Use of a commercial UAV - 3DR IRIS + in the intra-logistics, {\it i.e., Internal Logistics of movement and storage.}, aiming to give another option of agility in the manufacturing process. Additionally, it will be approached a study of evaluation of the cost of the missions that the UAV executes in this process.
 
-Logistics has become a competitive and fundamental factor for organizations, involving the management, conservation and supervision of freight transport. In addition, excellent logistics means customer satisfaction, so speed is still an important factor in a successful logistics process \cite{drone4logistic}. Currently, one of the solutions to this type of problem is the use of Unmanned Aerial Vehicles(UAVs). Nowadays, UAVs are mostly remotely piloted vehicles (RPV), since their operations are carried out by ground operators. If the tasks performed by a UAV were performed autonomously, it would relieve the work of these operators, since they perform tedious and repetitive tasks \cite{pascarella2013autonomic}.
+Logistics has become a competitive and fundamental factor for organizations, involving the management, conservation and supervision of freight transport. In addition, excellent logistics means customer satisfaction, so speed is still an important factor in a successful logistics process \cite{drone4logistic}. Currently, one of the solutions to this type of problem is the use of unmanned aerial vehicles (UAVs). Nowadays, UAVs are mostly remotely piloted vehicles (RPV), since their operations are carried out by ground operators. If the tasks performed by an UAV were performed autonomously, it would relieve the work of these operators, since they perform tedious and repetitive tasks \cite{pascarella2013autonomic}.
 
 A probable improvement of these logistics systems is the increase of the automation of the UAVs, what results in minimization of the costs, e.g. in terms of time. Consequently, investments and studies related to stand-alone UAVs are important to the development of smart factories \cite{hern2014dhl}. However, one of the main problems with the use of autonomous UAVs is the reliability and intelligence of the system. Thus, increased employment of autonomous UAVs requires the development of devices that are capable of performing tasks and interacting with the environment intelligently and reliably.
 
 Autonomous UAVs need to know what will happen in a future instant and what is the best decision to make at the present time, and therefore require strategies not only to decompose their missions into meaningful sub-tasks but also to track progress toward mission goals and the evolution of these tasks relative to the capabilities of autonomous UAVs \cite{finn2012developments}. As a consequence, in order to perform a mission successfully, it is recommended to make a plan to the task \cite{successplan}. Mission planning problems consist of planning events to meet certain requirements associated with the plan and improving mission objectives \cite{krozel1988search}. Therefore, this is one of the main challenges faced in solving this type of problem.
 
-Some researches about evaluation and optimization of mission planning have been done in the last years. \citeasnoun{schwarz2012towards} have used ant colony to optimize missions for an automated guided vehicle (AVG). Another paper investigates energy consumption for a factory and evaluate the logistic planning processes using a metric of evaluation\cite{muller2012analyzing}.
+Some researches about evaluation and optimization of mission planning have been done in the last years. \citeasnoun{schwarz2012towards} have used ant colony to optimize missions for an automated guided vehicle (AVG). Another paper investigates energy consumption for a factory and evaluate the logistic planning processes using a metric of evaluation~\cite{muller2012analyzing}.
 
 This paper presents a methodology that evaluate the cost of mission planners for a commercial UAV. We developed a evaluation metric that evaluate the relative cost of a planning strategy related with the optimal cost generated by the CPLEX optimizer. %The evaluation is made by comparing the mission execution time with the cost of an optimal solution solved by CPLEX solver. Additionally, a middleware was developed to interface the mission planning application and the embedded control software, adapting the UAV for intra-logistics. Finally, experiments were done to verify the consistency of evaluation methodology.
 
 Summarizing, the main contributions of this work are:
 \begin{itemize}
-\item an evaluation methodology for UAV mission planners algorithms;
-\item use of a commercial UAV in intralogistics.
+\item a novel evaluation methodology for UAV intralogistics mission planners algorithms, that allows to predict the planners performance and obtain optimal algorithms and missions;
+\item development of an intralogistcs mission planner framework that provides mission commands for an UAV system; 
+\item use of a commercial UAV system in intralogistics missions to demonstrate the evaluation methodology efficiency.
 \end{itemize}
 
 The remaining of this work is organized as follows: Section~\ref{sec:related} presents some previous works related to mission planning, optimization and evaluation, Section~\ref{sec:background} provides the fundamentals of mission planning and optimization problems, Section~\ref{sec:method} explains the proposed evaluation methodology in details, Section~\ref{sec:results} shows the experimental procedures and results in order to explore and demonstrate the potential of methodology, and, finally, Section~\ref{sec:conclusao} concludes the work.
@@ -141,11 +145,73 @@ A similar project, called Ressac (Research and Rescue by Cooperative Autonomous 
 
 Finally, the German Aerospace Center (DLR) has also developed a mission management system based on the behavior paradigm \cite{adolf2010onboard}, which has been integrated with the ARTIS helicopter and validated in different scenarios, including follower of waypoints and search and tracking mission.
 
-\section{Background}
+%--------------------------------------------
+\section{Preliminaries}
 \label{sec:background}
+%--------------------------------------------
 
+%--------------------------------------------
+\subsection{Terminology}
+\label{sec:terms}
+%--------------------------------------------
+
+Some key definitions related to the case study and the application developed in this paper need to be clarified. All definitions below will be adopted in the remainder of this work.
+
+\begin{myDefinition}{Mission Command}
+
+Mission command is a command created to execute a task such as go to one location to another location, get a package using a robot gripper, UAV landing, etc.
+
+
+\label{def:missioncommand}
+\end{myDefinition}
+
+\begin{myDefinition}{Mission}
+
+Mission is the set of steps and mission commands that the UAV executes to produce the customer's order.
+\label{def:mission}
+\end{myDefinition}
+
+\begin{myDefinition}{Warehouse}
+
+Warehouse is the set of stored raw material available until the moment of entering the productive process. The raw materials, \textit{i.e.}, the inputs available in this work are inputs A, B and C.
+\label{almoxarifado}
+\end{myDefinition}
+
+\begin{myDefinition}{Order}
+
+Order is the requisition of products made by the client. In this work the products are of type X and Y.
+\label{pedido}
+\end{myDefinition}
+
+\begin{myDefinition}{Production Time}
+
+Production time is the time required to produce a product X or Y, after having available all the necessary inputs for the production, given by the production rule.
+\label{tempoProducao}
+\end{myDefinition}
+
+\begin{myDefinition}{Production Rule}
+
+Production rule tells what and how many inputs are needed to produce a particular product.
+\label{regraProducao}
+\end{myDefinition}
+
+\begin{myDefinition}{Mission Planner}
+
+Mission planner is the agent who performs the planning of a mission, that is, generating all the steps and commands necessary to carry out a mission.
+\label{planejadorMissao}
+\end{myDefinition}
+
+\begin{myDefinition}{Mission File}
+
+The mission file is a file that was created for the context of this work, with the extension \textsc{.mission} containing the mission itself.
+\label{arquivoMissao}
+\end{myDefinition}
+
+
+%--------------------------------------------
 \subsection{Mission Planning}
 \label{subsec:missionplanning}
+%--------------------------------------------
 
 Firstly, a mission can be defined as a goal that need to be completed. In the context of this work, the mission of the UAV is delivery of packages according to a set of well defined rules. A definition to mission planning for UAV is the process of planning the locations to visit (waypoints) and the actions that the vehicles can perform (loading/dropping a load, taking videos/pictures, etc.), typically over a time period \cite{ramirez2014solving}. An important term in this work is the concept of planner which is the agent (software implementation) that generate a mission. Functionally, mission planning lies above the trajectory planning process, where the mission planner generates a desired mission plan, and then the trajectory planner generates the flight plan (trajectories) between the waypoints.
 
@@ -200,17 +266,19 @@ An optimization problem can be defined as a finite set of variables, where the c
 
 % \subsection{UAV Movement System}
 
-In this section, we first investigate the platform used in this work, verifying the hardware characteristics and how to control it by software. The core hardware of the UAV IRIS+ is the Pixhawk and we can control it using a Python library - dronekit that uses MAVLink\footnote{MAVLink or Micro Air Vehicle Link is a protocol for communicating with small unmanned vehicle. It is designed as a header-only message marshalling library} protocol. 
+In this section, we first investigate the UAV platform used (3DR IRIS+) in this work, verifying the hardware characteristics and the control framework developed for intralogistics missions. The core hardware of the UAV IRIS+ is the Pixhawk and we can control it using a Python library (dronekit) that uses Micro Air Vehicle Link (MAVLink) protocol \commentib{REF para MAVLink}. MAVLink is a protocol for communicating with small unmanned vehicle. It is designed as a header-only message marshalling library. 
 
-Secondly, we integrate a robot gripper to the UAV to take and leave packages during the mission. We have connected a servo motor to the Pixhawk by one of the PWM (pulse width modulation) outputs. In the Figure~\ref{fig:hardArch}, we can see the system hardware architecture and the interconnections between each component module.
+The IRIS+ UAV is integrated to a robot gripper to take and leave packages during missions. We have connected a servo motor to the Pixhawk by one of the pulse width modulation (PWM) outputs. Figure~\ref{fig:hardArch} shows the hardware architecture of system and the interconnections between each component module. Figure~\ref{fig:sysArch} shows the software components of mission planning framework.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.45\textwidth]{arquiteturaIHW.eps}
+	\includegraphics[width=\columnwidth]{arquiteturaIHW.eps}
 	\caption{System Hardware Archtecture.\label{fig:hardArch}}
 \end{figure}
 
-In order to control the UAV from a PC, we have used the dronekit api that translates MAVLink commands to a Python function. In the PC is running the program that control the UAV using a radio module connected to the PC via usb to send and receive data from the UAV. We have created a bunch of functions in the control program for some UAV actions. The movement functions are shown below:
+The Mission Planner reads the warehouse inputs and client order and produces a \texttt{.mission} file, that contains the list of mission commands needed to produce the required client order. This \texttt{.mission} file is used by UAV Control Program to control the UAV and produce the low-level movement commands.
+
+In order to control the UAV from a PC, we have used the dronekit API that translates MAVLink commands to a Python function. In the ground station, the PC is running the UAV Control Program that controls the UAV using a radio module connected to the PC via USB. We have created a bunch of functions in the control program for some UAV actions. The movement functions are shown below:
 
 \begin{itemize}
 \item \texttt{TakeOff}: takeoff command of the UAV;
@@ -221,9 +289,6 @@ In order to control the UAV from a PC, we have used the dronekit api that transl
 \item \texttt{Land}: command to make the UAV land.
 \end{itemize}
 
-The movement functions illustrated above are in a file, of extension .mission, that the UAV reads and executes that commands. The file is generated by a mission planner program.
-
-As we can see in the Figure~\ref{fig:sysArch}, there is a mission planner that generates the mission through the existing inputs in the warehouse and the client's order. After mission generation (using some algorithmic strategy), the UAV receives the mission and executes it. In the Section~\ref{sec:method} there is a more comprehensive explanation of the terms used in this current section. 
 
 \begin{figure}[H]
 	\centering
@@ -257,57 +322,7 @@ In order to model the mission planning problem as an optimization problem, the c
 	\caption{Case Study Representation.\label{fig:useCase}}
 \end{figure}
 
-Some key definitions related to the case study and the application developed in this paper need to be clarified. All definitions below will be adopted in the remainder of this work.
 
-\begin{myDefinition}{Mission Command}
-
-Mission command is a command created to execute a task such as go to one location to another location, get a package using a robot gripper, UAV landing, etc.
-
-
-\label{missao}
-\end{myDefinition}
-
-\begin{myDefinition}{Mission}
-
-Mission is the set of steps and mission commands that the UAV executes to produce the customer's order.
-\label{missao}
-\end{myDefinition}
-
-\begin{myDefinition}{Warehouse}
-
-Warehouse is the set of stored raw material available until the moment of entering the productive process. The raw materials, \textit{i.e.}, the inputs available in this work are inputs A, B and C.
-\label{almoxarifado}
-\end{myDefinition}
-
-\begin{myDefinition}{Order}
-
-Order is the requisition of products made by the client. In this work the products are of type X and Y.
-\label{pedido}
-\end{myDefinition}
-
-\begin{myDefinition}{Production Time}
-
-Production time is the time required to produce a product X or Y, after having available all the necessary inputs for the production, given by the production rule.
-\label{tempoProducao}
-\end{myDefinition}
-
-\begin{myDefinition}{Production Rule}
-
-Production rule tells what and how many inputs are needed to produce a particular product.
-\label{regraProducao}
-\end{myDefinition}
-
-\begin{myDefinition}{Mission Planner}
-
-Mission planner is the agent who performs the planning of a mission, that is, generating all the steps and commands necessary to carry out a mission.
-\label{planejadorMissao}
-\end{myDefinition}
-
-\begin{myDefinition}{Mission File}
-
-The mission file is a file that was created for the context of this work, with the extension \textsc{.mission} containing the mission itself.
-\label{arquivoMissao}
-\end{myDefinition}
 	
 The Figure~\ref{fig:useCase} shows that there are three types of inputs in the warehouse ({\it i.e.}, A, B, and C) and two production lines that produces two different products ({\it i.e.}, X and Y). Each production line produces only one type of product and has a characteristic production time.  In the Figure~\ref{fig:useCase} shows that to produce a product of type X, two inputs of type A and one input of type C are required, and to produce a product of type Y, two inputs of type B and one input of type C are required. The production time of a X product is $4 p.u.$ and the time of production of product Y is $6 p.u.$. A production unit ($1 p.u.$) was considered to be a \texttt{GoTo} command performed by the UAV.
 
@@ -327,12 +342,12 @@ The notation used is given below:
 \item $\mathcal{M} = \set{m_i \vert i\in \mathbb{N}^{*},i\leq M}$ is the set of $M$ production lines (machines);
 \item $\mathcal{P} = \set{p_j \vert j\in \mathbb{N}^{*},j\leq N}$ is the processing time of each $j$-th task;
 \item $S = \set{s_i \vert s\in \mathbb{N}^{*},i\leq M}$  is the setup (production) time of each $i$-th production line;
-\item $R||C_{max}$ (Three-field notation\footnote{Notation $\alpha | \beta | \gamma$, where $\alpha$: processing environment, $\beta$: problem constraints and $\gamma$: optimization criterion.} used in the literature to represent a given task scheduling problem, in this case, minimizing the makespan \footnote{Makespan is the termination time of the most loaded processor.\label{nt:makespan}} in an unrelated parallel machine environment \cite{graham1979optimization}.
+%\item $R||C_{max}$ (Three-field notation\footnote{Notation $\alpha | \beta | \gamma$, where $\alpha$: processing environment, $\beta$: problem constraints and $\gamma$: optimization criterion.} used in the literature to represent a given task scheduling problem, in this case, minimizing the makespan \footnote{Makespan is the termination time of the most loaded processor.\label{nt:makespan}} in an unrelated parallel machine environment \cite{graham1979optimization}.
 \end{itemize}
 
 \paragraph{Decision variable}
 
-The variable $x_{ij}$ is a binary decision variable which takes the value $1$ if the task $j$ is running on the machine $i$, and $0$ otherwise. The variable $C_ {max}$ is the variable that we want to optimize.
+The variable $x_{ij}$ is a binary decision variable which takes the value $1$ if the task $j$ is running on the machine $i$, and $0$ otherwise. The variable $C_ {mission}$ is the variable that we want to optimize.
 
 \begin{equation}
 \label{eq:decision}
@@ -344,22 +359,19 @@ x_{ij}=\begin{cases}
   \end{cases}
 \end{split}
 \end{equation}
+
+\paragraph{Objective function}
+
+The objective function is the total mission cost $C_{mission}$ (total process execution time) that may be modeled as follows.
 \begin{equation}
-C_{max}=\sum_{i=1}^{M}{\sum_{j=1}^{N}{
- (p_j+s_j)x_{ij}}}
+\label{eq:objfunction}
+C_{mission}=\sum_{i=1}^{M}{\sum_{j=1}^{N}{
+ (p_j+s_j)x_{ij}}},
 \end{equation}
 
-\paragraph{Objective}
+The Eq.~\eqref{eq:objfunction} represents the sum of the the duration time $p_j$ of each travel from one place another in the case study explained in Section~\ref{sec:ec}, considering the production time $s_j$ in each production line.
 
-The objective function is the variable $C_ {max}$ (total process execution time) that needs to be minimized.
-\begin{equation}
-	\begin{array}{cc}
-		\min & C_{max}  \\,
-	\end{array}
-\end{equation}
-where,
 
-$C_{max}$ is the variable to be minimized (optimized).
 %\begin{equation}
 %\label{eq:cmax}
 %C_{max} = \sum_{i=1}^{M}{\sum_{j=1}^{N}{
@@ -381,13 +393,10 @@ $C_{max}$ is the variable to be minimized (optimized).
 
 \begin{equation}
 \label{eq:execTime}
-\sum_{i=1}^{M}{\sum_{j=1}^{N}{
- (p_j+s_j)x_{ij}}}\leq \hat{C}_{max}
+C_{mission}\leq C_{max}
 \end{equation}
 
-where $\hat{C}_{max}$ is a variable used to set a ceiling value to $C_{max}$ during the implementation.
-
-The Eq.~\eqref{eq:execTime} represents the sum of the the duration time $p_j$ of each travel from one place another in the case study explained in Section~\ref{sec:ec}, considering the production time $s_j$ in each production line. The $x_{ij}$ shows which product is being produced in each production line. The left hand side of the Eq.~\eqref{eq:execTime} needs to be smaller than the right hand side of the Eq.~\eqref{eq:execTime}.
+The Eq.~\eqref{eq:execTime} indicates that the mission cost will be always less or equal to a maximum cost denoted by $C_{max}$, obtained empirically.
 \end{itemize}
 
 % For a better understanding what the summation means, let's suppose that there are two production lines and tree products to be produced (tasks), therefore, $x_{00}+x_{10}+x_{20}=1$, $x_{01}+x_{11}+x_{21}=1$ and $x_{02}+x_{12}+x_{22}=1$, so, it can be verified that those restrictions are set, there will be only one task running in a machine.
@@ -398,11 +407,10 @@ The resulting optimization problem consists in minimizing $C_{max}$ with relatio
 \begin{equation}
 	\label{eq:optproblem}
 	\begin{array}{ccc}
-		\min & C_{max},  \\
+		\min & C_{mission},  \\
   \\
-		\textrm{ subject to } & \sum_{i=1}^{M}{\sum_{j=1}^{N}{x_{ij}}}=1, \\
-		& \sum_{i=1}^{M}{\sum_{j=1}^{N}{
- (p_j+s_j)x_{ij}}}\leq C_{max}
+		\textrm{ s.t. } & \sum_{i=1}^{M}{\sum_{j=1}^{N}{x_{ij}}}=1, \\
+		& C_{mission}\leq C_{max}
  \\
 	\end{array}
 \end{equation}	
@@ -503,18 +511,16 @@ where $c_o$ is the optimal cost obtained by the CPLEX solver, \textbf{$c_X$} is 
 \label{ssec:expobjandenv}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-In order to clarify the evaluation methodology efficiency, two mission planner algorithms are evaluated using the proposed metric, and the evaluation result is compared with practical execution time of algorithms that are implemented in the simulation tool SITL\footnote{Simulator that allows executing a Plane, Copter or Rover without the need of a hardware)} and in a real UAV system (3DR IRIS+). The mission planning algorithms were executed in a computer running Linux Mint, core i7 processor and 8GB of RAM. In order to control the UAV, we run the control program, which uses the dronekit api as an interface between a high level program language (Python) and the protocol that the UAV understand (MAVLink), in the same computer where there is a radio module connected via usb communicating with the UAV radio module.
+In order to clarify the evaluation methodology efficiency, two mission planner algorithms are evaluated using the proposed metric, and the evaluation result is compared with practical execution time of algorithms that are implemented in the simulation tool SITL\footnote{Simulator that allows executing a Plane, Copter or Rover without the need of a hardware)} and in a real UAV system (3DR IRIS+). The mission planning algorithms were executed in a computer running Linux Mint, core i7 processor and 8 GB of RAM. In order to control the UAV, we run the control program, which uses the dronekit API as an interface between a high level program language (Python) and the protocol that the UAV understand (MAVLink), in the same computer where there is a radio module connected via USB communicating with the UAV radio module.
 
 
 \subsection{Mission Planners}
 
-In this work, we considered that mission planner is a software that generates a production mission given the warehouse and customer order. This program generates a \texttt{.mission} extension file containing a set of mission commands, as shown in the Section~\ref{missao}. Two examples of planners are presented in this work and will be employed to demonstrate the cost evaluation methodology.
+In this work, we considered that mission planner is a software that generates a production mission given the warehouse and customer order. This program generates a \texttt{.mission} extension file containing a set of mission commands, as shown in the Section~\ref{sec:uav}. Two examples of planners are presented in this work and will be employed to demonstrate the cost evaluation methodology.
 
 \subsubsection{Planner A}
 
-In the Algorithm~\ref{alg:planA}, we show a strategy to solve the mission planning problem and we denoted as Planner A. In this Algorithm, it's produced all the X product in sequence, bringing the inputs in sequence as well (A,B and C) and then it's produced all the Y products in this order.
-
-The general steps of planner A are shown in the Algorithm~\ref{alg:planA}.
+In the Algorithm~\ref{alg:planA}, we show a strategy to solve the mission planning problem and we denoted as Planner A. In this Algorithm, the production of X products has a higher priority over Y, {\it i.e.}, the inputs are firstly allocated to production of X orders, and the production of Y products begins if there is no other X to be produced. The general steps of planner A are shown in the Algorithm~\ref{alg:planA}.
 
 \begin{algorithm}[ht]
 \footnotesize
@@ -553,9 +559,7 @@ bring Y to the client\;
 \end{algorithm}
 
 \subsubsection{Planner B}
-In planner B, unlike planner A where the UAV is idle waiting for each product to be produced and only then head to the client, the UAV continues the production process while the output of the products does not end. After the production of each product is finished, the UAV stops the task that was running and goes to the production line of that particular product, performs the collection and takes it to the client. After that, it returns to run the task that was previously running, performing a scheduling of tasks.
-
-The general steps of planner B are shown in the Algorithm~\ref{alg:planB}.
+In planner B, unlike planner A where the UAV is idle waiting for each product to be produced and only then head to the client, the UAV continues the production process while the output of the products does not end. After the production of each product is finished, the UAV stops the task that was running and goes to the production line of that particular product, performs the collection and takes it to the client. After that, it returns to run the task that was previously running, performing a scheduling of tasks. The general steps of planner B are shown in the Algorithm~\ref{alg:planB}.
 
 \begin{algorithm}[ht]
 \footnotesize
@@ -642,8 +646,8 @@ It can be seen in the Equation~\ref{eq2} that the proposed evaluation methodolog
 \subsection{Practical Results}
 
 To verify the practical results, as well as a cost comparison between the different approaches of mission planners developed in this work, the flight time measurement was performed using the two mission planning algorithms developed, using the case study shown in \ref{sec:ec}.
-
-Below, we can verify the two mission files generated by the two strategies developed in this work:
+%
+%Below, we can verify the two mission files generated by the two strategies developed in this work:
 
 %\begin{figure}[H]
 %\centering
@@ -665,8 +669,7 @@ Below, we can verify the two mission files generated by the two strategies devel
 
 %The two mission files shown above, have exactly the same instances, that is, they have the same resources and have to perform the same mission that is to produce two products of type X and one of type Y. However, they execute the mission of Different way and have different performances. As discussed in Section~\ref{sec:acusto}, planner B has more \texttt{GoTo} commands than planner A (see Figure~\ref{fig:planArq}).
 
-The following is data about the mission being executed in the simulator SITL. The table below shows the performances of both schedulers relative to flight time.
-
+Table~\ref{table:plannersSimulado} presents the performance (total flight time) of both planners algorithms.
 \begin{table}[H]
 \centering
 %\begin{adjustbox}{max width=\textwidth}
@@ -686,9 +689,7 @@ The following is data about the mission being executed in the simulator SITL. Th
 \caption{Mission Planners Flight Time - Simulator.\label{table:plannersSimulado}}
 \end{table}
 
-In the Table~\ref{table:plannersSimulado}, it can be verified that the mission time executed by planner B presented less time compared to planner A in all five tests.
-
-In Figure~\ref{fig:GraPlannersSimulado} is shown a graph of the flight times of both planners in the five tests done in the simulation environment.
+Table~\ref{table:plannersSimulado} indicates that the mission time of planner B is lower then the time of planner A in all five tests, ensuring the results of the evaluation methodology. Figure~\ref{fig:GraPlannersSimulado} shows a bar graph of the simulation flight times of both planners in the five tests.
 
 \begin{figure}[H]
 	\centering
@@ -696,17 +697,15 @@ In Figure~\ref{fig:GraPlannersSimulado} is shown a graph of the flight times of 
 	\caption{Flight Time Graph of Mission Planners Relative to 5 Tests in Simulator.\label{fig:GraPlannersSimulado}}
 	\end{figure}
 	
-	Next, you can see the results for the tests performed in real environment used by both planners.
-	
-	In Figure~\ref{fig:maps} the map where the tests were performed is shown on the map at the Faculty of Physical Education and Physiotherapy of Federal University of Amazonas.
-	
+Additional experiments are performed with the real UAV system (3DR IRIS+). Figure~\ref{fig:maps} shows the map of experimental environment (Faculty of Physical Education and Physiotherapy of Federal University of Amazonas).
+
 		\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.47\textwidth]{map.eps}
 	\caption{Warehouse, Production Line X, Production Line Y and Costumer in the Map.\label{fig:maps}}
 	\end{figure}
 	
-	In Table~\ref{table:plannersReal}, it can be seen that the mission time executed by planner B in real environment also shown a shorter time compared to planner A in the five tests:
+Table~\ref{table:plannersReal} shows the the flight times for both planners. The results indicates that the planner B also shown a shorter time compared to planner A in real environment.
 	
 	\begin{table}[H]
 \centering
@@ -725,7 +724,7 @@ In Figure~\ref{fig:GraPlannersSimulado} is shown a graph of the flight times of 
 \caption{Mission Planners Flight Time - Real.\label{table:plannersReal}}
 \end{table}
 
-In Figure~\ref{fig:GraPlannersReal} is shown a graph of the flight times of both planners in the five tests done in real environment.
+Figure~\ref{fig:GraPlannersReal} shows a bar graph of the flight times of both planners in the five tests with IRIS+.
 
 \begin{figure}[H]
 	\centering
@@ -733,16 +732,16 @@ In Figure~\ref{fig:GraPlannersReal} is shown a graph of the flight times of both
 	\caption{Flight Time Graph of Mission Planners Relative to 5 Tests in a Real Environment.\label{fig:GraPlannersReal}}
 	\end{figure}
 	
-	As presented in the section, planner B was faster than planner A, relative to execution time. This can also be verified in real environment, as shown in tables \ref{table:plannersSimulado} and \ref{table:plannersReal} of mission execution time in simulated and real environment.
+	The aforementioned results confirmed the prediction provided by the planner evaluation methodology, and the planner B is faster than planner A in all the tests with simulations and IRIS+.
 
 \section{Conclusions}
 \label{sec:conclusao}
 
 We have developed an evaluation methodology for UAV mission planner in an industrial production scenario as illustrated in the Section~\ref{sec:method}. We used this methodology of evaluation to performs in two different algorithms in order to verify the performance of them.
 
-In addition, we have used a commercial UAV to perform our methodology. We have created a framework with a set of mission commands to control the UAV using dronekit api as presented in the Section~\ref{sec:uav} and \ref{sec:method}. 
+In addition, we have used a commercial UAV to perform our methodology. We have created a framework with a set of mission commands to control the UAV using dronekit API as presented in the Section~\ref{sec:uav} and \ref{sec:method}. 
 
-Further works includes the use of computational vision for the recognition of inputs, and to improve the modelling of the optimization problem for better results in cost evaluation.
+Further works includes the use of computational vision for the recognition of inputs, and to improve the modeling of the optimization problem for better results in cost evaluation.
 
 
 %\selectlanguage{brazil}
