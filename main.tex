@@ -113,7 +113,7 @@ This paper presents the development of mission planners in intralogistics for a 
 
 % Use of a commercial UAV - 3DR IRIS + in the intra-logistics, {\it i.e., Internal Logistics of movement and storage.}, aiming to give another option of agility in the manufacturing process. Additionally, it will be approached a study of evaluation of the cost of the missions that the UAV executes in this process.
 
-Logistics has become a competitive and fundamental factor for organizations, involving the management, conservation, and supervision of freight transport. In addition, excellent logistics means customer satisfaction; so speed is still an important factor in a successful logistics process~\cite{drone4logistic}. Currently, one of the solutions to this type of problem is the use of unmanned aerial vehicles (UAVs). Nowadays, UAVs are mostly remotely piloted vehicles (RPV), since their operations are carried out by ground operators. If the tasks performed by an UAV are performed autonomously, it would relieve the work of these operators, since they perform tedious and repetitive tasks~\cite{pascarella2013autonomic}.
+Logistics has become a competitive and fundamental factor for organizations, involving the management, conservation, and supervision of freight transport. In addition, excellent logistics means customer satisfaction; so speed is still an important factor in a successful logistics process~\cite{drone4logistic}. Currently, one of the solutions to this type of problem is the use of unmanned aerial vehicles (UAVs). Nowadays, UAVs are mostly remotely piloted vehicles (RPV), since their operations are carried out by ground operators. If the tasks performed by a UAV are performed autonomously, it would relieve the work of these operators, since they perform tedious and repetitive tasks~\cite{pascarella2013autonomic}.
 
 A probable improvement of these logistics systems is the increase of the UAVs automation, which results in costs minimization. Consequently, investments and studies related to stand-alone UAVs are important to the smart factories development~\cite{hern2014dhl}. However, one of the main problems for using autonomous UAVs is the system's reliability and intelligence. Thus, increased employment of autonomous UAVs requires the development of devices, which are able to perform tasks and interact with the environment in an intelligent and reliable way.
 
@@ -126,7 +126,7 @@ Autonomous UAVs need to know what will happen in a future instant and what is th
 In summary, the main contributions of this study are:
 \begin{itemize}
 \item a novel evaluation methodology for UAV intralogistics mission planners algorithms, which allows predicting the planners performance and also obtaining optimal algorithms and missions;
-\item development of an intralogistcs mission planner framework that provides mission commands for an UAV system; 
+\item development of an intralogistcs mission planner framework that provides mission commands for a UAV system; 
 \item use of a commercial UAV system in intralogistics missions to demonstrate the evaluation methodology efficiency.
 \end{itemize}
 
@@ -161,7 +161,7 @@ Key definitions related to the case study and the application developed in this 
 
 \begin{myDefinition} {Mission Command} 
 
-Mission Command is a command created to execute a task such as to go from one location to another, get a package using a robot gripper, and land an UAV.
+Mission Command is a command created to execute a task such as to go from one location to another, get a package using a robot gripper, and land a UAV.
 \label{def:missioncommand}
 \end{myDefinition}
 
@@ -281,7 +281,7 @@ The IRIS+ UAV is integrated into a robot gripper to take and leave packages duri
 	\label{fig:hardArch}
 \end{figure}
 
-The Mission Planner reads the warehouse inputs and client order and produces a \texttt{.mission} file, which contains the list of mission commands needed for producing the required client order. This \texttt{.mission} file is used by an UAV Control Program to control the UAV and to produce the low-level movement commands (cf. Definition~\ref{def:missioncommand}).
+The Mission Planner reads the warehouse inputs and client order and produces a \texttt{.mission} file, which contains the list of mission commands needed for producing the required client order. This \texttt{.mission} file is used by a UAV Control Program to control the UAV and to produce the low-level movement commands (cf. Definition~\ref{def:missioncommand}).
 
 \textcolor{red}{Thiago, poderias conectar as definicoes com o texto... como fiz acima...}
 
@@ -292,8 +292,8 @@ In order to control the UAV from a PC, we have used the dronekit API that transl
 \item \texttt{GoTo}: command to move the  UAV to a certain location;
 \item \texttt{TakePackage}: command to collect an input/product through a robot gripper;
 \item \texttt{LeavePackage}: command to leave an input or product from a robot gripper;
-\item \texttt{Wait}: command to make an UAV to hover (wait);
-\item \texttt{Land}: command to make an UAV to land.
+\item \texttt{Wait}: command to make a UAV to hover (wait);
+\item \texttt{Land}: command to make a UAV to land.
 \end{itemize}
 
 \begin{figure}[H]
@@ -307,13 +307,13 @@ In order to control the UAV from a PC, we have used the dronekit API that transl
 
 
 %%%%%%%%%%%%%%%
-\section{Methodology of Time Cost Evaluation, UAV use and Mission Planning}
+\section{Methodology of Time Cost Evaluation, UAV Use and Mission Planning}
 \label{sec:method}
 %%%%%%%%%%%%%%%
 
 %\commentib{Modifique o t\'itulo (expanda). Metodologia de qu\^e?? Tente fazer algo parecido com o do trabalho.}
 
-In this section, there will have a brief clarification of the contents of this paper such as the way we used to evaluate the algorithm cost of the mission, a study case to a UAV and contents about mission planning.
+In this section, there is a brief clarification of the contents of this study such as the way we evaluate the algorithm mission cost, a study case to a UAV and contents about mission planning.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Case Study}
@@ -335,7 +335,7 @@ The Figure~\ref{fig:useCase} shows that there are three types of inputs in the w
 The task to be performed is the production of the customer order, where the UAV will collect supplies from the warehouse, take to the production line and once the production of a certain product is finished, it will lead to the customer.
 
 %%%%%%%%%%%%%%%
-\subsection{Modelling an UAV Intralogistics Mission as an Optimization Problem }
+\subsection{Modelling a UAV Intralogistics Mission as an Optimization Problem }
 \label{ssec:modelo}
 %%%%%%%%%%%%%%%
 
