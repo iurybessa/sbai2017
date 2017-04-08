@@ -1,48 +1,5 @@
-This is BibTeX, Version 0.99d (TeX Live 2014/dev)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
-The top-level auxiliary file: main.aux
+This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
 The style file: dcu.bst
 Database file #1: exemplo.bib
 Warning--empty institution in krozel1988search
-You've used 18 entries,
-            2921 wiz_defined-function locations,
-            734 strings with 8110 characters,
-and the built_in function-call counts, 79087 in all, are:
-= -- 12984
-> -- 993
-< -- 0
-+ -- 6189
-- -- 301
-* -- 6739
-:= -- 15856
-add.period$ -- 39
-call.type$ -- 18
-change.case$ -- 251
-chr.to.int$ -- 18
-cite$ -- 19
-duplicate$ -- 273
-empty$ -- 562
-format.name$ -- 360
-if$ -- 14236
-int.to.chr$ -- 5
-int.to.str$ -- 0
-missing$ -- 16
-newline$ -- 81
-num.names$ -- 187
-pop$ -- 97
-preamble$ -- 1
-purify$ -- 270
-quote$ -- 0
-skip$ -- 247
-stack$ -- 0
-substring$ -- 18320
-swap$ -- 46
-text.length$ -- 252
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 68
-warning$ -- 1
-while$ -- 396
-width$ -- 0
-write$ -- 262
 (There was 1 warning)

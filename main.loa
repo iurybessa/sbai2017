@@ -1,5 +1,5 @@
-\contentsline {authors}{\scshape {Thiago Cavalcante}$^\ensuremath {*}$}{1}
+\contentsline {authors}{\scshape {Thiago Cavalcante}$^\TextOrMath {\textasteriskcentered }{*}$}{1}
 \contentsline {authors}{\hspace {-2ex}~,}{1}
-\contentsline {authors}{\scshape {Lucas Carvalho Cordeiro}$^\ensuremath {\dagger }$}{1}
+\contentsline {authors}{\scshape {Lucas Carvalho Cordeiro}$^\TextOrMath {\textdagger }{\dagger }$}{1}
 \contentsline {authors}{\hspace {-2ex}~,}{1}
-\contentsline {authors}{\scshape {Iury Valente de Bessa}$^\ensuremath {\ddagger }$}{1}
+\contentsline {authors}{\scshape {Iury Valente de Bessa}$^\TextOrMath {\textdaggerdbl }{\ddagger }$}{1}

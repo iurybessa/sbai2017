@@ -266,7 +266,7 @@ An optimization problem can be defined as a finite set of variables, where the c
 
 % \subsection{UAV Movement System}
 
-In this section, we first investigate the UAV platform used (3DR IRIS+) in this work, verifying the hardware characteristics and the control framework developed for intralogistics missions. The core hardware of the UAV IRIS+ is the Pixhawk and we can control it using a Python library (dronekit) that uses Micro Air Vehicle Link (MAVLink) protocol \commentib{REF para MAVLink}. MAVLink is a protocol for communicating with small unmanned vehicle. It is designed as a header-only message marshalling library. 
+In this section, we first investigate the UAV platform used (3DR IRIS+) in this work, verifying the hardware characteristics and the control framework developed for intralogistics missions. The core hardware of the UAV IRIS+ is the Pixhawk and we can control it using a Python library (dronekit) that uses Micro Air Vehicle Link (MAVLink) protocol \cite{meier2011pixhawk}. MAVLink is a protocol for communicating with small unmanned vehicle. It is designed as a header-only message marshalling library. 
 
 The IRIS+ UAV is integrated to a robot gripper to take and leave packages during missions. We have connected a servo motor to the Pixhawk by one of the pulse width modulation (PWM) outputs. Figure~\ref{fig:hardArch} shows the hardware architecture of system and the interconnections between each component module. Figure~\ref{fig:sysArch} shows the software components of mission planning framework.
 

@@ -47,13 +47,6 @@ Garecht, J.  \harvardyearleft 2010\harvardyearright .
 \newblock Accessed in: 17/10/2015.
 \newline\harvardurl{\url{http://www.thefundraisingauthority.com/fundraising-basics/fundraising-plan/}}
 
-\harvarditem[Graham et~al.]{Graham, Lawler, Lenstra \harvardand\
-  Kan}{1979}{graham1979optimization}
-Graham, R.~L., Lawler, E.~L., Lenstra, J.~K. \harvardand\ Kan, A.~R.
-  \harvardyearleft 1979\harvardyearright .
-\newblock Optimization and approximation in deterministic sequencing and
-  scheduling: a survey, {\em Annals of discrete mathematics} {\bf 5}:~287--326.
-
 \harvarditem{Hern}{2014}{hern2014dhl}
 Hern, A.  \harvardyearleft 2014\harvardyearright .
 \newblock Dhl launches first commercial drone ‘parcelcopter’delivery
@@ -63,6 +56,14 @@ Hern, A.  \harvardyearleft 2014\harvardyearright .
 Krozel, J.~A.  \harvardyearleft 1988\harvardyearright .
 \newblock Search problems in mission planning and navigation of autonomous
   aircraft, {\em Technical report}.
+
+\harvarditem[Meier et~al.]{Meier, Tanskanen, Fraundorfer \harvardand\
+  Pollefeys}{2011}{meier2011pixhawk}
+Meier, L., Tanskanen, P., Fraundorfer, F. \harvardand\ Pollefeys, M.
+  \harvardyearleft 2011\harvardyearright .
+\newblock Pixhawk: A system for autonomous flight using onboard computer
+  vision, {\em Robotics and automation (ICRA), 2011 IEEE international
+  conference on}, IEEE, pp.~2992--2997.
 
 \harvarditem[M{\"u}ller et~al.]{M{\"u}ller, Hopf \harvardand\
   Krones}{2012}{muller2012analyzing}
