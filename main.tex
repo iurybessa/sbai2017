@@ -270,34 +270,36 @@ An optimization problem can be defined as a finite set of variables, where the c
 
 % \subsection{UAV Movement System}
 
-In this section, we first investigate the UAV platform used (3DR IRIS+) in this work, verifying the hardware characteristics and the control framework developed for intralogistics missions. The core hardware of the UAV IRIS+ is the Pixhawk and we can control it using a Python library (dronekit) that uses Micro Air Vehicle Link (MAVLink) protocol \cite{meier2011pixhawk}. MAVLink is a protocol for communicating with small unmanned vehicle. It is designed as a header-only message marshalling library. 
+In this section, we first investigate the UAV platform used (3DR IRIS+) in this study, describing the hardware characteristics and the control framework developed for intralogistics missions. The core hardware of the UAV IRIS+ is the Pixhawk and we can control it using a Python library (dronekit), which uses Micro Air Vehicle Link (MAVLink) protocol~\cite{meier2011pixhawk}. MAVLink is a protocol for communicating with small unmanned vehicle, which is designed as a header-only message marshalling library.  \textcolor{red}{Thiago, poderias incluir citacao da biblioteca?}
 
-The IRIS+ UAV is integrated to a robot gripper to take and leave packages during missions. We have connected a servo motor to the Pixhawk by one of the pulse width modulation (PWM) outputs. Figure~\ref{fig:hardArch} shows the hardware architecture of system and the interconnections between each component module. Figure~\ref{fig:sysArch} shows the software components of mission planning framework.
-
+The IRIS+ UAV is integrated into a robot gripper to take and leave packages during missions. We have connected a servo motor to the Pixhawk by one of the pulse width modulation (PWM) outputs. Figure~\ref{fig:hardArch} shows the hardware architecture of system and the interconnections between each component module. Figure~\ref{fig:sysArch} shows the mission planning framework software components.
+%
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\columnwidth]{arquiteturaIHW.eps}
-	\caption{System Hardware Archtecture.\label{fig:hardArch}}
+	\caption{System Hardware Archtecture. \textcolor{red}{Thiago, poderias aumentar a fonte do texto da figura?}}
+	\label{fig:hardArch}
 \end{figure}
 
-The Mission Planner reads the warehouse inputs and client order and produces a \texttt{.mission} file, that contains the list of mission commands needed to produce the required client order. This \texttt{.mission} file is used by UAV Control Program to control the UAV and produce the low-level movement commands.
+The Mission Planner reads the warehouse inputs and client order and produces a \texttt{.mission} file, which contains the list of mission commands needed for producing the required client order. This \texttt{.mission} file is used by an UAV Control Program to control the UAV and to produce the low-level movement commands (cf. Definition~\ref{def:missioncommand}).
 
-In order to control the UAV from a PC, we have used the dronekit API that translates MAVLink commands to a Python function. In the ground station, the PC is running the UAV Control Program that controls the UAV using a radio module connected to the PC via USB. We have created a bunch of functions in the control program for some UAV actions. The movement functions are shown below:
+\textcolor{red}{Thiago, poderias conectar as definicoes com o texto... como fiz acima...}
 
+In order to control the UAV from a PC, we have used the dronekit API that translates MAVLink commands to a Python function. In the ground station, the PC is running the UAV Control Program that controls the UAV using a radio module connected to the PC via USB. We have created a bunch of functions in the control program for the most common UAV actions. The movement functions are described below:
+%
 \begin{itemize}
 \item \texttt{TakeOff}: takeoff command of the UAV;
-\item \texttt{GoTo}: command to move the  UAV to certain location;
+\item \texttt{GoTo}: command to move the  UAV to a certain location;
 \item \texttt{TakePackage}: command to collect an input/product through a robot gripper;
 \item \texttt{LeavePackage}: command to leave an input or product from a robot gripper;
-\item \texttt{Wait}: command to make the UAV to hover (wait);
-\item \texttt{Land}: command to make the UAV land.
+\item \texttt{Wait}: command to make an UAV to hover (wait);
+\item \texttt{Land}: command to make an UAV to land.
 \end{itemize}
-
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.45\textwidth]{sysArch.eps}
-	\caption{System's Archtecture.\label{fig:sysArch}}
+	\caption{System's Architecture. \textcolor{red}{Thiago, poderias aumentar a fonte do texto da figura?}\label{fig:sysArch}}
 \end{figure}
 
 %\subsection{Mission Planning}
