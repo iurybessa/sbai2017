@@ -95,14 +95,14 @@
 \begin{abstract}
  Este artigo apresenta o desenvolvimento de planejadores de missão na intralogística para um veículo aéreo não tripulado comercial, equipado com uma garra robótica, em um ambiente industrial onde há almoxarifado de insumos, linhas de produção e deposito de produtos. Neste trabalho, o planejador gera comandos necessários para realizar uma missão a qual compreende desde a entrega de insumos trazidos do almoxarifado à linha de produção, até a entrega do produto final ao cliente. Foram desenvolvidas duas abordagens diferentes para planejamento de missão: na primeira abordagem, utilizou-se uma simples heurística que resolve o problema; já na segunda abordagem, utilizou-se uma técnica com escalonamento de tarefas (processo de produção). Estas abordagens seguem algumas regras de produção que serão apresentadas ao longo deste trabalho. Foi realizado uma avaliação dos planejadores de missão desenvolvidos, verificando o custo de ambos, realizando algumas medidas de tempo de execução, bem como comparando estes resultados com o custo ótimo obtido  com a ferramenta de otimização CPLEX.   \end{abstract}
 
-\keywords{Planejamento de Missão, Sistemas de Manufatura.}
+\keywords{Planejamento de Missão, Sistemas de Manufatura, Problemas de Otimiza\c{c}\~ao.}
 
 \selectlanguage{english}
 \begin{abstract}
 This paper presents the development of mission planners in intralogistics for a commercial unmanned aerial vehicle equipped with a robotic gripper in an industrial environment, which consists of an input warehouse, production lines, and a product warehouse. In this study, the planner produces the needed commands for carrying out a given mission, which includes the delivery of inputs brought from the warehouse to the production line until the final product is delivered to the customer (product warehouse). Two different approaches are developed for mission planning: in the first approach, a simple heuristic is used to solve the mission problem; in the second approach, a technique with task scheduling (production process) is employed; both approaches follow a set of production rules. An evaluation of the developed mission planners is performed, verifying the cost of both approaches, measuring the execution time, and comparing those results with the optimum cost obtained with the IBM ILOG CPLEX optimizer.
 \end{abstract}
 
-\keywords{Mission Planning, Manufacturing Systems.}
+\keywords{Mission Planning, Manufacturing Systems, Optimization Problems.}
 ]
 
 % CONTRIBUIÇÃO
@@ -224,7 +224,8 @@ Firstly, a mission can be defined as a goal that needs to be completed. In the c
 \subsection{Optimization Problems}
 %--------------------------------------------
 
-An optimization problem is about finding the best solution (relative to a certain criterion) among a set of available alternatives. For example, the popular bin packaging problem that aims to find the number of boxes of a certain size to store a set of objects of indicated sizes; optimization involves, for example, finding the least amount of boxes. An optimization problem is usually represented as follows:
+An optimization problem is related to finding the best solution (relative to a certain criterion) among a set of available alternatives. For instance, the popular bin packaging problem that aims to find the number of boxes of a certain size to store a set of objects of indicated sizes; optimization involves, for example, finding the least amount of boxes. An optimization problem is usually represented as follows:
+
 \begin{equation}
 	\label{eq:optproblema}
 	\begin{array}{cc}
@@ -232,6 +233,8 @@ An optimization problem is about finding the best solution (relative to a certai
 		\textrm{ subject to } & \textbf{x}\in\Omega.\\
 	\end{array}
 \end{equation}	
+
+\textcolor{red}{Precisas definir o termo omega da formula}
 	
 An optimization problem can be defined as a finite set of variables, where the correct values for the variables specify the optimal solution. If the variables are of the set of real, the problem is called continuous, and if they can only have a finite set of distinct values, the problem is called combinatorial \protect\cite{francq2011optimization}.
 
