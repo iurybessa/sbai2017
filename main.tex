@@ -510,23 +510,24 @@ Finally, the evaluation of each mission planner is computed w.r.t. the optimal c
 \section{Experimental Evaluation}
 \label{sec:results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- This section shows the experimental results obtained in this project, as well as the cost evaluation of two techniques used compared to the optimum cost implemented with the CPLEX solver.
+
+This section describes the experimental results obtained in this project, as well as the cost evaluation of two techniques used, which are compared to the optimum cost implemented with the CPLEX solver.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experimental Environmental and Objectives}
 \label{ssec:expobjandenv}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-In order to clarify the evaluation methodology efficiency, two mission planner algorithms are evaluated using the proposed metric, and the evaluation result is compared with practical execution time of algorithms that are implemented in the simulation tool SITL\footnote{Simulator that allows executing a Plane, Copter or Rover without the need of a hardware)} and in a real UAV system (3DR IRIS+). The mission planning algorithms were executed in a computer running Linux Mint, core i7 processor and 8 GB of RAM. In order to control the UAV, we run the control program, which uses the dronekit API as an interface between a high level program language (Python) and the protocol that the UAV understand (MAVLink), in the same computer where there is a radio module connected via USB communicating with the UAV radio module.
-
+In order to clarify the evaluation methodology efficiency, two mission planner algorithms are evaluated using the proposed metric, and the evaluation result is compared with practical execution time of algorithms that are implemented in the simulation tool SITL\footnote{Simulator that allows executing a Plane, Copter or Rover without the need of a hardware)} and in a real UAV system (3DR IRIS+). The mission planning algorithms were executed in a computer running Linux Mint, core i7 processor and 8 GB of RAM. In order to control the UAV, we run the control program, which uses the dronekit API as an interface between a high level program language (Python) and the protocol that the UAV understands (MAVLink), in the same computer where there is a radio module connected via USB communicating with the UAV radio module.
 
 \subsection{Mission Planners}
 
-In this work, we considered that mission planner is a software that generates a production mission given the warehouse and customer order. This program generates a \texttt{.mission} extension file containing a set of mission commands, as shown in the Section~\ref{sec:uav}. Two examples of planners are presented in this work and will be employed to demonstrate the cost evaluation methodology.
+In this study, we considered that mission planner is a software that generates a production mission given the warehouse and customer order. This program generates a \texttt{.mission} extension file containing a set of mission commands, as described in Section~\ref{sec:uav}. Two examples of planners are presented in this work and are employed to demonstrate the cost evaluation methodology.
 
 \subsubsection{Planner A}
 
-In the Algorithm~\ref{alg:planA}, we show a strategy to solve the mission planning problem and we denoted as Planner A. In this Algorithm, the production of X products has a higher priority over Y, {\it i.e.}, the inputs are firstly allocated to production of X orders, and the production of Y products begins if there is no other X to be produced. The general steps of planner A are shown in the Algorithm~\ref{alg:planA}.
-
+In Algorithm~\ref{alg:planA}, we show one strategy to solve the mission planning problem and we denoted it as Planner A. In this particular algorithm, the production of X products has a higher priority over Y, {\it i.e.}, the inputs are firstly allocated to production of X orders, and the production of Y products begins if there is no other X to be produced. The general steps of planner A are described in Algorithm~\ref{alg:planA}.
+%
 \begin{algorithm}[ht]
 \footnotesize
 \KwIn{warehouse}
@@ -564,8 +565,9 @@ bring Y to the client\;
 \end{algorithm}
 
 \subsubsection{Planner B}
-In planner B, unlike planner A where the UAV is idle waiting for each product to be produced and only then head to the client, the UAV continues the production process while the output of the products does not end. After the production of each product is finished, the UAV stops the task that was running and goes to the production line of that particular product, performs the collection and takes it to the client. After that, it returns to run the task that was previously running, performing a scheduling of tasks. The general steps of planner B are shown in the Algorithm~\ref{alg:planB}.
-
+\textcolor{red}{Thiago, esta frase ficou um pouco confusa com a descricao do planner A... tente explicar melhor o planner B... e depois falar da diferenca para o planner A...}
+In planner B, unlike planner A, where the UAV is idle waiting for each product to be produced and only then delivered to the client, the UAV continues the production process while the output of the products does not end. After the production of each product is finished, the UAV stops the task that was running and goes to the production line of that particular product, performs the collection and takes it to the client. After that, it returns to run the task that was previously running, performing a scheduling of tasks. The general steps of planner B are shown in the Algorithm~\ref{alg:planB}.
+%
 \begin{algorithm}[ht]
 \footnotesize
 \KwIn{warehouse}
@@ -617,7 +619,7 @@ keep producing\;
 \subsection{Cost Evaluation}
 \label{ssec:acusto}
 
-The results of each mission planner is compared to the optimal solution obtained with the branch-and-cut algorithm of the IBM/ILOG CPLEX 12.4 tool developed in C++. In order to obtain better results to do the comparison, it was considered only the time in which the UAV takes to finish the production of a product.
+The results of each mission planner is compared to the optimal solution obtained with the branch-and-cut algorithm of the IBM/ILOG CPLEX 12.4 tool developed in C++ \textcolor{red}{Thiago, incluir citacao da ferramenta}. In order to obtain better results to perform the comparison, it was considered only the time in which the UAV takes to finish the production of a product.
 
 \begin{table}[H]
 \centering
@@ -739,15 +741,20 @@ Figure~\ref{fig:GraPlannersReal} shows a bar graph of the flight times of both p
 	
 	The aforementioned results confirmed the prediction provided by the planner evaluation methodology, and the planner B is faster than planner A in all the tests with simulations and IRIS+.
 
+\textcolor{red}{Thiago, nao ficou claro pra mim os objetivos dos experimentos... poderias escrever claramente quais seriam as research questions que devemos responder nos experimentos? Alem disso, precisas descrever uma secao sobre ameacas da validade dos resultados... como exemplo, olhe este artigo: https://arxiv.org/pdf/1610.04761.pdf}
+
+%---------------------------------
 \section{Conclusions}
 \label{sec:conclusao}
+%---------------------------------
 
-We have developed an evaluation methodology for UAV mission planner in an industrial production scenario as illustrated in the Section~\ref{sec:method}. We used this methodology of evaluation to performs in two different algorithms in order to verify the performance of them.
+\textcolor{red}{Thiago, precisas melhorar substancialmente esta secao... a conclusao deve ser mais forte. Precisas enfatizar as contribuicoes e os principais resultados do seu trabalho.}
+
+We have developed an evaluation methodology for UAV mission planner in an industrial production scenario, as described in Section~\ref{sec:method}. We used this methodology of evaluation to perform two different algorithms to verify the performance of them.
 
 In addition, we have used a commercial UAV to perform our methodology. We have created a framework with a set of mission commands to control the UAV using dronekit API as presented in the Section~\ref{sec:uav} and \ref{sec:method}. 
 
-Further works includes the use of computational vision for the recognition of inputs, and to improve the modeling of the optimization problem for better results in cost evaluation.
-
+Future work includes the use of computational vision for the recognition of inputs, and improvements of the optimization problem modeling for better results in cost evaluation.
 
 %\selectlanguage{brazil}
 %
