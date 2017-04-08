@@ -313,7 +313,7 @@ In order to control the UAV from a PC, we have used the dronekit API that transl
 
 %\commentib{Modifique o t\'itulo (expanda). Metodologia de qu\^e?? Tente fazer algo parecido com o do trabalho.}
 
-In this section, there is a brief clarification of the contents of this study such as the way we evaluate the algorithm mission cost, a study case to a UAV and contents about mission planning.
+In this section, we evaluate the algorithm mission cost and describe a case study to a UAV and contents about mission planning.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Case Study}
@@ -321,18 +321,16 @@ In this section, there is a brief clarification of the contents of this study su
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In order to model the mission planning problem as an optimization problem, the case study shown in Figure~\ref{fig:useCase} is used.
-
+%
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.45\textwidth]{useCase.eps}
 	\caption{Case Study Representation.\label{fig:useCase}}
 \end{figure}
-
-
 	
-The Figure~\ref{fig:useCase} shows that there are three types of inputs in the warehouse ({\it i.e.}, A, B, and C) and two production lines that produces two different products ({\it i.e.}, X and Y). Each production line produces only one type of product and has a characteristic production time.  In the Figure~\ref{fig:useCase} shows that to produce a product of type X, two inputs of type A and one input of type C are required, and to produce a product of type Y, two inputs of type B and one input of type C are required. The production time of a X product is $4 p.u.$ and the time of production of product Y is $6 p.u.$. A production unit ($1 p.u.$) was considered to be a \texttt{GoTo} command performed by the UAV.
+Figure~\ref{fig:useCase} shows that there are three types of inputs in the warehouse (i.e., A, B, and C) and two production lines that produces two different products (i.e., X and Y). Each production line produces only one type of product and has a characteristic production time. Figure~\ref{fig:useCase} shows that to produce a product of type X, two inputs of type A and one input of type C are required, and to produce a product of type Y, two inputs of type B and one input of type C are required. The production time of a X product is $4 p.u.$ and the time of production of product Y is $6 p.u.$. A production unit ($1 p.u.$) is considered to be a \texttt{GoTo} command performed by the UAV. \textcolor{red}{Tempo de producao de produto eh medido em p.u.? Esta parte ficou confusa...}
 
-The task to be performed is the production of the customer order, where the UAV will collect supplies from the warehouse, take to the production line and once the production of a certain product is finished, it will lead to the customer.
+The task to be performed is the production of the customer order, where a given UAV collects supplies from the warehouse, takes that to the production line, and once the production of a certain product is finished, the UAV delivers it to the customer.
 
 %%%%%%%%%%%%%%%
 \subsection{Modelling a UAV Intralogistics Mission as an Optimization Problem }
