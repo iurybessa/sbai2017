@@ -337,9 +337,7 @@ The task to be performed is the production of the customer order, where a given 
 \label{ssec:modelo}
 %%%%%%%%%%%%%%%
 
-The purpose of this subsection is to elaborate a modelling of the mission planning problem into an optimization problem. In order to find, afterwards, the shortest execution time of all the tasks (minimization), based on the case study explained in Section~\ref{sec:ec}.
-
-The notation used is given below:
+The purpose of this subsection is to elaborate a modelling of the mission planning problem into an optimization problem. \textcolor{red}{Thiago, esta frase esta sem concordancia...} In order to find, afterwards, the shortest execution time of all the tasks (minimization), based on the case study explained in Section~\ref{sec:ec}. The notation used is given below:
 
 \begin{itemize}
 \item $\mathcal{T} = \set{T_j \vert j\in \mathbb{N}^{*},j\leq N}$ is the set of $N$ tasks;
@@ -351,8 +349,8 @@ The notation used is given below:
 
 \paragraph{Decision variable}
 
-The variable $x_{ij}$ is a binary decision variable which takes the value $1$ if the task $j$ is running on the machine $i$, and $0$ otherwise. The variable $C_ {mission}$ is the variable that we want to optimize.
-
+The variable $x_{ij}$ is a binary decision variable that takes the value $1$ if the task $j$ is running on the machine $i$, and $0$ otherwise. The variable $C_ {mission}$ is the variable that we want to optimize.
+%
 \begin{equation}
 \label{eq:decision}
 \begin{split}
@@ -366,15 +364,15 @@ x_{ij}=\begin{cases}
 
 \paragraph{Objective function}
 
-The objective function is the total mission cost $C_{mission}$ (total process execution time) that may be modeled as follows.
+The objective function is the total mission cost $C_{mission}$ (total process execution time) that can be modeled as follows.
+%
 \begin{equation}
 \label{eq:objfunction}
 C_{mission}=\sum_{i=1}^{M}{\sum_{j=1}^{N}{
  (p_j+s_j)x_{ij}}},
 \end{equation}
 
-The Eq.~\eqref{eq:objfunction} represents the sum of the the duration time $p_j$ of each travel from one place another in the case study explained in Section~\ref{sec:ec}, considering the production time $s_j$ in each production line.
-
+Eq.~\eqref{eq:objfunction} represents the sum of the duration time $p_j$ of each travel from one place another in the case study explained in Section~\ref{sec:ec}, considering the production time $s_j$ in each production line.
 
 %\begin{equation}
 %\label{eq:cmax}
@@ -386,7 +384,7 @@ The Eq.~\eqref{eq:objfunction} represents the sum of the the duration time $p_j$
 \paragraph{Constraints}
 
 \begin{itemize}
-\item Each task must be executed/processed in an unique machine:
+\item Each task must be executed/processed in a unique machine:
 
 \begin{equation}
 \label{eq:unicity}
@@ -400,14 +398,15 @@ The Eq.~\eqref{eq:objfunction} represents the sum of the the duration time $p_j$
 C_{mission}\leq C_{max}
 \end{equation}
 
-The Eq.~\eqref{eq:execTime} indicates that the mission cost will be always less or equal to a maximum cost denoted by $C_{max}$, obtained empirically.
+Eq.~\eqref{eq:execTime} indicates that the mission cost is always less or equal than a maximum cost denoted by $C_{max}$, obtained empirically.
 \end{itemize}
 
 % For a better understanding what the summation means, let's suppose that there are two production lines and tree products to be produced (tasks), therefore, $x_{00}+x_{10}+x_{20}=1$, $x_{01}+x_{11}+x_{21}=1$ and $x_{02}+x_{12}+x_{22}=1$, so, it can be verified that those restrictions are set, there will be only one task running in a machine.
 
 \paragraph{Resulting optimization problem}
 
-The resulting optimization problem consists in minimizing $C_{max}$ with relation to the decision variable \eqref{eq:decision} constrained to the condition in Eq. \eqref{eq:unicity} and \eqref{eq:execTime}. Thus, the optimization problem is represented as follows:
+The resulting optimization problem consists in minimizing $C_{max}$ w.r.t. the decision variable \eqref{eq:decision} constrained to the condition in Eq. \eqref{eq:unicity} and \eqref{eq:execTime}. Thus, the optimization problem is represented as follows:
+%
 \begin{equation}
 	\label{eq:optproblem}
 	\begin{array}{ccc}
