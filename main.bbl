@@ -1,5 +1,10 @@
 \begin{thebibliography}{xx}
 
+\harvarditem{3D~Robotics}{n.d.}{dronekit}
+3D~Robotics, I.  \harvardyearleft n.d.\harvardyearright .
+\newblock Dronekit.
+\newline\harvardurl{dronekit.io}
+
 \harvarditem{Adolf \harvardand\ Andert}{2010}{adolf2010onboard}
 Adolf, F. \harvardand\ Andert, F.  \harvardyearleft 2010\harvardyearright .
 \newblock {\em Onboard mission management for a VTOL UAV using sequence and
@@ -81,6 +86,12 @@ Pascarella, D., Venticinque, S. \harvardand\ Aversa, R.  \harvardyearleft
   Intelligence and Computing, 2013 IEEE 10th International Conference on and
   10th International Conference on Autonomic and Trusted Computing (UIC/ATC)},
   IEEE, pp.~410--415.
+
+\harvarditem{Pehcevski \harvardand\ Piwowarski}{2009}{pehcevski2009evaluation}
+Pehcevski, J. \harvardand\ Piwowarski, B.  \harvardyearleft
+  2009\harvardyearright .
+\newblock Evaluation metrics for structured text retrieval, {\em Encyclopedia
+  of Database Systems}, Springer, pp.~1015--1024.
 
 \harvarditem[Ramirez-Atencia et~al.]{Ramirez-Atencia, Bello-Orgaz, R-Moreno
   \harvardand\ Camacho}{2014}{ramirez2014solving}
