@@ -119,7 +119,7 @@ A probable improvement of these logistics systems is the increase of the UAVs au
 
 Autonomous UAVs need to know what will happen in a future instant and what is the best decision to make at the present time, and therefore require strategies not only to decompose their missions into meaningful sub-tasks, but also to track progress toward mission goals and the evolution of these tasks relative to the autonomous UAVs capabilities~\cite{finn2012developments}. As a consequence, in order to successfully perform a mission, it is recommended to perform task planning~\cite{successplan}. Mission planning problems consist of planning events to meet certain requirements associated with the plan and also improving mission objectives~\cite{krozel1988search}. Therefore, this is one of the main challenges faced in solving this type of problem.
 
-\textcolor{green}{Professor, nao consegui encontrar o erro de concordancia, soh mudei pra voz ativa... The academy has done some great researches about evaluation and optimization of mission planning in the last years}. \citeasnoun{schwarz2012towards} has used ant colony to optimize missions for an automated guided vehicle (AVG). Another paper investigates energy consumption for a factory and evaluates the logistic planning processes using statistical metrics of evaluation~\cite{muller2012analyzing}.
+The academy has done some great researches about evaluation and optimization of mission planning in the last years. \citeasnoun{schwarz2012towards} have used ant colony to optimize missions for an automated guided vehicle (AVG). Another paper investigates energy consumption for a factory and evaluates the logistic planning processes using statistical metrics of evaluation~\cite{muller2012analyzing}.
 
 An evaluation metrics consists of a set of measures that follow a common underlying evaluation methodology. It is used to evaluate the efficacy of information retrieval systems and to justify theoretical and/or pragmatical developments of these systems \cite{pehcevski2009evaluation}. In this work, we use an optimal measure to compare with a calculated value of a mission cost.
 
@@ -508,6 +508,7 @@ The cost of each planner strategy (algorithm~\ref{alg:planA} and~\ref{alg:planB}
 Finally, the evaluation of each mission planner is computed w.r.t. the optimal cost, therefore, the $MPCI_{X}$ of a planner $X$ is computed as follows:
 %
 \begin{equation}
+\label{eq:MPCI}
 	MPCI_X=\frac{c_o}{c_X},
 \end{equation}
 
@@ -757,21 +758,26 @@ Figure~\ref{fig:GraPlannersReal} shows a bar graph of the flight times of both p
 	\end{figure}
 	
 	The aforementioned results confirmed the prediction provided by the planner evaluation methodology, and the planner B is faster than planner A in all the tests with simulations and IRIS+ tests.
+	
+\subsection{Threats to Validity}
+\label{sec:ameacas}
 
-\textcolor{red}{Thiago, nao ficou claro pra mim os objetivos dos experimentos... poderias escrever claramente quais seriam as research questions que devemos responder nos experimentos? Alem disso, precisas descrever uma secao sobre ameacas da validade dos resultados... como exemplo, olhe este artigo: https://arxiv.org/pdf/1610.04761.pdf}
+In order to compile the experiments, we have assembled a favourable environment to apply our evaluation metrics. In this way, we considered the use case in Section~\ref{sec:method}.
+
+However, in case we change the scenario where the number of UAVs increases, our algorithms will not work as expected because we did not adapted the algorithms for cooperative work and consequently our metrics will not functioning as expected. Further works may be implemented to make the metrics works in a cooperative work environment where the number of UAVs is greater than two.
+
+%\textcolor{red}{Thiago, nao ficou claro pra mim os objetivos dos experimentos... poderias escrever claramente quais seriam as research questions que devemos responder nos experimentos? Alem disso, precisas descrever uma secao sobre ameacas da validade dos resultados... como exemplo, olhe este artigo: https://arxiv.org/pdf/1610.04761.pdf}
 
 %---------------------------------
 \section{Conclusions}
 \label{sec:conclusao}
 %---------------------------------
 
-\textcolor{red}{Thiago, precisas melhorar substancialmente esta secao... a conclusao deve ser mais forte. Precisas enfatizar as contribuicoes e os principais resultados do seu trabalho.}
+We have presented an evaluation methodology for UAV mission planner in an industrial production scenario, as described in Section~\ref{sec:method}. We have used this methodology of evaluation to perform two different algorithms to verify the performance of them. Our approach uses an optimizer tool to generate an optimal cost for a mission (w.r.t. flight time) and compares to different algorithm strategies using the index defined in Eq.~\ref{eq:MPCI}.
+ 
+In addition, we have developed a framework for mission planning, command and control for intralogistics mission using a commercial UAV. In our project we have applied a UAV to solve intralogistics problems using the dronekit API to control and command adopting a high-level programming language.
 
-We have developed an evaluation methodology for UAV mission planner in an industrial production scenario, as described in Section~\ref{sec:method}. We used this methodology of evaluation to perform two different algorithms to verify the performance of them.
-
-In addition, we have used a commercial UAV to perform our methodology. We have created a framework with a set of mission commands to control the UAV using dronekit API as presented in the Section~\ref{sec:uav} and \ref{sec:method}. 
-
-Future work includes the use of computational vision for the recognition of inputs, and improvements of the optimization problem modeling for better results in cost evaluation.
+Future work includes the use of computational vision for the recognition of inputs, and improvements of the optimization problem modelling for better results in cost evaluation. Supplementary, we will make experiments in a cooperative work environment where the number of UAVs is greater than two.
 
 %\selectlanguage{brazil}
 %
