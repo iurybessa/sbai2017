@@ -521,11 +521,11 @@ Finally, the evaluation of each mission planner is computed w.r.t. the optimal c
 This section describes the experimental results obtained in this project, as well as the cost evaluation of two techniques used, which are compared to the optimum cost implemented with the CPLEX solver.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Objectives}
+\subsection{Experimental Environment and Objectives}
 \label{ssec:expobjandenv}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 In order to verify the efficiency of the metrics shown in the Section~\ref{sec:method}, our experimental evaluation aims to answer the following research questions:
-
+TODO
 \begin{enumerate}
 
 \item[RQ1] \textbf{(performance)} which of the Planner strategies are more efficient?
@@ -533,6 +533,7 @@ In order to verify the efficiency of the metrics shown in the Section~\ref{sec:m
 \item[RQ2] \textbf{(sanity check)} ?
 
 \end{enumerate}
+TODO
 
 In order to clarify the evaluation methodology efficiency, two mission planner algorithms are evaluated using the proposed metrics, and the evaluation result is compared with practical execution time of algorithms that are implemented in the simulation tool SITL\footnote{Simulator that allows executing a Plane, Copter or Rover without the need of a hardware)} and in a real UAV system (3DR IRIS+). The mission planning algorithms were executed in a computer running Linux Mint, core i7 processor and 8 GB of RAM. In order to control the UAV, we run the control program, which uses the dronekit API as an interface between a high level program language (Python) and the protocol that the UAV understands (MAVLink), in the same computer where there is a radio module connected via USB communicating with the UAV radio module.
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2016.12.6)  9 APR 2017 16:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2016.12.6)  10 APR 2017 20:34
 entering extended mode
 **./main.tex
 (main.tex
@@ -1019,20 +1019,17 @@ Package pdftex.def Info: arquiteturaIHW-eps-converted-to.pdf used on input line
  287.
 (pdftex.def)             Requested size: 215.72598pt x 139.58548pt.
  [3 <./arquiteturaIHW-eps-converted-to.pdf>]
-
-LaTeX Warning: Reference `def:movFunc' on page 4 undefined on input line 295.
-
 Package epstopdf Info: Source file: <sysArch.eps>
-(epstopdf)                    date: 2017-04-07 15:56:36
+(epstopdf)                    date: 2017-04-10 16:07:02
 (epstopdf)                    size: 9654575 bytes
 (epstopdf)             Output file: <sysArch-eps-converted-to.pdf>
-(epstopdf)                    date: 2017-04-07 15:56:36
+(epstopdf)                    date: 2017-04-10 20:31:13
 (epstopdf)                    size: 7234 bytes
 (epstopdf)             Command: <epstopdf --outfile=sysArch-eps-converted-to.pd
 f sysArch.eps>
 (epstopdf)             \includegraphics on input line 308.
 Package epstopdf Info: Output file is already uptodate.
-<sysArch-eps-converted-to.pdf, id=40, 1087.06125pt x 257.96375pt>
+ <sysArch-eps-converted-to.pdf, id=40, 1087.06125pt x 257.96375pt>
 File: sysArch-eps-converted-to.pdf Graphic file (type pdf)
 
 <use sysArch-eps-converted-to.pdf>
@@ -1055,13 +1052,13 @@ File: useCase-eps-converted-to.pdf Graphic file (type pdf)
 <use useCase-eps-converted-to.pdf>
 Package pdftex.def Info: useCase-eps-converted-to.pdf used on input line 334.
 (pdftex.def)             Requested size: 203.90855pt x 118.01547pt.
- [4 <./sysArch-eps-converted-to.pdf> <./useCase-eps-converted-to.pdf>]
-Overfull \hbox (36.13498pt too wide) in paragraph at lines 571--571
+ [4 <./sysArch-eps-converted-to.pdf> <./useCase-eps-converted-to.pdf>] [5]
+Overfull \hbox (36.13498pt too wide) in paragraph at lines 581--581
 [] [] 
  []
 
-[5]
-Overfull \hbox (36.13498pt too wide) in paragraph at lines 623--623
+
+Overfull \hbox (36.13498pt too wide) in paragraph at lines 633--633
 [] [] 
  []
 
@@ -1074,7 +1071,7 @@ Package epstopdf Info: Source file: <GraPlannersSimulado.eps>
 (epstopdf)                    size: 7281 bytes
 (epstopdf)             Command: <epstopdf --outfile=GraPlannersSimulado-eps-con
 verted-to.pdf GraPlannersSimulado.eps>
-(epstopdf)             \includegraphics on input line 710.
+(epstopdf)             \includegraphics on input line 720.
 Package epstopdf Info: Output file is already uptodate.
 
 <GraPlannersSimulado-eps-converted-to.pdf, id=83, 407.5225pt x 268.00125pt>
@@ -1082,12 +1079,15 @@ File: GraPlannersSimulado-eps-converted-to.pdf Graphic file (type pdf)
 
 <use GraPlannersSimulado-eps-converted-to.pdf>
 Package pdftex.def Info: GraPlannersSimulado-eps-converted-to.pdf used on input
- line 710.
+ line 720.
 (pdftex.def)             Requested size: 226.56659pt x 149.00008pt.
 
-Overfull \hbox (10.8406pt too wide) in paragraph at lines 710--711
+Overfull \hbox (10.8406pt too wide) in paragraph at lines 720--721
  [][] 
  []
+
+
+Underfull \vbox (badness 3895) has occurred while \output is active []
 
 Package epstopdf Info: Source file: <map.eps>
 (epstopdf)                    date: 2017-04-07 15:56:36
@@ -1097,13 +1097,14 @@ Package epstopdf Info: Source file: <map.eps>
 (epstopdf)                    size: 283972 bytes
 (epstopdf)             Command: <epstopdf --outfile=map-eps-converted-to.pdf ma
 p.eps>
-(epstopdf)             \includegraphics on input line 718.
+(epstopdf)             \includegraphics on input line 728.
 Package epstopdf Info: Output file is already uptodate.
+
 <map-eps-converted-to.pdf, id=84, 362.35374pt x 241.90375pt>
 File: map-eps-converted-to.pdf Graphic file (type pdf)
 
 <use map-eps-converted-to.pdf>
-Package pdftex.def Info: map-eps-converted-to.pdf used on input line 718.
+Package pdftex.def Info: map-eps-converted-to.pdf used on input line 728.
 (pdftex.def)             Requested size: 212.97314pt x 142.17937pt.
 Package epstopdf Info: Source file: <GraPlannersReal.eps>
 (epstopdf)                    date: 2017-04-01 16:23:17
@@ -1113,7 +1114,7 @@ Package epstopdf Info: Source file: <GraPlannersReal.eps>
 (epstopdf)                    size: 7287 bytes
 (epstopdf)             Command: <epstopdf --outfile=GraPlannersReal-eps-convert
 ed-to.pdf GraPlannersReal.eps>
-(epstopdf)             \includegraphics on input line 745.
+(epstopdf)             \includegraphics on input line 755.
 Package epstopdf Info: Output file is already uptodate.
 
 <GraPlannersReal-eps-converted-to.pdf, id=85, 407.5225pt x 268.00125pt>
@@ -1121,15 +1122,18 @@ File: GraPlannersReal-eps-converted-to.pdf Graphic file (type pdf)
 
 <use GraPlannersReal-eps-converted-to.pdf>
 Package pdftex.def Info: GraPlannersReal-eps-converted-to.pdf used on input lin
-e 745.
+e 755.
 (pdftex.def)             Requested size: 226.56659pt x 149.00008pt.
 
-Overfull \hbox (10.8406pt too wide) in paragraph at lines 745--746
+Overfull \hbox (10.8406pt too wide) in paragraph at lines 755--756
  [][] 
  []
 
-[7 <./GraPlannersSimulado-eps-converted-to.pdf> <./map-eps-converted-to.pdf> <.
-/GraPlannersReal-eps-converted-to.pdf>] (main.bbl
+
+Underfull \vbox (badness 6396) has occurred while \output is active []
+
+ [7 <./GraPlannersSimulado-eps-converted-to.pdf> <./map-eps-converted-to.pdf>] 
+(main.bbl
 Underfull \hbox (badness 2293) in paragraph at lines 43--48
 []| | \T1/aer/m/n/10 Francq, P. (2011).  Op-ti-miza-tion prob-lems.
  []
@@ -1154,7 +1158,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--54
 \T1/aett/m/it/10 thefundraisingauthority . com /
  []
 
-
+[8 <./GraPlannersReal-eps-converted-to.pdf>]
 Underfull \hbox (badness 6110) in paragraph at lines 110--115
 []| | \T1/aer/m/n/10 Service-drone (2014).  Drones for lo-gis-tic
  []
@@ -1169,43 +1173,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 110--115
 \T1/aett/m/it/10 com / en / production /
  []
 
-[8]) [9
+) [9
 
-] (main.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+] (main.aux) ) 
 Here is how much of TeX's memory you used:
  14152 strings out of 493333
  243031 string characters out of 3139194
- 310407 words of memory out of 3000000
+ 310415 words of memory out of 3000000
  17442 multiletter control sequences out of 15000+200000
  39453 words of font info for 80 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,24n,39p,10412b,538s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Program Files/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program Files/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmitt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
-cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmt
-i8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><
-C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (9 pages, 1044308 bytes).
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx1
+0.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:
+/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmitt10.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
+blic/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
+fonts/cm/cmti8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmtt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msb
+m10.pfb>
+Output written on main.pdf (9 pages, 1044905 bytes).
 PDF statistics:
  176 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
