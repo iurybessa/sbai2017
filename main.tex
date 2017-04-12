@@ -330,7 +330,7 @@ In order to control the UAV from a PC, we have used the dronekit API that transl
 In this section, we evaluate the algorithm mission cost and describe a case study to a UAV and contents about mission planning.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Case Study: UAV Mission}
+\subsection{Case Study: UAV Intralogistics Mission}
 \label{sec:ec}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -351,7 +351,9 @@ The task to be performed is the production of the client order (cf. Definition~\
 \label{ssec:modelo}
 %%%%%%%%%%%%%%%
 
-The purpose of this subsection is make the mission planning problem into an optimization problem, creating a modelling for the problem; in order to find, afterwards, the shortest execution time of all tasks (minimization), based on the case study explained in Section~\ref{sec:ec}. The notation used is given below:
+\textcolor{red}{Is this modelling new? We have to mention whether it is new or whether we use it from some other reference.}
+
+The purpose of this subsection is to make the mission planning problem into an optimization problem, creating a modelling for the problem; in order to find, afterwards, the shortest execution time of all tasks (minimization), based on the case study explained in Section~\ref{sec:ec}. The notation used is given below:
 
 \begin{itemize}
 \item $\mathcal{T} = \set{T_j \vert j\in \mathbb{N}^{*},j\leq N}$ is the set of $N$ tasks;
@@ -363,7 +365,7 @@ The purpose of this subsection is make the mission planning problem into an opti
 
 \paragraph{Decision variable}
 
-The variable $x_{ij}$ is a binary decision variable that takes the value $1$ if the task $j$ is running on the machine $i$, and $0$ otherwise. The variable $C_ {mission}$ is the variable that we want to optimize.
+The variable $x_{ij}$ is a binary decision variable that takes the value $1$ if the task $j$ is running on the machine $i$; and $0$ otherwise. The variable $C_ {mission}$ is the variable that we want to optimize.
 %
 \begin{equation}
 \label{eq:decision}
@@ -386,7 +388,7 @@ C_{mission}=\sum_{i=1}^{M}{\sum_{j=1}^{N}{
  (p_j+s_j)x_{ij}}},
 \end{equation}
 
-Eq.~\eqref{eq:objfunction} represents the sum of the duration time $p_j$ of each travel from one place another in the case study explained in Section~\ref{sec:ec}, considering the production time (cf. Definition~\ref{def:tempoProducao}) $s_j$ in each production line.
+Eq.~\eqref{eq:objfunction} represents the sum of the duration time $p_j$ of each travel from one place to another in the case study explained in Section~\ref{sec:ec}, considering the production time (cf. Definition~\ref{def:tempoProducao}) $s_j$ in each production line.
 
 %\begin{equation}
 %\label{eq:cmax}
@@ -419,7 +421,7 @@ Eq.~\eqref{eq:execTime} indicates that the mission cost is always less or equal 
 
 \paragraph{Resulting optimization problem}
 
-The resulting optimization problem consists in minimizing $C_{max}$ w.r.t. the decision variable \eqref{eq:decision} constrained to the condition in Eq. \eqref{eq:unicity} and \eqref{eq:execTime}. Thus, the optimization problem is represented as follows:
+The resulting optimization problem consists in minimizing $C_{max}$ w.r.t. the decision variable \eqref{eq:decision} constrained to the condition in Equations \eqref{eq:unicity} and \eqref{eq:execTime}. Thus, the optimization problem is represented as follows:
 %
 \begin{equation}
 	\label{eq:optproblem}
@@ -506,11 +508,11 @@ The resulting optimization problem consists in minimizing $C_{max}$ w.r.t. the d
 \label{ssec:evaluationmethod}
 %%%%%%%%%%%%%%%
 
-The main contribution of this study is a methodology to evaluate UAV mission planner algorithms and to find minimum cost planner. For this purpose, a generalized evaluation metrics is developed. The objective (cost) function modeled in Section~\ref{ssec:modelo} is related to the total time spent for the mission execution. Our evaluation metrics compares the cost of a planner algorithm with the best cost computed by the CPLEX solver~\cite{cplex2003ilog}. The metrics presented here is called Mission Planner Cost Index ($MPCI$).
+The main contribution of this study is a methodology to evaluate UAV mission planner algorithms and to find minimum cost planner. For this purpose, a generalized evaluation metrics is developed. The objective (cost) function modeled in Section~\ref{ssec:modelo} is related to the total time spent for the mission execution. Our evaluation metrics compares the cost of a planner algorithm with the best cost computed by the CPLEX solver~\cite{cplex2003ilog}. The metrics presented here is called Mission Planner Cost Index ($MPCI$). \textcolor{red}{Is it a new metric? if not, please add a reference; otherwise, make it clear that this metric is one contribution.}
 
 Firstly, the optimal cost of the problem is obtained by means of the CPLEX solver, which returns the optimum value (minimum mission execution time). The model proposed in Section~\ref{ssec:modelo} is implemented using the CPLEX solver library available for C++. 
 
-The cost of each planner strategy (algorithm~\ref{alg:planA} and~\ref{alg:planB}) $c_X$ is obtained by counting the number of \texttt{GoTo} commands which represents a process (task).
+The cost of each planner strategy (Algorithms~\ref{alg:planA} and~\ref{alg:planB}) $c_X$ is obtained by counting the number of \texttt{GoTo} commands which represents a process (task).
 
 Finally, the evaluation of each mission planner is computed w.r.t. the optimal cost, therefore, the $MPCI_{X}$ of a planner $X$ is computed as follows:
 %
