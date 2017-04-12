@@ -75,7 +75,7 @@
 
 \title{PLANNING AND EVALUATION OF UAV MISSION FOR INTRALOGISTICS PROBLEM}
 
-\author{Thiago Cavalcante}{thiagorodrigoengcomp@gmail.com}
+\author{Thiago R. F. Cavalcante}{thiagorodrigoengcomp@gmail.com}
 \address{Graduate Program in Electrical Engineering, Federal University of Amazonas, Manaus, AM, Brazil}
 
 \author{Iury V. de Bessa}{iurybessa@ufam.edu.br}
@@ -93,13 +93,13 @@
 
 \selectlanguage{brazil}
 \begin{abstract}
- Este artigo apresenta o desenvolvimento de planejadores de missão na intralogística para um veículo aéreo não tripulado comercial, equipado com uma garra robótica, em um ambiente industrial onde há almoxarifado de insumos, linhas de produção e deposito de produtos. Neste trabalho, o planejador gera comandos necessários para realizar uma missão a qual compreende desde a entrega de insumos trazidos do almoxarifado à linha de produção, até a entrega do produto final ao cliente. Foram desenvolvidas duas abordagens diferentes para planejamento de missão: na primeira abordagem, utilizou-se uma simples heurística que resolve o problema; já na segunda abordagem, utilizou-se uma técnica com escalonamento de tarefas (processo de produção). Estas abordagens seguem algumas regras de produção que serão apresentadas ao longo deste trabalho. Foi realizado uma avaliação dos planejadores de missão desenvolvidos, verificando o custo de ambos, realizando algumas medidas de tempo de execução, bem como comparando estes resultados com o custo ótimo obtido  com a ferramenta de otimização CPLEX.   \end{abstract}
+ Este artigo apresenta o desenvolvimento de planejadores de missão na intralogística para um veículo aéreo não tripulado comercial, equipado com uma garra robótica, em um ambiente industrial onde há almoxarifado de insumos, linhas de produção e deposito de produtos. Neste trabalho, o planejador gera comandos necessários para realizar uma missão a qual compreende desde a entrega de insumos trazidos do almoxarifado à linha de produção, até a entrega do produto final ao cliente. Foram desenvolvidas duas abordagens diferentes para planejamento de missão: na primeira abordagem, utilizou-se uma simples heurística que resolve o problema, onde o VANT leva os insumos do almoxarifado para a respectiva linha de produção e fica esperando a produção terminar, por um período de tempo característico de cada linha de produção; já na segunda abordagem, utilizou-se uma técnica com escalonamento de tarefas (processo de produção). Estas abordagens seguem algumas regras de produção que serão apresentadas ao longo deste trabalho. Foi realizado uma avaliação dos planejadores de missão desenvolvidos, verificando o custo de ambos, realizando algumas medidas de tempo de execução, bem como comparando estes resultados com o custo ótimo obtido  com a ferramenta de otimização CPLEX.   \end{abstract}
 
 \keywords{Planejamento de Missão, Sistemas de Manufatura, Problemas de Otimiza\c{c}\~ao.}
 
 \selectlanguage{english}
 \begin{abstract}
-This paper presents the development of mission planners in intralogistics for a commercial unmanned aerial vehicle equipped with a robotic gripper in an industrial environment, which consists of an input warehouse, production lines, and a product warehouse. In this study, the planner produces the needed commands for carrying out a given mission, which includes the delivery of inputs brought from the warehouse to the production line until the final product is delivered to the customer (product warehouse). Two different approaches are developed for mission planning: in the first approach, a simple heuristic is used to solve the mission problem \textcolor{red}{Can you briefly explain this heuristic? please also replicate it to the Portuguese abstract...}; in the second approach, a technique with task scheduling (production process) is employed; both approaches follow a set of production rules. An evaluation of the developed mission planners is performed, verifying the cost of both approaches, measuring the execution time, and comparing those results with the optimum cost obtained with the IBM ILOG CPLEX optimizer.
+This paper presents the development of mission planners in intralogistics for a commercial unmanned aerial vehicle equipped with a robotic gripper in an industrial environment, which consists of an input warehouse, production lines, and a product warehouse. In this study, the planner produces the needed commands for carrying out a given mission, which includes the delivery of inputs brought from the warehouse to the production line until the final product is delivered to the customer (product warehouse). Two different approaches are developed for mission planning: in the first approach, a simple heuristic is used to solve the mission problem, where a UAV gets the necessary inputs to produce a product, from the warehouse, and bring to the respective production line and the UAV waits in production line site to finish the production of the product; in the second approach, a technique with task scheduling (production process) is employed; both approaches follow a set of production rules. An evaluation of the developed mission planners is performed, verifying the cost of both approaches, measuring the execution time, and comparing those results with the optimum cost obtained with the IBM ILOG CPLEX optimizer.
 \end{abstract}
 
 \keywords{Mission Planning, Manufacturing Systems, Optimization Problems.}
@@ -125,7 +125,7 @@ Both academy and industry have done research about evaluation and optimization o
 
 An evaluation metrics consists of a set of measures that follow a common underlying evaluation methodology. It is used to evaluate the efficacy of information retrieval systems and to justify theoretical and/or pragmatical developments of these systems \cite{pehcevski2009evaluation}. In this work, we use an optimal measure to compare with a calculated value of a mission cost.
 
-This paper presents a methodology that evaluates the cost of mission planners for a commercial UAV. We developed an evaluation metrics that evaluates the relative cost of a planning strategy related with the optimal cost generated by the CPLEX optimizer. \textcolor{red}{Can you please add a citation to CPLEX?} %The evaluation is made by comparing the mission execution time with the cost of an optimal solution solved by CPLEX solver. Additionally, a middleware was developed to interface the mission planning application and the embedded control software, adapting the UAV for intra-logistics. Finally, experiments were done to verify the consistency of evaluation methodology.
+This paper presents a methodology that evaluates the cost of mission planners for a commercial UAV. We developed an evaluation metrics that evaluates the relative cost of a planning strategy related with the optimal cost generated by the CPLEX optimizer \cite{cplex2003ilog}. %The evaluation is made by comparing the mission execution time with the cost of an optimal solution solved by CPLEX solver. Additionally, a middleware was developed to interface the mission planning application and the embedded control software, adapting the UAV for intra-logistics. Finally, experiments were done to verify the consistency of evaluation methodology.
 
 In summary, the main contributions of this study are:
 \begin{itemize}
@@ -134,9 +134,9 @@ In summary, the main contributions of this study are:
 \item use of a commercial UAV system in intralogistics missions to demonstrate the evaluation methodology efficiency.
 \end{itemize}
 
-\textcolor{red}{Can you please add a sentence about the results in the contributions?}
+As a result to this work, we have verified that the development and experiments of the mission planner evaluation methodology were done successfully as sown in Section~\ref{sec:results}. Additionally, the framework to command and control a UAV was gratefully developed and tested in simulated and real environment.
 
-\textit{Outline}. Section~\ref{sec:related} describes previous studies related to mission planning, optimization, and evaluation. Section~\ref{sec:background} provides the fundamentals of mission planning and optimization problems. Section~\ref{sec:method} explains the proposed evaluation methodology in further details. Section~\ref{sec:results} describes the experimental procedures and results in order to explore and demonstrate the potential of methodology, and, finally, Section~\ref{sec:conclusao} concludes this study and describes future work.
+\textit{Outline}. Section~\ref{sec:related} shows previous studies related to mission planning, optimization, and evaluation. Section~\ref{sec:background} provides the fundamentals of mission planning and optimization problems. Section~\ref{sec:uav} describes the UAV movement system used in this work. Section~\ref{sec:method} explains the proposed evaluation methodology in further details. Section~\ref{sec:results} describes the experimental procedures and results in order to explore and demonstrate the potential of methodology, and, finally, Section~\ref{sec:conclusao} concludes this study and describes future work.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Related Work}
@@ -247,7 +247,7 @@ An optimization problem is related to finding the best solution (relative to a c
 	\end{array}
 \end{equation}	
 
-\noindent where $\Omega$ is a set of constraints of the problem. \textcolor{red}{What is the definition of ``f''?}
+\noindent where $\Omega$ is a set of the problem constraints and $f(x)$ is the function to optimize.
 	
 An optimization problem can be defined as a finite set of variables, where the correct values for the variables specify the optimal solution. If the variables are of the set of real, the problem is called continuous, and if they can only have a finite set of distinct values, the problem is called combinatorial \protect\cite{francq2011optimization}.
 
@@ -350,8 +350,6 @@ The task to be performed is the production of the client order (cf. Definition~\
 \subsection{Modelling a UAV Intralogistics Mission as an Optimization Problem }
 \label{ssec:modelo}
 %%%%%%%%%%%%%%%
-
-\textcolor{red}{Is this modelling new? We have to mention whether it is new or whether we use it from some other reference.}
 
 The purpose of this subsection is to make the mission planning problem into an optimization problem, creating a modelling for the problem; in order to find, afterwards, the shortest execution time of all tasks (minimization), based on the case study explained in Section~\ref{sec:ec}. The notation used is given below:
 
