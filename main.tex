@@ -153,6 +153,7 @@ Finally, the German Aerospace Center (DLR) has also developed a mission manageme
 
 Existing approaches for evaluation of mission planners for intralogistics problems are either empirical or theoretical. This paper describes an approach combining both aspects. In addition, we test the metrics in a real environment, \textit{i.e.}, we use a real UAV to perform a mission and we measure the cost (mission execution time) of the mission.
 
+\textcolor{red}{Are you sure that there is no related work that solves the problem? Please double-check in the Scopus digital library!}
 %--------------------------------------------
 \section{Preliminaries}
 \label{sec:background}
@@ -165,56 +166,56 @@ Existing approaches for evaluation of mission planners for intralogistics proble
 
 Key definitions related to the case study and the application developed in this study need to be clarified. All definitions below are adopted in the remainder of this study.
 
-\begin{myDefinition} {Mission Command} 
-
+\begin{myDefinition} 
+\textbf{(Mission Command)} 
 Mission Command is a command created to execute a task such as to go from one location to another, get a package using a robot gripper, and land a UAV.
 \label{def:missioncommand}
 \end{myDefinition}
 
-\begin{myDefinition}{Mission} 
-
+\begin{myDefinition}
+\textbf{(Mission)} 
 Mission is the set of steps and mission commands that the UAV executes to produce the customer's order.
 \label{def:mission}
 \end{myDefinition}
 
-\begin{myDefinition}{Warehouse}
-
+\begin{myDefinition}
+\textbf{(Warehouse)}
 Warehouse is the set of stored raw material available until the moment of entering the productive process. The raw materials, i.e., the inputs available in this work are inputs A, B, and C.
 \label{def:almoxarifado}
 \end{myDefinition}
 
-\begin{myDefinition}{Order}
-
+\begin{myDefinition} 
+\textbf{(Order)}
 Order is the requisition of products made by the client. In this study, the products are of type X and Y.
 \label{def:pedido}
 \end{myDefinition}
 
-\begin{myDefinition}{Production Time}
-
+\begin{myDefinition}
+\textbf{(Production Time)}
 Production time is the time required to produce a product X or Y, after making available all the needed inputs for the production, given by the production rule.
 \label{def:tempoProducao}
 \end{myDefinition}
 
-\begin{myDefinition}{Production Rule}
-
+\begin{myDefinition}
+ \textbf{(Production Rule)}
 Production rule describes what and how many inputs are needed to produce a particular product.
 \label{def:regraProducao}
 \end{myDefinition}
 
-\begin{myDefinition}{Mission Planner}
-
+\begin{myDefinition}
+\textbf{(Mission Planner)}
 Mission planner is the agent who performs the planning of a mission, that is, produce all steps and commands needed to carry out a given mission.
 \label{def:planejadorMissao}
 \end{myDefinition}
 
-\begin{myDefinition}{Mission File}
-
+\begin{myDefinition}
+ \textbf{(Mission File)}
 The mission file is a file that is created for the context of this work, with the extension \textsc{.mission} containing the mission itself.
 \label{def:arquivoMissao}
 \end{myDefinition}
 
-\begin{myDefinition}{Movement Function}
-
+\begin{myDefinition}
+ \textbf{(Movement Function)}
 The movement function are functions created in Python using the drokekit API to send commands to the UAV by MAVLink protocol.
 \label{def:movFunc}
 \end{myDefinition}
