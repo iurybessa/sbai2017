@@ -534,11 +534,11 @@ This section describes the experimental results obtained in this project, as wel
 \subsection{Experimental Environment and Objectives}
 \label{ssec:expobjandenv}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-In order to verify the efficiency of the metrics shown in the Section~\ref{sec:method}, our experimental evaluation aims to answer the following research questions:
+In order to verify the efficiency of the metrics shown in Section~\ref{sec:method}, our experimental evaluation aims to answer the following research questions:
 TODO
 \begin{enumerate}
 
-\item[RQ1] Does the framework for mission planning, command and control for intralogistics mission using a UAV work?
+\item[RQ1] Does the framework for mission planning, command and control for intralogistics mission using a UAV work? \textcolor{red}{this is not a research question... try something like:  ``Does the framework for mission planning, command and control for intralogistics mission using a UAV produce the expected results?'' try to clarify what is the expected result!}
 
 \item[RQ2] Is the metrics of mission evaluation efficient?
 
@@ -546,6 +546,8 @@ TODO
 TODO
 
 The mission planning algorithms were executed in a computer running Linux Mint, core i7 processor and 8 GB of RAM. In order to control the UAV, we run the control program, which uses the dronekit API as an interface between a high level program language (Python) and the protocol that the UAV understands (MAVLink), in the same computer where there is a radio module connected via USB communicating with the UAV radio module.
+
+\textcolor{red}{I do not think that the description of the algorithm should in the experimental evaluation... we should explain it before the experimental evaluation section.}
 
 \subsection{Mission Planners}
 
@@ -773,7 +775,7 @@ Figure~\ref{fig:GraPlannersReal} shows a bar graph of the flight times of both p
 
 In order to compile the experiments, we have assembled a favourable environment to apply our evaluation metrics. In this way, we considered the use case in Section~\ref{sec:method}.
 
-However, in case we change the scenario where the number of UAVs increases, our algorithms will not work as expected because we did not adapted the algorithms for cooperative work and consequently our metrics will not functioning as expected. Further works may be implemented to make the metrics works in a cooperative work environment where the number of UAVs is greater than two.
+However, in case we change the scenario where the number of UAVs increases, our algorithms will not work as expected because we did not adapted the algorithms for cooperative work and consequently our metrics will not work as expected. Further works may be implemented to make the metrics works in a cooperative work environment where the number of UAVs is greater than two.
 
 %\textcolor{red}{Thiago, nao ficou claro pra mim os objetivos dos experimentos... poderias escrever claramente quais seriam as research questions que devemos responder nos experimentos? Alem disso, precisas descrever uma secao sobre ameacas da validade dos resultados... como exemplo, olhe este artigo: https://arxiv.org/pdf/1610.04761.pdf}
 
@@ -782,9 +784,11 @@ However, in case we change the scenario where the number of UAVs increases, our 
 \label{sec:conclusao}
 %---------------------------------
 
-We have presented an evaluation methodology for UAV mission planner in an industrial production scenario, as described in Section~\ref{sec:method}. We have used this methodology of evaluation to perform two different algorithms to verify the performance of them. Our approach uses an optimizer tool to generate an optimal cost for a mission (w.r.t. flight time) and compares to different algorithm strategies using the index defined in Eq.~\ref{eq:MPCI}.
+We have presented an evaluation methodology for UAV mission planner in an industrial production scenario, as described in Section~\ref{sec:method}. We have used this evaluation methodology to perform two different algorithms to verify the performance of them. Our approach uses an optimizer tool to generate an optimal cost for a mission (w.r.t. flight time) and compares to different algorithm strategies using the index defined in Eq.~\ref{eq:MPCI}.
  
 In addition, we have developed a framework for mission planning, command and control for intralogistics mission using a commercial UAV. In our project we have applied a UAV to solve intralogistics problems using the dronekit API to control and command adopting a high-level programming language.
+
+\textcolor{red}{can you please describe the main experimental results here... What did you achieve? what have we improved w.r.t. the related work?}
 
 Future work includes the use of computational vision for the recognition of inputs, and improvements of the optimization problem modelling for better results in cost evaluation. Supplementary, we will make experiments in a cooperative work environment where the number of UAVs is greater than two.
 
