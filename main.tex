@@ -285,7 +285,7 @@ An optimization problem can be defined as a finite set of variables, where the c
 
 In this section, we first investigate the UAV platform used (3DR IRIS+) in this study, describing the hardware characteristics and the control framework developed for intralogistics missions. The core hardware of the UAV IRIS+ is the Pixhawk and we can control it using a Python library \cite{dronekit}, which uses Micro Air Vehicle Link (MAVLink) protocol~\cite{meier2011pixhawk}. MAVLink is a protocol for communicating with small unmanned vehicle, which is designed as a header-only message marshalling library.
 
-The IRIS+ UAV is integrated into a robot gripper to take and leave packages during missions (cf. Definition~\ref{def:mission}). We have connected a servo motor to the Pixhawk by one of the pulse width modulation (PWM) outputs. Figure~\ref{fig:hardArch} shows the hardware architecture of system and the interconnections between each component module. Figure~\ref{fig:sysArch} shows the mission planning framework software components.
+The IRIS+ UAV is integrated into a robot gripper to take and leave packages during missions (cf. Definition~\ref{def:mission}). We have connected a servo motor to the Pixhawk by one of the pulse width modulation (PWM) outputs. Figure~\ref{fig:hardArch} shows the system hardware architecture and the interconnections between each component module. Figure~\ref{fig:sysArch} shows the mission planning framework software components.
 %
 \begin{figure}[H]
 	\centering
@@ -293,6 +293,8 @@ The IRIS+ UAV is integrated into a robot gripper to take and leave packages duri
 	\caption{System Hardware Archtecture.}
 	\label{fig:hardArch}
 \end{figure}
+
+\textcolor{red}{There is no connection between the figures and the description. Could you please clearly explain the figures along the text?}
 
 The Mission Planner (cf. Definition~\ref{def:planejadorMissao}) reads the warehouse inputs and client order and produces a \texttt{.mission} file, which contains the list of mission commands needed for producing the required client order. This \texttt{.mission} file is used by a UAV Control Program to control the UAV and to produce the low-level movement commands (cf. Definition~\ref{def:missioncommand}).
 
