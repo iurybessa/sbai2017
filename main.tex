@@ -116,7 +116,7 @@ Logistics has become a competitive and fundamental factor for organizations, inv
 
 One possible improvement of these logistics systems is the increase of the UAVs automation, which results in costs minimization. Consequently, investments and studies related to stand-alone UAVs are important to the smart factories development~\cite{hern2014dhl}. However, one of the main problems for using autonomous UAVs is the system's reliability and intelligence. Thus, increased employment of autonomous UAVs requires the development of devices, which are able to perform tasks and interact with the environment in an intelligent and reliable way.
 
-Autonomous UAVs need to know what will happen in a future instant and what is the best decision to make at the present time; therefore, they require strategies not only to decompose their missions into meaningful sub-tasks, but also to track progress toward mission goals and the evolution of these tasks relative to the autonomous UAVs capabilities~\cite{finn2012developments}. As a consequence, in order to successfully perform a mission, it is recommended to perform task planning~\cite{successplan}. Mission planning problems consist of planning events to meet certain requirements and objectives~\cite{krozel1988search}. Therefore, this \commentib{this o q??} is one of the main challenges faced in solving this problem.
+Autonomous UAVs need to know what will happen in a future instant and what is the best decision to make at the present time; therefore, they require strategies not only to decompose their missions into meaningful sub-tasks, but also to track progress toward mission goals and the evolution of these tasks relative to the autonomous UAVs capabilities~\cite{finn2012developments}. As a consequence, in order to successfully perform a mission, it is recommended to perform task planning~\cite{finn2012developments}. Mission planning problems consist of planning events to meet certain requirements and objectives~\cite{krozel1988search}. Therefore, this \commentib{this o q??} is one of the main challenges faced in solving this problem.
 
 Both academy and industry have done researches about evaluation and optimization of mission planning in the last years. \citeasnoun{schwarz2012towards} have used ant colony to optimize missions for an automated guided vehicle (AVG). Another paper investigates energy consumption for a factory and evaluates the logistic planning processes using statistical metrics of evaluation~\cite{muller2012analyzing}.
 
@@ -254,7 +254,7 @@ An optimization problem is related to finding the best solution (relative to a c
 
 \noindent where $\Omega$ is a set of the problem constraints and $f(x)$ is the function to optimize.
 	
-An optimization problem can be defined as a finite set of variables, where the correct values for the variables specify the optimal solution. If the variables are of the set of real, the problem is called continuous, and if they can only have a finite set of distinct values, the problem is called combinatorial \protect\cite{francq2011optimization}.
+An optimization problem can be defined as a finite set of variables, where the correct values for the variables specify the optimal solution. If the variables are of the set of real, the problem is called continuous, and if they can only have a finite set of distinct values, the problem is called combinatorial~\cite{korte2012combinatorial}.
 
 %Two distinctions need to be made to better understand the universe of optimization problems. The first is to distinguish a problem which refers to a more general class, for example, the problem of packaging, and an example representing a special type of problem, for example the problem of packaging, wherein there are 5 packages for packaging 25 objects of different sizes. The second distinction concerns the existence of two categories of problem classes: the abstract problem classes and the concrete problem classes. As the name itself suggests, the second category refers to problems that have "concrete existence," that is, problems for which instances can be created. The BPP corresponds to this category. Together they are also part of a more abstract class: grouping problems. Only with the problem of abstract classes, it is impossible to define instances. In fact, as shown in Figure~\ref{fig:problemasDeOtimizacao}, the classes of concrete and abstract problems form a hierarchy of optimization problems.
 %
@@ -324,8 +324,8 @@ In order to control the UAV from a PC, we have used the dronekit API that transl
 \multicolumn{1}{|c|}{\textbf{Command}} & \multicolumn{1}{c|}{\textbf{Description}}           \\ \hline
 \texttt{TakeOff}                     & takes off the UAV                                   \\ \hline
 \texttt{GoTo}                        & moves the UAV to a certain location                 \\ \hline
-\texttt{TakePackage}                 & collects an input/product through the gripper \\ \hline
-\texttt{LeavePackage}                & leaves an input/product through the gripper   \\ \hline
+\texttt{TakePackage}                 & takes an input/product (gripper) \\ \hline
+\texttt{LeavePackage}                & leaves an input/product (gripper)   \\ \hline
 \texttt{Wait}                        & makes the UAV to hover (wait)                       \\ \hline
 \texttt{Land}                        & lands the UAV                                       \\ \hline
 \end{tabular}
@@ -334,7 +334,7 @@ In order to control the UAV from a PC, we have used the dronekit API that transl
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.45\textwidth]{sysArch.eps}
+	\includegraphics[width=0.8\columnwidth]{sysArch.eps}
 	\caption{System's Architecture.\label{fig:sysArch}}
 \end{figure}
 
@@ -350,7 +350,7 @@ In order to control the UAV from a PC, we have used the dronekit API that transl
 
 %\commentib{Modifique o t\'itulo (expanda). Metodologia de qu\^e?? Tente fazer algo parecido com o do trabalho.}
 
-In this section, we evaluate the algorithm mission cost and describe a case study to a UAV and contents about mission planning.
+%In this section, we evaluate the algorithm mission cost and describe a case study to a UAV and contents about mission planning.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Case Study: UAV Intralogistics Mission}
@@ -361,7 +361,7 @@ In order to model the mission planning problem as an optimization problem, the c
 %
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.45\textwidth]{useCase.eps}
+	\includegraphics[width=0.7\columnwidth]{useCase.eps}
 	\caption{Case Study Representation.\label{fig:useCase}}
 \end{figure}
 	
@@ -529,7 +529,7 @@ The resulting optimization problem consists in minimizing $C_{max}$ w.r.t. the d
 \label{ssec:evaluationmethod}
 %%%%%%%%%%%%%%%
 
-The main contribution of this study is a methodology to evaluate UAV mission planner algorithms and to find minimum cost planner. For this purpose, a generalized evaluation metrics is developed. The objective (cost) function modeled in Section~\ref{ssec:modelo} is related to the total time spent for the mission execution. Our evaluation metrics compares the cost of a planner algorithm with the best cost computed by the CPLEX solver~\cite{cplex2003ilog}. The metrics presented here is called Mission Planner Cost Index ($MPCI$). \textcolor{red}{Is it a new metric? if not, please add a reference; otherwise, make it clear that this metric is one contribution.}
+The main contribution of this study is a methodology to evaluate UAV mission planner algorithms and to find minimum cost planner. For this purpose, a generalized evaluation metrics is developed. The objective (cost) function modeled in Section~\ref{ssec:modelo} is related to the total time spent for the mission execution. Our evaluation metrics compares the cost of a planner algorithm with the best cost computed by the CPLEX solver~\cite{cplex2003ilog}. This work proposed a novel metrics called Mission Planner Cost Index ($MPCI$).
 
 Firstly, the optimal cost of the problem is obtained by means of the CPLEX solver, which returns the optimum value (minimum mission execution time). The model proposed in Section~\ref{ssec:modelo} is implemented using the CPLEX solver library available for C++. 
 
@@ -553,7 +553,7 @@ In this study, we considered that mission planner is a software that generates a
 In Algorithm~\ref{alg:planA}, we show a strategy to solve the mission planning problem and we denoted it as Planner A. In this particular algorithm, the production of X products has a higher priority over Y, {\it i.e.}, the inputs are firstly allocated to production of X orders, and the production of Y products begins if there is no other X to be produced. The general steps of planner A are described in Algorithm~\ref{alg:planA}.
 %
 \begin{algorithm}[ht]
-\footnotesize
+\scriptsize
 \KwIn{warehouse}
 \KwIn{order}
 \KwOut{mission file \textit{.mission}}
@@ -593,7 +593,7 @@ bring Y to the client\;
 The strategy for Planner B is a bit more complex than Planner A. In the Planner B strategy, the UAV starts to bring all the necessary inputs to make the first product X, taking all the A, B and C inputs, respectively, to the production line X. After bring all the necessary inputs to produce the first X product, the production line X starts to produce the X product and while the production line X is producing, the UAV goes to the warehouse to get the necessary inputs to produce the next product (either Planner A and Planner B produce fistly the X products e then all the Y products). However, when the X product finishes producing, the UAV knows the instant and goes to the production line to get the X product to bring to the client place; and after that, the UAV goes back to bring the rest of the inputs. The UAV keeps work in the same way until it brings all the products to the client place. Differently to the Planner A, the Planner B does not wait the production in the production line. The UAV works as a scheduler and executes the mission faster than Planner A strategy, because it does not enter in a busy wait state. The general steps of planner B are shown in the Algorithm~\ref{alg:planB}.
 %
 \begin{algorithm}[ht]
-\footnotesize
+\scriptsize
 \KwIn{warehouse}
 \KwIn{order}
 \KwOut{mission file \textit{.mission}}
@@ -807,11 +807,11 @@ However, in case we change the scenario where the number of UAVs increases, our 
 
 We have presented an evaluation methodology for UAV mission planner in an industrial production scenario, as described in Section~\ref{sec:method}. We have used a evaluation methodology to perform two different algorithms to verify the performance of them. Our approach uses an optimizer tool to generate an optimal cost for a mission (w.r.t. flight time) and compares to different algorithm strategies using the index defined in Eq.~\ref{eq:MPCI}.
  
-In addition, we have developed a framework for mission planning, command and control for intralogistics mission using a commercial UAV. In our project we have applied a UAV to solve intralogistics problems using the dronekit API to control and command adopting a high-level programming language.
+In addition, we have developed a framework for mission planning, command and control for intralogistics mission using a commercial UAV. Weused an UAV to solve intralogistics problems using the dronekit API to control and command adopting a high-level programming language.
 
 Summary, our experiments to test the evaluation methodology for mission planner were done successfully as expected in simulated environment as well as in a real environment using a real UAV, and consequently, the methodology is able to evaluate mission planner algorithms for intralogistics problems. Moreover, the framework can solve the necessity of control and command a commercial UAV. Thus, our work is a new tool to verify a specific problem of intralogistics.
 
-Future work includes the use of computational vision for the recognition of inputs, and improvements of the optimization problem modelling for better results in cost evaluation. Supplementary, we will make experiments in a cooperative work environment where the number of UAVs is greater than two.
+Future work includes the use of computational vision for the recognition of inputs, and improvements of the optimization problem modeling for better results in cost evaluation. Supplementary, we will make experiments in a cooperative work environment where the number of UAVs is greater than two.
 
 %\selectlanguage{brazil}
 %
